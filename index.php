@@ -54,6 +54,11 @@
 		<?php
 	if(isset($_SESSION['user'])){
 ?>
+<style type="text/css">
+	#menu li a{
+		font-size: 15px;
+	}
+</style>
 <ul id="menu" style="margin-bottom: 1%;background-color:#0a3d62; z-index: 0;width: 98%;margin-left: 1%;">
 		
 		<li><a href="index.php?view=ql_tindang">Quản lí tin đăng</a></li>
@@ -77,6 +82,7 @@
 			}
 		?>
 	</div>
+	<hr />
 	<!-- <div class="w3-row w3-col s3" style="width:24%;" >
 		<?php 
 			// if(!isset($_GET['view']))

@@ -2,7 +2,7 @@
     <link rel="icon" href="http://www.thuthuatweb.net/wp-content/themes/HostingSite/favicon.ico" type="image/x-ico"/>
      <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link href="css/style_sp.css" rel="stylesheet" />
-   <div class="w3-teal" style=" width:40%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 0px;">CÁC SẢN PHẨM ĐÃ THÍCH</div>
+   <div class="w3-teal" style=" width:100%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 0px;">CÁC SẢN PHẨM ĐÃ THÍCH</div>
 </div>
  <div class="container-item" style="padding:3%;">
 <?php

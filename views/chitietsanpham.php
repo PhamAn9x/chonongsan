@@ -120,8 +120,36 @@
 							</td>
 						</tr>
 						<tr style=" border-radius: 7px;">
-							<td style="vertical-align: middle; text-align: center;"><span style=" font-size: 28px; font-weight: bolder; padding-top: 1%;">Giá Mua :  </span><span style="color: red;font-size: 28px;font-weight: bolder;"><?php echo adddotstring($row['SP_GIA']); ?></span>/<?php echo $row['SP_DONVITINH']; ?> </td>
-							<td style="vertical-align: middle; text-align: center;"><span style=" font-size: 28px; font-weight: bolder; padding-top: 1%;">Giá Bán :  </span><span style="color: red;font-size: 28px;font-weight: bolder;"><?php echo adddotstring($row['SP_GIA']); ?></span>/<?php echo $row['SP_DONVITINH']; ?> </td>
+							<?php 
+							$sql = "SELECT MAX(L_GIA) AS GIA_M FROM LENH WHERE SP_ID = $sp_id AND L_TEN = 'ban' ";
+							$dong = mysqli_fetch_row(mysqli_query($conn,$sql));
+							if( $dong[0] != null){
+								
+							?>
+							<td style="vertical-align: middle; text-align: center;"><span style=" font-size: 28px; font-weight: bolder; padding-top: 1%;">Giá bán :  </span><span style="color: red;font-size: 28px;font-weight: bolder;"><?php echo adddotstring($dong[0]); ?></span>/<?php echo $row['SP_DONVITINH']; ?> </td>
+							<?php
+								}else{
+									?>
+									<td style="vertical-align: middle; text-align: center;"><span style=" font-size: 28px; font-weight: bolder; padding-top: 1%;">Giá Mua :  </span><span style="color: red;font-size: 23px;font-weight: bolder;"><?php echo "Đang cập nhật";?></span> </td>
+							<?php
+									
+								}
+							?>
+							<?php 
+							$sql = "SELECT MIN(L_GIA) AS GIA_M FROM LENH WHERE SP_ID = $sp_id AND L_TEN = 'mua' ";
+							$dong = mysqli_fetch_row(mysqli_query($conn,$sql));
+							if( $dong[0] != null){
+								
+							?>
+							<td style="vertical-align: middle; text-align: center;"><span style=" font-size: 28px; font-weight: bolder; padding-top: 1%;">Giá Mua :  </span><span style="color: red;font-size: 28px;font-weight: bolder;"><?php echo adddotstring($dong[0]); ?></span>/<?php echo $row['SP_DONVITINH']; ?> </td>
+							<?php
+								}else{
+									?>
+									<td style="vertical-align: middle; text-align: center;"><span style=" font-size: 28px; font-weight: bolder; padding-top: 1%;">Giá Mua :  </span><span style="color: red;font-size: 23px;font-weight: bolder;"><?php echo "Đang cập nhật";?></span> </td>
+							<?php
+									
+								}
+							?>
 							<td style="border-left: 1px dotted black; padding-bottom: 1%;" >
 								<?php 
 								$strqr = 'Tên sản phẩm:'.$row['SP_TEN'].'-Thuộc hợp tác xã: '.$row['HTX_TEN'].'-Địa chỉ: '.$row['SP_DIACHI'].'-Tên chủ sản phẩm: '.$row['USR_HO'].' '.$row['USR_TEN'].'-Ngày đăng: '.$row['SP_NGAYDANG'].'-Số điện thoại liên lạc:'.$row['USR_SDT'];
@@ -139,7 +167,7 @@
 
 			</div>
 			<div class="w3-col s6">
-				<?php include('views/maps.php'); ?>
+				<?php //include('views/maps.php'); ?>
 			</div>
 			<div class="w3-col s12"><hr /></div>
 			<div class="w3-col s6">

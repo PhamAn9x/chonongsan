@@ -20,7 +20,7 @@
     ?>
 
    
-    <form name="dangtin" id="dangtin" method="post" class="tindang">
+    <form name="frdonhang" id="frdonhang" method="post" class="tindang">
         <div class="w3-row khung">
             <div class="w3-row">
             <h1>XỬ LÝ ĐƠN HÀNG</h1>
@@ -47,11 +47,21 @@
                             $ngaydat ="";
                             $kl_id = $_GET['ma'];
                             $sdt = $_GET['so'];
+                            $sdtb = $_SESSION['sdt'];
                             mysqli_set_charset($conn,'UTF8');
-                            $result =mysqli_query($conn,"SELECT * FROM KHOPLENH WHERE KL_SDT_MUA = '$sdt' OR KL_SDT_BAN = '$sdt' AND KL_ID = $kl_id");          
-                            // echo "SELECT * FROM KHOPLENH WHERE KL_SDT_MUA = '$sdt'";                  
+                            $result =mysqli_query($conn,"SELECT * FROM KHOPLENH WHERE KL_SDT_MUA = '$sdt' AND KL_SDT_BAN = '$sdtb' AND KL_TRANGTHAI < 2");          
+                            // echo "SELECT * FROM KHOPLENH WHERE KL_SDT_MUA = '$sdt'";    
+
                             foreach ($result as $value) {
                                 $ngaydat = $value['KL_NGAYKHOP'];
+                                $id = $value['KL_SP_ID'];
+                                $SP = array(  
+                                    "id" => $value['KL_SP_ID'],
+                                    "ten" => $value['KL_SP_TEN'],
+                                    "soluong" => $value['KL_SOLUONG'],
+                                    "gia" => $value['KL_GIA']
+                                );
+                                $_SESSION['SP'][$id] = $SP;
                                 ?>
                         <tr>
                             <td><?php echo $i; ?></td>
@@ -74,7 +84,9 @@
                                     echo adddotstring($tong).' VNĐ  ';
                             ?>
 
-                            </span></td>
+                            </span>
+                            <input style="display: none;" type="text" name="tong" id="tong" value="<?php echo $tong; ?>">
+                        </td>
                         </tr>
                     </table>
                </div>
@@ -144,30 +156,36 @@
   if(isset($_POST['hoten'])){
     $hoten=$_POST['hoten'] ;
     $ngaysinh=$_POST['ngaysinh'] ;
-    $sdt=$_POST['sodienthoai'] ;
+    $sdtm=$_POST['sodienthoai'] ;
+    $sdtb = $_SESSION['sdt'];
     $diachi=$_POST['diachi'] ;
     $email=$_POST['email'] ;
     $ngaydathang=$_POST['ngaydat'] ;
     $cap = $_POST['g-recaptcha-response'];
+    $tong = $_POST['tong'];
 	if($hoten != "" && $ngaysinh != "" && $sdt != "" && $diachi != "" && $email != "" && $ngaydathang != "" && $cap != ""){
-        $sql = "INSERT INTO DONHANG(DH_SDT,DH_NGAYDAT,DH_NOIGIAO,DH_TRANGTHAI,DH_HOTEN,DH_EMAIL,DH_TONGTIEN) VALUES (
-        '$sdt','$ngaydathang','$diachi',1,'$hoten','$email',$tong)";
+        $sql = "INSERT INTO DONHANG(DH_SDT_NGUOIBAN,DH_SDT_NGUOIMUA,DH_NOIGIAO,DH_NGAYDAT,DH_TONGTIEN) VALUES ('$sdtb',
+        '$sdtm','$diachi','$ngaydathang',$tong)";
+        echo $sql;
         if(mysqli_query($conn,$sql)) 
             {
-                $dong =  mysqli_fetch_row(mysqli_query($conn,"SELECT DH_ID FROM DONHANG WHERE DH_SDT = '$sdt' ORDER BY DH_ID DESC LIMIT 0,1"));
+                $dong =  mysqli_fetch_row(mysqli_query($conn,"SELECT DH_ID FROM DONHANG WHERE DH_SDT_NGUOIBAN = '$sdtb' ORDER BY DH_ID DESC LIMIT 0,1"));
                 $dh_ma = $dong[0];
-                foreach ($_SESSION['giohang'] as $value) {
+                foreach ($_SESSION['SP'] as $value) {
                     $sp_id = $value['id'];
                     $soluong = $value['soluong'];
-                   mysqli_query($conn,"INSERT INTO SANPHAMDONHANG(DH_ID,SP_ID,DHSP_SOLUONG) VALUES($dh_ma,$sp_id,$soluong)");
+                    $ten = $value['ten'];
+                    $gia = $value['gia'];
+                   mysqli_query($conn,"INSERT INTO SANPHAMDONHANG(DH_ID,SP_ID,SPDH_TEN,SPDH_GIA,SPDH_SOLUONG) VALUES($dh_ma,$sp_id,'$ten',$gia,$soluong)");
+                   mysqli_query($conn,"UPDATE KHOPLENH SET KL_TRANGTHAI =1 WHERE KL_SDT_BAN = '$sdtb' AND KL_SDT_MUA = '$sdtm' AND KL_TRANGTHAI < 2");
                    $sl = mysqli_fetch_row(mysqli_query($conn,"SELECT SP_SOLUONG FROM SANPHAM WHERE SP_ID = $sp_id"));
                    $vlsl = $sl[0];
                    $slcl = $vlsl - $soluong;
                    mysqli_query($conn,"UPDATE SANPHAM SET SP_SOLUONG = $slcl WHERE SP_ID = $sp_id");
                 }
-                echo '<meta http-equiv="Refresh" content="0,URL=index.php" />';
+               echo '<meta http-equiv="Refresh" content="0,URL=index.php?view=ql_khoplenh" />';
                echo '<script>alert("Đơn hàng của bạn đã được ghi nhận! Cảm ơn!");</script';
-                unset($_SESSION['giohang']); 
+                unset($_SESSION['SP']); 
 
             } else echo '<script>alert("Đặt hàng chưa thành công!");</script';
 

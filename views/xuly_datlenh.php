@@ -12,6 +12,13 @@ if(isset($_POST['sldatlenh'])){
 	$diachi = $_POST['ipdiachigiaohang'];
 	$loinhan = $_POST['iploinhan'];
 	$sdt =  $_SESSION['sdt'];
+	if(!isset($_SESSION['sdt'])){
+?>
+ <meta http-equiv="Refresh" content="0,URL=../index.php?view=dangnhap" />
+	<script type="text/javascript"> alert("Vui lòng đăng nhập trước khi giao dịch!");</script>
+<?php
+	}
+	else
 	if($sl*$gia == 0){
 		?>
 		<script type="text/javascript"> alert("Vui lòng kiểm tra lại thông tin!");</script>
@@ -125,7 +132,7 @@ if(isset($_POST['sldatlenh'])){
 								// 	");
 								// mysqli_set_charset($conn,'UTF8');
 								mysqli_query($conn,"
-									INSERT INTO KHOPLENH(KL_TEN,KL_SDT_BAN,KL_SDT_MUA,KL_SP_ID,KL_SOLUONG,KL_SP_TEN,KL_GIA,KL_DIACHI,KL_GHICHU) VALUES ('mua','$sdt_mua','$sdt',$spid,$ban_conlai,'$spten',$sp_gia,'$sp_diachi','$sp_ghichu')
+									INSERT INTO KHOPLENH(KL_TEN,KL_SDT_BAN,KL_SDT_MUA,KL_SP_ID,KL_SOLUONG,KL_SP_TEN,KL_GIA,KL_DIACHI,KL_GHICHU) VALUES ('mua','$sdt','$sdt_mua',$spid,$ban_conlai,'$spten',$sp_gia,'$sp_diachi','$sp_ghichu')
 									");
 
 								echo "So luong ".$sdt_mua." mua con lai la ".$mcl."<br/>";
@@ -160,7 +167,7 @@ if(isset($_POST['sldatlenh'])){
 								// 	");
 						 		mysqli_set_charset($conn,'UTF8');
 								mysqli_query($conn,"
-									INSERT INTO KHOPLENH(KL_TEN,KL_SDT_BAN,KL_SDT_MUA,KL_SP_ID,KL_SOLUONG,KL_SP_TEN,KL_GIA,KL_DIACHI,KL_GHICHU) VALUES ('mua','$sdt_mua','$sdt',$spid,$sl_mua,'$spten',$sp_gia,'$sp_diachi','$sp_ghichu')
+									INSERT INTO KHOPLENH(KL_TEN,KL_SDT_BAN,KL_SDT_MUA,KL_SP_ID,KL_SOLUONG,KL_SP_TEN,KL_GIA,KL_DIACHI,KL_GHICHU) VALUES ('mua','$sdt','$sdt_mua',$spid,$sl_mua,'$spten',$sp_gia,'$sp_diachi','$sp_ghichu')
 									");
 								echo "So luong ".$sdt_mua." mua con lai 0 <br />";
 								mysqli_set_charset($conn,'UTF8');

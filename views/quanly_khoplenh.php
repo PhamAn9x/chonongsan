@@ -24,6 +24,9 @@
                 <style type="text/css">
                 .tb tr td{
                     text-align: center;
+                    font-size: 16px;
+                    font-family: 'roboto'; 
+                    vertical-align: middle;
                 }
             </style>
             <div class="w3-col s12 w3-white w3-round">
@@ -55,21 +58,20 @@
 
                     </tr>
                     <?php 
+                    $load = 1;
+                    $load1 = 1;
+                    $i=0;
                     include('config/connect.php');
                     $sdt = $_SESSION['sdt'];
-                    $sql = "SELECT * FROM KHOPLENH WHERE KL_SDT_BAN = '$sdt' OR KL_SDT_MUA = '$sdt'";
-                    echo $sql;
+                    $sql = "SELECT * FROM KHOPLENH WHERE KL_SDT_BAN = '$sdt' AND KL_TRANGTHAI < 2 GROUP BY KL_SDT_MUA";
                     mysqli_set_charset($conn,'UTF8');
                     $rs = mysqli_query($conn,$sql);
-                    $i=1;
                     if(mysqli_num_rows($rs)<1){
-                        ?>
-                        <tr>
-                            <td colspan="9"> <i> Bạn chưa đăng tin nào!</i></td>
-                        </tr>
-                        <?php
+                       $load = 0;
                     } else
                     foreach ($rs as $value) {
+                        $sdtmua = $value['KL_SDT_MUA'];
+                        $i++;
                         ?>
                         <tr>
                             <td><?php echo $i; ?></td>
@@ -78,22 +80,64 @@
                             if($value['KL_SDT_MUA'] == $sdt) echo "Mua";
                             else echo "Bán";
                             ?></td>
-                            <td><?php echo $value['KL_SP_ID']; ?></td>
-                            <td><?php echo $value['KL_SP_TEN']; ?></td>
-                            <td><?php echo adddotstring($value['KL_GIA']); ?></td>
-                            <td><?php echo $value['KL_SOLUONG']; ?></td>
-                            <td><?php echo adddotstring($value['KL_SOLUONG']*$value['KL_GIA']); ?></td>
                             <td>
+                                 <?php 
+                                 mysqli_set_charset($conn,"UTF8");
+                                $rs1 = mysqli_query($conn,"SELECT * FROM KHOPLENH WHERE KL_SDT_BAN = '$sdt' AND KL_SDT_MUA = '$sdtmua' AND KL_TRANGTHAI < 2");
+                                foreach ($rs1 as $value1) {
+                                    ?>
+                                <?php echo $value1['KL_SP_ID']."<br />-------<br />"; }?>
+                                    
+                            </td>
+                            <td>
+                                <?php 
+                                $rs1 = mysqli_query($conn,"SELECT * FROM KHOPLENH WHERE KL_SDT_BAN = '$sdt' AND KL_SDT_MUA = '$sdtmua' AND KL_TRANGTHAI < 2");
+                                foreach ($rs1 as $value1) {
+                                    ?>
+                                <?php echo $value1['KL_SP_TEN']."<br />-------------------------<br />"; }?>
+                                    
+                            </td>
+                            <td>
+                                <?php 
+                                $rs1 = mysqli_query($conn,"SELECT * FROM KHOPLENH WHERE KL_SDT_BAN = '$sdt' AND KL_SDT_MUA = '$sdtmua' AND KL_TRANGTHAI < 2");
+                                foreach ($rs1 as $value1) {
+                                    ?>
+                                <?php echo adddotstring($value1['KL_GIA'])."<br />-----------<br />"; }?>
+                                    
+                            </td>
+                            <td>
+                                <?php 
+                                $rs1 = mysqli_query($conn,"SELECT * FROM KHOPLENH WHERE KL_SDT_BAN = '$sdt' AND KL_SDT_MUA = '$sdtmua' AND KL_TRANGTHAI < 2");
+                                foreach ($rs1 as $value1) {
+                                    ?>
+                                <?php echo $value1['KL_SOLUONG']."<br />-------<br />"; }?>
+                                    
+                            </td>
+                            <td>
+                                <?php 
+                                $rs1 = mysqli_query($conn,"SELECT * FROM KHOPLENH WHERE KL_SDT_BAN = '$sdt' AND KL_SDT_MUA = '$sdtmua' AND KL_TRANGTHAI < 2");
+                                $tong =0;
+                                foreach ($rs1 as $value1) {
+                                    $tong += $value1['KL_GIA']*$value1['KL_SOLUONG'];
+                                }
+                                    ?>
+                                    <?php echo adddotstring($tong)." VNĐ"; ?>
+                                
+                            </td>
+
+                            <td>
+
+
                                 <?php 
                                 if($value['KL_TRANGTHAI']==0 && $value['KL_SDT_MUA'] == $sdt){
                                     ?>
-                                    <a href="index.php?view=xulydonhang&ma=<?php echo $value['KL_ID'].'&so='.$value['KL_SDT_BAN']; ?>"><span style="color: red;">Người bán chưa xử lý đơn hàng </span></a>
+                                   <span style="color: red;">Người bán <br />chưa xử lý đơn hàng </span>
                                     <?php
                                 }
                                 else{
                                     if($value['KL_TRANGTHAI']==1 && $value['KL_SDT_MUA'] == $sdt){
                                         ?>
-                                    <span style="color: blue;">Đang giao hàng! </span>
+                                    <span class="out" style="color: blue;">Đang giao hàng! </span>
                                     <?php
                                 }                                
                                 }
@@ -103,7 +147,7 @@
                                 <?php
                                 if($value['KL_TRANGTHAI']==0 && $value['KL_SDT_BAN'] == $sdt){
                                     ?>
-                                    <a href="index.php?view=xulydonhang&ma=<?php echo $value['KL_ID'].'&so='.$value['KL_SDT_BAN']; ?>"><span style="color: red;">Đơn hàng đang chờ xử lý </span></a>
+                                   <span style="color: red;">Đơn hàng <br />đang chờ xử lý </span>
                                     <?php
                                 }
                                  if($value['KL_TRANGTHAI']==1 && $value['KL_SDT_BAN'] == $sdt){
@@ -129,17 +173,17 @@
                                 <?php
                                 if($value['KL_TRANGTHAI'] == 1 && $value['KL_SDT_MUA'] == $sdt){
                                     ?>
-                                    <a href="#"><button class="w3-btn w3-red w3-hover-white w3-round">Nhận hàng</button></a>
+                                    <input type="button" id="nhanhang" class="w3-btn w3-red w3-hover-white w3-round" value="Nhận hàng" />
                                     <?php
                                 }
                                 if($value['KL_TRANGTHAI'] == 2 && $value['KL_SDT_MUA'] == $sdt){
                                     ?>
-                                   <span style="color: red;">Đã nhận hàng!</span>
+                                   <span id="output-nhan" style="color: red;">Đã nhận hàng!</span>
                                     <?php
                                 }
                                 if($value['KL_TRANGTHAI']==1 && $value['KL_SDT_BAN'] == $sdt){
                                     ?>
-                                   <span style="color: blue;"> Đang giao hàng!</span>
+                                   <span class="out" style="color: blue;"> Đang giao hàng!</span>
                                     <?php
                                 }
                                 if($value['KL_TRANGTHAI']==2 && $value['KL_SDT_BAN'] == $sdt){
@@ -151,7 +195,7 @@
                                 <?php
                                 if($value['KL_TRANGTHAI']==0 && $value['KL_SDT_BAN'] == $sdt){
                                     ?>
-                                    <a style="color: white;" href="index.php?view=xulydonhang&ma=<?php echo $value['KL_ID'].'&so='.$value['KL_SDT_BAN']; ?>"><input type="button" class="w3-btn w3-red w3-hover-blue w3-round" value='Chi tiết đơn hàng'/>
+                                    <a style="color: white;" href="index.php?view=xulydonhang&ma=<?php echo $value['KL_ID'].'&so='.$value['KL_SDT_MUA']; ?>"><input type="button" class="w3-btn w3-red w3-hover-blue w3-round" value='Chi tiết đơn hàng'/>
                                         </a>
                                     <?php
                                 }
@@ -164,13 +208,192 @@
                                {
                                 $sdtb = $value['KL_SDT_BAN'];
                                 $rs = mysqli_fetch_row(mysqli_query($conn,"SELECT USR_HO,USR_TEN FROM USER WHERE USR_SDT = '$sdtb'"));
-                                echo $sdt."<br />";
+                                echo $sdtb."<br />";
+                                 echo "-------------<br />";
                                 echo $rs[0]." ".$rs[1];
                             }
                             else {
                                 $sdtm = $value['KL_SDT_MUA'];
                                 $rs = mysqli_fetch_row(mysqli_query($conn,"SELECT USR_HO,USR_TEN FROM USER WHERE USR_SDT = '$sdtm'"));
-                                echo $sdt."<br />";
+                                echo $sdtm."<br />";
+                                echo "-------------<br />";
+                                echo $rs[0]." ".$rs[1];
+                            }
+                            ?>
+                        </td>
+                    </tr>
+
+                    <script type="text/javascript">
+                        $(document).ready(function(){
+                            $("#delete<?php echo $value['SP_ID']; ?>").click(function(){
+                                var id = <?php echo $value['SP_ID']; ?>;
+                                if(confirm('Bạn có chắc muốn xóa sản phẩm này?')){
+                                 $.post("process_ajax/xoa_sanpham.php", {key: id}, function(data){
+                                    $("#alert").html(data);
+                                });
+                             }
+                         });
+                        });
+                    </script>
+
+                    <?php
+                }
+                ?>
+
+                    
+                 <?php 
+                    include('config/connect.php');
+                    $sdt = $_SESSION['sdt'];
+                    $sql = "SELECT * FROM KHOPLENH WHERE KL_SDT_MUA = '$sdt' AND KL_TRANGTHAI < 2 GROUP BY KL_SDT_BAN";
+                    mysqli_set_charset($conn,'UTF8');
+                    $rs = mysqli_query($conn,$sql);
+                    if(mysqli_num_rows($rs)<1){
+                        $load1 = 0;
+                    } else
+                    foreach ($rs as $value) {
+                        $i++;
+                        ?>
+                        <tr>
+                            <td><?php echo $i; ?></td>
+
+                            <td ><?php
+                            if($value['KL_SDT_MUA'] == $sdt) echo "Mua";
+                            else echo "Bán";
+                            ?></td>
+                             <td>
+                                 <?php 
+                                $rs1 = mysqli_query($conn,"SELECT * FROM KHOPLENH WHERE KL_SDT_MUA = '$sdt' AND KL_TRANGTHAI < 2");
+                                foreach ($rs1 as $value1) {
+                                    ?>
+                                <?php echo $value1['KL_SP_ID']."<br />-------<br />"; }?>
+                                    
+                            </td>
+                            <td>
+                                <?php 
+                                mysqli_set_charset($conn,"UTF8");
+                                $rs1 = mysqli_query($conn,"SELECT * FROM KHOPLENH WHERE KL_SDT_MUA = '$sdt' AND KL_TRANGTHAI < 2");
+                                foreach ($rs1 as $value1) {
+                                    ?>
+                                <?php echo $value1['KL_SP_TEN']."<br />-------------------------<br />"; }?>
+                                    
+                            </td>
+                            <td>
+                                <?php 
+                                $rs1 = mysqli_query($conn,"SELECT * FROM KHOPLENH WHERE KL_SDT_MUA = '$sdt' AND KL_TRANGTHAI < 2");
+                                foreach ($rs1 as $value1) {
+                                    ?>
+                                <?php echo adddotstring($value1['KL_GIA'])."<br />-----------<br />"; }?>
+                                    
+                            </td>
+                            <td>
+                                <?php 
+                                $rs1 = mysqli_query($conn,"SELECT * FROM KHOPLENH WHERE KL_SDT_MUA = '$sdt' AND KL_TRANGTHAI < 2");
+                                foreach ($rs1 as $value1) {
+                                    ?>
+                                <?php echo $value1['KL_SOLUONG']."<br />-------<br />"; }?>
+                                    
+                            </td>
+                            <td>
+                                <?php 
+                                $rs1 = mysqli_query($conn,"SELECT * FROM KHOPLENH WHERE KL_SDT_MUA = '$sdt' AND KL_TRANGTHAI < 2");
+                                $tong =0;
+                                foreach ($rs1 as $value1) {
+                                    $tong += $value1['KL_GIA']*$value1['KL_SOLUONG'];
+                                }
+                                    ?>
+                                    <?php echo adddotstring($tong)." VNĐ"; ?>
+                                
+                            </td>
+                            <td>
+                                <?php 
+                                if($value['KL_TRANGTHAI']==0 && $value['KL_SDT_MUA'] == $sdt){
+                                    ?>
+                                   <span style="color: red;">Người bán <br />chưa xử lý đơn hàng </span>
+                                    <?php
+                                }
+                                else{
+                                    if($value['KL_TRANGTHAI']==1 && $value['KL_SDT_MUA'] == $sdt){
+                                        ?>
+                                    <span class="out" style="color: blue;">Đang giao hàng! </span>
+                                    <?php
+                                }                                
+                                }
+                                
+                                ?>
+
+                                <?php
+                                if($value['KL_TRANGTHAI']==0 && $value['KL_SDT_BAN'] == $sdt){
+                                    ?>
+                                   <span style="color: red;">Đơn hàng <br />đang chờ xử lý </span>
+                                    <?php
+                                }
+                                 if($value['KL_TRANGTHAI']==1 && $value['KL_SDT_BAN'] == $sdt){
+                                    ?>
+                                   <span style="color: red;"> Đã xử lý </span>
+                                    <?php
+                                }
+                                if($value['KL_TRANGTHAI']==2 && $value['KL_SDT_BAN'] == $sdt){
+                                    ?>
+                                   <span style="color: blue;"> Xử lý xong </span>
+                                    <?php
+                                }
+                                if($value['KL_TRANGTHAI']==2 && $value['KL_SDT_MUA'] == $sdt){
+                                    ?>
+                                   <span style="color: blue;"> Xử lý xong </span>
+                                    <?php
+                                }
+                                ?>
+
+
+                            </td>
+                            <td>
+                                <?php
+                                if($value['KL_TRANGTHAI'] == 1 && $value['KL_SDT_MUA'] == $sdt){
+                                    ?>
+                                    <input type="button" id="nhanhang" class="w3-btn w3-red w3-hover-white w3-round" value="Nhận hàng" />
+                                    <?php
+                                }
+                                if($value['KL_TRANGTHAI'] == 2 && $value['KL_SDT_MUA'] == $sdt){
+                                    ?>
+                                   <span id="output-nhan" style="color: red;">Đã nhận hàng!</span>
+                                    <?php
+                                }
+                                if($value['KL_TRANGTHAI']==1 && $value['KL_SDT_BAN'] == $sdt){
+                                    ?>
+                                   <span class="out" style="color: blue;"> Đang giao hàng!</span>
+                                    <?php
+                                }
+                                if($value['KL_TRANGTHAI']==2 && $value['KL_SDT_BAN'] == $sdt){
+                                    ?>
+                                   <span style="color: red;"> Giao hàng thành công!</span>
+                                    <?php
+                                }
+                                ?>
+                                <?php
+                                if($value['KL_TRANGTHAI']==0 && $value['KL_SDT_BAN'] == $sdt){
+                                    ?>
+                                    <a style="color: white;" href="index.php?view=xulydonhang&ma=<?php echo $value['KL_ID'].'&so='.$value['KL_SDT_MUA']; ?>"><input type="button" class="w3-btn w3-red w3-hover-blue w3-round" value='Chi tiết đơn hàng'/>
+                                        </a>
+                                    <?php
+                                }
+                                ?>
+                            </td>
+                            <td>
+                               <?php
+
+                               if($value['KL_SDT_MUA'] == $sdt)
+                               {
+                                $sdtb = $value['KL_SDT_BAN'];
+                                $rs = mysqli_fetch_row(mysqli_query($conn,"SELECT USR_HO,USR_TEN FROM USER WHERE USR_SDT = '$sdtb'"));
+                                echo $sdtb."<br />";
+                                 echo "-------------<br />";
+                                echo $rs[0]." ".$rs[1];
+                            }
+                            else {
+                                $sdtm = $value['KL_SDT_MUA'];
+                                $rs = mysqli_fetch_row(mysqli_query($conn,"SELECT USR_HO,USR_TEN FROM USER WHERE USR_SDT = '$sdtm'"));
+                                echo $sdtm."<br />";
+                                echo "-------------<br />";
                                 echo $rs[0]." ".$rs[1];
                             }
                             ?>
@@ -193,7 +416,17 @@
                     <?php
                     $i++;
                 }
+                if($load == 0 && $load1 == 0){
+                    ?>
+                    <tr>
+                            <td colspan="9"> <i> Không có dữ liệu!</i></td>
+                        </tr>
+                    <?php
+                }
                 ?>
+
+
+                
             </table>
         </div>
     </div>
@@ -221,6 +454,16 @@
         $.post("process_ajax/xuly_timkiem_khoplenh.php", {loc: keys, tukhoa: key}, function(data){
             $("#output").html(data);
         });
+    });
+
+
+        $("#nhanhang").click(function(){
+         var sdtb = '<?php echo $sdtb;?>';
+        
+        $.post("process_ajax/xuly_nhanhang.php", {key: sdtb}, function(data){
+            $(".out").html(data);
+        });
+        alert('daposst');
     });
 
 

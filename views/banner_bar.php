@@ -5,7 +5,11 @@
 	$slthich = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM THICH WHERE USR_SDT = $sdt"));
 	} else $slthich = 0;
 ?>
-
+<style type="text/css">
+	#frtimkiem table tr td{
+		font-size: 15px;
+	}
+</style>
 
 <div style=" margin-top:0.5%; margin-bottom: 2px;">
 <link rel="stylesheet" href="css/style_hover.css">
@@ -42,9 +46,9 @@
 								}else{
 									?>
 								<td class="" style="font-weight: 600; padding-top: 3px; font-size: 16px; padding-left: 23px; padding-right: 23px; text-align: center;">
-									<span style="padding-left: 0px;font-size: 19px;">Xin chào<br></span>  
+									<span style="padding-left: 0px;font-size: 15px;">Xin chào</span>  
 									
-									<span style=" font-size: 20px; color: red;"><?php echo $_SESSION['user']; ?></span>  
+									<span style=" font-size: 17px; color: red;"><?php echo $_SESSION['user']; ?></span>  
 								</td>
 								
 							
@@ -74,7 +78,7 @@
 									$sp = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(*) AS tssp FROM KHOPLENH WHERE KL_SDT_MUA = $sdt AND KL_TEN = 'mua'"));
 
 								?>				
-									<div id="ex4">
+									<div id="ex4" style="display: none;">
 									  <a href="?xem=giohang"><span class="p1 fa-stack fa-2x has-badge" data-count="<?php echo $sp[0]; ?>">
 									    <!--<i class="p2 fa fa-circle fa-stack-2x"></i>-->
 									    <i class="p3 fa fa-shopping-cart fa-stack-1x xfa-inverse" data-count="4b"></i>

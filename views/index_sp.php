@@ -3,7 +3,7 @@
     <link rel="icon" href="http://www.thuthuatweb.net/wp-content/themes/HostingSite/favicon.ico" type="image/x-ico"/>
      <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link href="css/style_sp.css" rel="stylesheet" />
-   <div class="w3-teal" style=" width: 90%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 0px; margin-left: 5%; ">SÀN GIAO DỊCH</div>
+   <div class="w3-teal" style=" width: 90%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 2px; margin-left: 5%; font-family: 'roboto'; font-weight: 700; ">SÀN GIAO DỊCH</div>
 
  <div class="container-item" style="padding-left: 4%;">
 <?php
@@ -46,31 +46,71 @@
                             <div class="item-top-content-inner">
                                 <div class="item-product">
                                     <div class="item-top-title">
-                                        <h2 style="width: 180px; font-size: 15px; font-weight: 900;text-shadow: currentColor;"><?php echo $rows['SP_TEN']; ?></h2>
+                                        <h2 style="width: 200px; font-size: 17px; font-weight: 900;text-shadow: currentColor;"><?php echo $rows['SP_TEN']; ?></h2>
                                        
                                     </div>
                                 </div>
-                                <div class="item-product">
-                                    <span class="price-num" style="color: red; font-size:19px; font-weight: 700"><?php echo adddotstring($rows['SP_GIA']); ?>
+                                <div class="item-product" style="width: 200px;">
+                                    <?php 
+                                    $sp_id = $rows['SP_ID'];
+                            $sql = "SELECT MIN(L_GIA) AS GIA_M FROM LENH WHERE SP_ID = $sp_id AND L_TEN = 'ban' ";
+                            $dong = mysqli_fetch_row(mysqli_query($conn,$sql));
+                            if( $dong[0] != null){
+                                
+                            ?>
+                                     <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
                                         
                                     </span>
-                                    /
+                                     /
                                          <span style="color: black">
                                             <?php echo $rows['SP_DONVITINH']; ?>
-                                        </span>   
+                                        </span>
+                                        <?php
+                                            }else{
+                                                ?>
+                                                <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
+                                        
+                                    </span>
+                                                <?php
+                                            }
+                                        ?>
+                                         <br /> 
+                                   <?php 
+                                    $sp_id = $rows['SP_ID'];
+                            $sql = "SELECT MAX(L_GIA) AS GIA_M FROM LENH WHERE SP_ID = $sp_id AND L_TEN = 'mua' ";
+                            $dong = mysqli_fetch_row(mysqli_query($conn,$sql));
+                            if( $dong[0] != null){
+                                
+                            ?>
+                                     <span style="font-weight:600; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
+                                        
+                                    </span>
+                                     /
+                                         <span style="color: black">
+                                            <?php echo $rows['SP_DONVITINH']; ?>
+                                        </span>
+                                        <?php
+                                            }else{
+                                                ?>
+                                                <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
+                                        
+                                    </span>
+                                                <?php
+                                            }
+                                        ?>
                                 </div>
                                 <?php
                                 if(isset($_SESSION['sdt'])){
-                                    $sp_id = $rows['SP_ID'];
+                                    // $sp_id = $rows['SP_ID'];
                                     $sdt = $_SESSION['sdt'];
                                     $dathich = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM THICH WHERE USR_SDT = $sdt AND SP_ID = $sp_id"));
                                                             if($dathich < 1){
                                 ?>
-                              <a href="views/xuly_thich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" src="logo_image/ictim2.png" width="30px" height="30px"></a>
+                              <a href="views/xuly_thich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" title="Thích" src="logo_image/ictim2.png" width="30px" height="30px"></a>
                               <?php
                                 } else{
                             ?>
-                                 <a href="views/xuly_bothich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" src="logo_image/ictim.png" width="37px" height="37px"></a>
+                                 <a href="views/xuly_bothich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" src="logo_image/ictim.png" title="Bỏ thích" width="37px" height="37px"></a>
                            <?php 
                                 }
                                 }
