@@ -37,8 +37,17 @@
 					<table>
 						<tr>
 							<td
-								style="font-weight: 800; float: right;"><img src="logo_image/ictim.png" width="30px" height="30px">Thích(0)
+								style=" font-size: 14px; font-weight: 800; float: right; margin-top:4px;"><img src="logo_image/ictim.png" width="30px" height="30px">Thích(0)
 							</td>
+							<td class="w3-border-left w3-border-right" style="font-weight: 600; padding-top: 6px; padding-left: 3px; font-size: 14px;">
+								<img style="margin-left:3px;" src="logo_image/icondn.png" width="25px" height="25px"><span style="padding-left: 7px;">Đăng nhập</span>  
+								<span style="font-size: 17px;">/</span>
+								<span style="padding-right:3px;">Đăng ký</span>  
+							</td>
+							<td>
+								<button class="w3-btn w3-round w3-red" style="margin-top: 4px; margin-left: 5px;">Đăng tin</button>
+							</td>
+
 						</tr>
 					</table>
 			</div>
