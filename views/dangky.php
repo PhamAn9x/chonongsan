@@ -1,5 +1,5 @@
 <!-- header starts here -->
-<link rel="stylesheet" type="text/css" href="./css/dangky.css">
+<link rel="stylesheet" type="text/css" href="../css/dangky.css">
 <!-- header ends here -->
 <div class="loginbox radius">
   <h2 style="color:#141823; text-align:center;">ĐĂNG KÝ THÀNH VIÊN</h2>
