@@ -1,125 +1,51 @@
-.photos {
-width: 945px;
-height: 400px;
-margin: 100px auto;
-position:relative;
+.khungsp{
+	margin-top: 1%; 
+	margin-bottom: 1%; 
+	height: 320px;
 }
-.photos > div {
-background-color: rgba(128, 128, 128, 0.5);
-border: 2px solid #444;
-float: left;
-height: 100px;
-margin: 5px;
-overflow: hidden;
-position: relative;
-width: 300px;
-z-index: 1;
- 
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
--ms-border-radius: 10px;
--o-border-radius: 10px;
-border-radius: 10px;
- 
--webkit-transform:scale(1.0);
--moz-transform:scale(1.0);
--ms-transform:scale(1.0);
--o-transform:scale(1.0);
-transform:scale(1.0);
- 
--webkit-transition-duration: 0.5s;
--moz-transition-duration: 0.5s;
--ms-transition-duration: 0.5s;
--o-transition-duration: 0.5s;
-transition-duration: 0.5s;
+.tieude{
+	height: 50px;
 }
-.photos > div img{
-width: 100%;
+.sp{
+	width:245px; 
+	height: 250px;
+	margin-left:10px; 
+	margin-right: 10px; 
+	margin-top: 10px;
+	border: ridge 3px green;
+	box-shadow: -5px -3px 5px;
+	float: left;
+	border-radius: 10px;
 }
-.photos > div:hover{
-z-index: 10;
- 
--webkit-transform:scale(2.0);
--moz-transform:scale(2.0);
--ms-transform:scale(2.0);
--o-transform:scale(2.0);
-transform:scale(2.0);
+.sp img{
+	border-radius: 10px 10px 0px 0px;
+	width: 239px;
+	height: 160px;
 }
-.photos > div div {
-background: url(../images/hover.gif) repeat scroll 0 0 transparent;
-cursor: pointer;
-height: 100%;
-left: 0;
-opacity: 0.5;
-position: absolute;
-top: 0;
-width: 100%;
-z-index: 15;
- 
--webkit-transition-duration: 0.5s;
--moz-transition-duration: 0.5s;
--ms-transition-duration: 0.5s;
--o-transition-duration: 0.5s;
-transition-duration: 0.5s;
+.sp img hover{
+	width: 300px;
+	height: 200px;
 }
-.photos > div:nth-child(1):hover div {
-height: 0%;
+.tieudesp{
+	width:240px;
+	height: 75px;
+	margin-top:0px;
+	border-radius: 0px 0px 10px 10px;
 }
- 
-.photos > div:nth-child(2):hover div {
-height: 0%;
-margin-top: 100px;
+.tieudesp div{
+	width: 240px;
+	height: 40px;
+	background: red;
 }
-.photos > div:nth-child(3):hover div {
-width: 0%;
+
+.bsp img{
+	width: 250px; 
+	height: 190px;
 }
-.photos > div:nth-child(4):hover div {
-margin-left: 300px;
-width: 0%;
-}
-.photos > div:nth-child(5):hover div {
-height: 0%;
-margin-left: 150px;
-margin-top: 50px;
-width: 0%;
-}
-.photos > div:nth-child(6):hover div {
-margin-left: 150px;
-width: 0%;
-}
-.photos > div:nth-child(7):hover div {
-height: 0%;
-margin-left: 150px;
-margin-top: 50px;
-width: 0%;
- 
--webkit-transform: rotateX(360deg);
--moz-transform: rotate(360deg);
--ms-transform: rotate(360deg);
--o-transform: rotate(-360deg);
-transform: rotate(-360deg);
-}
-.photos > div:nth-child(8):hover div {
-height: 0%;
-margin-left: 150px;
-margin-top: 50px;
-width: 0%;
- 
--webkit-transform: rotateZ(600deg);
--moz-transform: rotateZ(600deg);
--ms-transform: rotateZ(600deg);
--o-transform: rotateZ(600deg);
-transform: rotateZ(600deg);
-}
-.photos > div.pair div {
-width: 50%;
-}
-.photos > div.pair div:nth-child(odd) {
-margin-left: 150px;
-}
-.photos > div.pair:hover div {
-width: 0%;
-}
-.photos > div.pair:hover div:nth-child(odd) {
-margin-left: 300px;
-}
+.td{
+	margin-left: 10px;
+	margin-top: 5px;
+	font-size: 25px; 
+	font-weight: 700; 
+	font-family: 'roboto';
+	}
