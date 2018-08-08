@@ -1,10 +1,10 @@
 .khungsp{
 	margin-top: 1%; 
 	margin-bottom: 1%; 
-	height: 320px;
+	height: 290px;
 }
 .tieude{
-	height: 50px;
+	height: 40px;
 }
 .sp{
 	width:245px; 
@@ -41,10 +41,19 @@
 .bsp img{
 	width: 250px; 
 	height: 190px;
+	border-radius: 20px;
 }
-.td{
+.tdl{
 	margin-left: 10px;
 	margin-top: 5px;
+	font-size: 20px; 
+	font-weight: 700; 
+	font-family: 'roboto';
+	}
+
+.tdr{
+	margin-left: 80%;
+	margin-top: -2.5%;
 	font-size: 25px; 
 	font-weight: 700; 
 	font-family: 'roboto';
