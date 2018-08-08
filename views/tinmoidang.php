@@ -26,7 +26,7 @@
 	             	 				<td colspan="2" style="height: 10px;">&nbsp</td>
 	             	 			</tr>
 	             	 			<tr>
-	             	 				<td style="position: absolute; float: left; font-weight: 900">
+	             	 				<td style="position: absolute; float: left; font-weight: 500">
 	             	 					<button style="width: 90px;" class="w3-btn w3-blue w3-round">Đặt hàng</button>
 	             	 					<button style="width: 90px;" class="w3-btn w3-green w3-round">Chi tiết</button>
 	             	 				</td>
