@@ -36,12 +36,18 @@
 		</div>
 	</div>
 	<div class="w3-row">
-		<div class="w3-col s3" style="padding-top: 1%; background: grey;">
-			<?php include("vendor/menu4/index.html"); ?>
-
+		<div class="w3-col s12" style=" border: solid 2px #009688; margin-left: 5px; text-align: left;border-radius: 5px;">
+			<div class="w3-col s3">
+				<panel style=" height: 30px; margin: 10px; font-size: 23px;font-family: 'roboto'; font-weight: 700;" >DANH MỤC HÀNG HÓA</panel>
+				<?php include("vendor/menu/index_danhmucsp.php"); ?>
+			</div>
+			<div class="w3-col s7" style="text-align: center;background-color:#009688; box-shadow: 5px 2px 15px; margin-top: 5px;">
+				<panel style=" height: 30px; margin: 10px; font-size: 23px;font-family: 'roboto'; font-weight: 700;">GIAN HÀNG TRƯNG BÀY</panel>
+			</div>
+			<div class="w3-col s2">
+				<panel style=" height: 30px; margin: 10px; font-size: 23px;font-family: 'roboto'; font-weight: 700;" >TÌM KIẾM NÂNG CAO</panel>
+			</div>
 		</div>
-		<div class="w3-col s7 w3-red w3-xxxlarge">gian hang</div>
-		<div class="w3-col s2 w3-yellow w3-xxxlarge">tim kiem nc</div>
 	</div>
 </body>
 </html>

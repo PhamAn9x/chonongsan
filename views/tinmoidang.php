@@ -35,7 +35,7 @@
              			</div>
             		</figcaption><a href="javascript:;"></a>
          		</figure>
-          		<textarea readonly="readonly" style="font-weight: 500; font-size: 20px;">LÚA OM5451</textarea>
+          		<textarea readonly="readonly" style="font-weight: 700; font-size: 17px;">LÚA OM5451</textarea>
           		<a href="#"><img src="logo_image/ictim.png" style="width: 40px; height: 40px; margin-bottom: 9px;"></a>
 			</div>
 
@@ -78,7 +78,7 @@
              			</div>
             		</figcaption><a href="javascript:;"></a>
          		</figure>
-          		<textarea readonly="readonly" style="font-weight: 500; font-size: 20px;">LÚA OM5451</textarea>
+          		<textarea readonly="readonly" style="font-weight: 500; font-size: 16px;">LÚA OM5451</textarea>
           		<a href="#"><img src="logo_image/ictim.png" style="width: 40px; height: 40px; margin-bottom: 9px;"></a>
 			</div>
 

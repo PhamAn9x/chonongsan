@@ -1,7 +1,7 @@
 .khungsp{
 	margin-top: 1%; 
 	margin-bottom: 1%; 
-	height: 290px;
+	height: 280px;
 }
 .tieude{
 	height: 40px;
@@ -41,9 +41,10 @@
 .bsp img{
 	width: 250px; 
 	height: 190px;
-	border-radius: 20px;
+	border-radius: 10px 10px 0px 0px;
 }
 .tdl{
+	text-align: left;
 	margin-left: 10px;
 	margin-top: 5px;
 	font-size: 20px; 
