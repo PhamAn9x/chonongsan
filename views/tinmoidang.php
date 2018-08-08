@@ -1,3 +1,7 @@
+<div class="w3-col s12 khungsp">
+<div class="w3-row w3-teal w3-round tieude">
+				<h1 class="tdl">TIN VỪA MỚI ĐĂNG </h1>
+			</div>
 <div class="demo bsp">
           		<figure class="imghvr-fold-up">
           			<img src="images/1.jpg" alt="example-image">
@@ -209,3 +213,4 @@
           		<textarea readonly="readonly" style="font-weight: 500; font-size: 20px;">LÚA OM5451</textarea>
           		<a href="#"><img src="logo_image/ictim.png" style="width: 40px; height: 40px; margin-bottom: 9px;"></a>
 			</div>
+		</div>
