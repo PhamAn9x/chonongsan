@@ -17,6 +17,9 @@
         <p>
           <input type="password" id="matkhau" name="matkhau" placeholder="Nhập mật khẩu" class="radius" />
         </p>
+        <p  style="text-align: left; margin-left: 20px; color: blue; font-size: 15px;" >
+          <input style="width: 15px;" type="checkbox" name="nhotk" id="nhotk" value=""/> <i>Ghi nhớ tài khoản</i><i style="margin-left: 180px;">Quên mật khẩu?</i>
+        </p>
         <p>
           <button class="radius title" name="dangky">Đăng nhập</button>
         </p>

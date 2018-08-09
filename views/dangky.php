@@ -12,6 +12,9 @@
     <div class="loginform">
       <form id="login" action="" method="post">
         <p>
+          <input type="text" name="ten" id="ten" placeholder="Nhập họ và tên">
+        </p>
+        <p>
           <input type="text" id="sdt" name="sdt" placeholder="Nhập số điện thoại" class="radius" />
         </p>
         <p>
@@ -20,7 +23,9 @@
         <p>
           <input type="text" id="rematkhau" name="rematkhau" placeholder="Nhập lại mật khẩu" class="radius" />
         </p>
-        <p>
+         <p>
+          <input type="email" id="email" name="email" placeholder="Nhập Eemail" class="radius" />
+        </p>
         <p>
           <button class="radius title" name="dangky">Đăng ký</button>
         </p>

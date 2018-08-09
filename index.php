@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="js/boxsp.js"></script>
 	<title></title>
 </head>
-<body style="width: 99%; margin-left: 0.5%; background-image: url('bg-main.jpg');">
+<body style="width: 99%; margin-left: 0.5%; background-image: url('bg-main2.jpg');">
 	<div class="w3-row">
 		<div class="w3-col s8 w3-black">
 			<img src="logo_image/banner.png">
@@ -56,7 +56,8 @@
 							else
 								if($view == "dangnhap") include("views/dangnhap.php");
 						}
-						else include("vendor/pd_item/index_sp.php");
+						//else include("vendor/pd_item/index_sp.php");
+						else include("views/dangtin.php");
 					?>
 				</div>
 			</div>

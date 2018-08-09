@@ -2,7 +2,7 @@
     <link rel="icon" href="http://www.thuthuatweb.net/wp-content/themes/HostingSite/favicon.ico" type="image/x-ico"/>
      <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link href="vendor/pd_item/style.css" rel="stylesheet" />
-    <div class="w3-teal w3-round" style=" height: 60px; margin-right:55px; padding-top: 18px; font-size: 25px">SẢN PHẨM TRƯNG BÀY</div>
+    <div class="w3-teal w3-round" style=" height: 60px; margin-right:55px; padding-top: 10px; font-size: 25px">SẢN PHẨM TRƯNG BÀY</div>
 <div class="wrapper" style="float: right;">
                 <!-- Social icons -->
             </div>
@@ -12,8 +12,6 @@ for ($x = 1; $x < 10; $x++) {
             </div>
             <div class="container-item">
                 <div class="item">
-                    <div class="item-overlay">
-                    </div>
                     <!-- item image -->
                     <div class="item-img">
                         <img src="vendor/pd_item/images/adidas.jpg" width="260" height="260" />

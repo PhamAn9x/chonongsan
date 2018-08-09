@@ -1,0 +1,71 @@
+.tindang tr td{
+	color: white;
+	font-size: 22px;
+	padding-top: 10px;
+	padding-left: 15px;
+	text-align: left;
+}
+.tindang tr td span{
+	color: red;
+}
+.tindang tr td input{
+	color: white;
+	border-radius: 5px;
+	background-color: #009688;
+	font-family: 'roboto';
+	text-align: center;
+
+}
+.tindang tr td input:hover{
+	transition-duration: 0.5s;
+	background-color: white;
+	color: black;
+	font-style: italic;
+}
+.tindang tr td input:focus{
+	background-color: white;
+	color: black;
+		font-style: italic;
+}
+
+.tindang tr td select{
+	color: white;
+	border-radius: 5px;
+	background-color: #009688;
+	font-family: 'roboto';
+	text-align: center;
+}
+.tindang tr td select:hover{
+	transition-duration: 0.5s;
+	background-color: white;
+	color: black;
+	font-style: italic;
+}
+.tindang tr td select:focus{
+	background-color: white;
+	color: black;
+	font-style: italic;
+}
+
+
+.tindang tr td textarea{
+	color: white;
+	border-radius: 5px;
+	background-color: #009688;
+	font-family: 'roboto';
+	text-align: left;
+	width: 100%;
+	height: 200px;
+
+}
+.tindang tr td textarea:hover{
+	transition-duration: 0.5s;
+	background-color: white;
+	color: black;
+	font-style: italic;
+}
+.tindang tr td textarea:focus{
+	background-color: white;
+	color: black;
+		font-style: italic;
+}
