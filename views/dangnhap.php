@@ -3,7 +3,7 @@
 <!-- header ends here -->
 <div class="loginbox radius" style="margin-left:400px;">
   <h2 style="color:#141823; text-align:center; font-size: 30px; 
-  line-height:38px; font-weight:normal; ">ĐĂNG NHẬP</h2>
+  line-height:38px; font-weight:1000; font-family: 'roboto';">ĐĂNG NHẬP</h2>
   <div class="loginboxinner radius">
     <div class="loginheader">
       <h4 class="title">Nhập tài khoản và mật khẩu để đăng nhập!.</h4>
@@ -12,7 +12,7 @@
     <div class="loginform">
       <form id="login" action="" method="post">
         <p>
-          <input type="text" id="sdt" name="sdt" placeholder="Nhập số điện thoại" class="radius" />
+          <input type="text" id="sdt" name="sdt" placeholder="Nhập số điện thoại/Email" class="radius" />
         </p>
         <p>
           <input type="password" id="matkhau" name="matkhau" placeholder="Nhập mật khẩu" class="radius" />

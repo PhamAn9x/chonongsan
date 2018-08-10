@@ -3,7 +3,7 @@
 <!-- header ends here -->
 <div class="loginbox radius" style="margin-left:400px;">
   <h2 style="color:#141823; text-align:center; font-size: 30px; 
-  line-height:38px; font-weight:normal; ">ĐĂNG KÝ THÀNH VIÊN</h2>
+  line-height:38px; font-weight:1000; font-family:'roboto'">ĐĂNG KÝ THÀNH VIÊN</h2>
   <div class="loginboxinner radius">
     <div class="loginheader">
       <h4 class="title">Nhập đầy đủ thông tin để tiến hành dăng ký!.</h4>

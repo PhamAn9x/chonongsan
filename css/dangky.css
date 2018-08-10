@@ -17,7 +17,7 @@
  
 .loginheader { height: 20px; }
  
-.loginform { margin: 4px auto; text-align:center; }
+.loginform { margin: 4px auto; text-align:center;}
  
 .loginbox h1 { 
   font-size: 30px; 
@@ -40,7 +40,7 @@
  
 .loginbox input {
   padding: 12px 10px; 
-  color: #ccc;
+  color: black;
   font-family: Arial, Helvetica, sans-serif; 
   margin-top: 8px; 
   font-size: 15px; 

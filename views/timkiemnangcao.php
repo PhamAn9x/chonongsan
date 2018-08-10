@@ -1,5 +1,5 @@
-<div class="w3-col s2 w3-teal" style="margin-bottom: 10px;font-size: 22px; height: 40px;">
-<span style="margin-left: 15px;">TÌM KIẾM NÂNG CAO</span>
+<div class="w3-col s2 w3-teal" style="margin-bottom: 10px;font-size: 20px; height: 40px;">
+<span style="margin-left: 15px; font-family: 'roboto';">TÌM KIẾM NÂNG CAO</span>
 </div>
 <div class="w3-col s10" style="margin-bottom:20px; ">
 			<form name="frtimkiemnc" id ="frtimkiemnc" method="get">

@@ -1,0 +1,33 @@
+  .hinh {
+    border: 1px solid #369;
+  }
+
+  .hinh:hover {
+    opacity: 0.4;
+    border: 1px solid deeppink;
+  }
+
+  .thumb {
+    border: 1px solid #000000;
+    height: 100px;
+    width: auto;
+  }
+
+  .thumb {
+    margin-right: 10px;
+    position: relative;
+    z-index: 999;
+  }
+
+  .thumb:hover {
+    filter: brightness(0.5);
+  }
+
+  .time {
+    position: absolute;
+    margin-left: -25px;
+    z-index: 999;
+    cursor: pointer;
+    background-color: #ce0122;
+    color: white;
+}
