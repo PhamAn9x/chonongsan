@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="js/boxsp.js"></script>
 	<title></title>
 </head>
+<?php include("vendor/vine/index.html"); ?>
 <body style="width: 99%; margin-left: 0.5%; ">
 	<div class="w3-row">
 		<div class="w3-col s8 w3-black">
