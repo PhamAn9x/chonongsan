@@ -1,4 +1,4 @@
-<div style="position: relative; left: 16%; top:10%">
+<div>
     <link rel="icon" href="http://www.thuthuatweb.net/wp-content/themes/HostingSite/favicon.ico" type="image/x-ico"/>
      <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link href="vendor/pd_item/style.css" rel="stylesheet" />

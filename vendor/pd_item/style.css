@@ -1,23 +1,6 @@
 /* Base settings */
-
-*{
-  margin: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box !important;
-     -moz-box-sizing: border-box !important;
-          box-sizing: border-box !important;
- -webkit-backface-visibility: hidden;
-}
-/*.preload * {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -ms-transition: none !important;
-  -o-transition: none !important;
-
-
 /* page setup */
 .wrapper{
-  position: relative;
   width:100%;
   max-width:1000px;
   margin-left:5%;
