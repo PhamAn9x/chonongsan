@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Project SMS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Fira+Mono:500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.min.css'>
+
+      <link rel="stylesheet" href="vendor/account/css/style.css">
+
+  
+</head>
+
+<body>
+
+  
+<!-- Home page-->
+<div class="homePage">
+  <h1 class="mainTitle animated fadeInDown">Project SMS</h1>
+  <p class="subTitle">Version 1.0</p><span>
+    <button class="signBtns animated slideInUp" onclick="document.querySelector('.overlay1').style.display='flex'">Sign Up</button>
+    <button class="signBtns animated slideInUp" onclick="document.querySelector('.overlay').style.display='flex'">Sign In</button></span>
+  <footer>&copy Copyright 2017, All rights reserved.</footer>
+</div>
+<!-- Login Page-->
+<div class="overlay animated zoomIn">
+  <div class="close-btn"><span class="close" title="Close" onclick="document.querySelector('.overlay').style.display='none'">&times  </span></div>
+  <h1>Login</h1>
+  <div class="modalWindow">
+    <form>
+      <input type="email" placeholder="Email address" required="required"/>
+      <input type="password" placeholder="Password" required="required"/>
+      <div>
+        <button type="submit">Login</button>
+      </div><a href="#">Forgot your password?</a>
+      <p>
+         Not a member? <a id="signInClick" onclick="document.querySelector('.overlay1').style.display='flex'"> Click here </a> to register.</p>
+    </form>
+  </div>
+</div>
+<!-- Signup Page-->
+<div class="overlay1 animated zoomIn">
+  <div class="close-btn"><span class="close" title="Close" onclick="document.querySelector('.overlay1').style.display='none'">&times</span></div>
+  <h1>Signup </h1>
+  <div class="modalWindow1">
+    <form method="POST" action="">
+      <input type="text" placeholder="First name" required="required"/>
+      <input type="text" placeholder="Last name" required="required"/>
+      <input type="text" placeholder="Company name (optional)"/>
+      <input type="email" placeholder="Email address" required="required"/>
+      <input type="password" placeholder="Password" required="required"/>
+      <div>
+        <button class="signBtns" type="submit">Signup</button>
+      </div>
+      <p>Already a member? <a id="signUpClick"  onclick="document.querySelector('.overlay').style.display='flex'"> Click here </a> to Login.</p>
+      <p>By clicking on the Signup button or otherwise using our services you agree to be bound by the <a href="#"> Terms of Use </a> and <a href="#"> Private Policy </a></p>
+    </form>
+  </div>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js'></script>
+
+  
+
+    <script  src="vendor/account/js/index.js"></script>
+
+
+
+
+</body>
+
+</html>

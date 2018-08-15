@@ -3,7 +3,7 @@
 }
 .tindang tr td{
 	color: black;
-	font-size: 22px;
+	font-size: 20px;
 	padding-top: 10px;
 	padding-left: 15px;
 	text-align: left;
@@ -15,7 +15,6 @@
 .tindang tr td input{
 	color: black;
 	border-radius: 5px;
-	
 	font-family: 'roboto';
 	text-align: center;
 	height: 35px;

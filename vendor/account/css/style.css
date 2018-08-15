@@ -1,0 +1,336 @@
+body {
+  background-color: #592633;
+  color: #f1dade;
+}
+
+.homePage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+}
+
+.subTitle {
+  margin: -10px 0 20px 0;
+  padding: 0;
+  font-size: 13px;
+  font-style: italic;
+  font-weight: lighter;
+}
+
+span {
+  margin: 20px;
+}
+
+.signBtns {
+  color: #592633;
+  background-color: #f1dade;
+  border: 2px solid #f1dade;
+  border-radius: 1px;
+  text-transform: uppercase;
+  margin: auto 2px;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: normal;
+}
+.signBtns:hover {
+  color: #f1dade;
+  background-color: #592633;
+  border: 2px solid #f1dade;
+  box-shadow: 1px 1px 8px #a63f52;
+  opacity: 0.7;
+}
+
+footer {
+  margin: 20px auto;
+  padding: 0;
+  font-size: 13px;
+  font-style: italic;
+  font-weight: lighter;
+}
+
+.overlay {
+  position: absolute;
+  background: rgba(241, 218, 222, 0.975);
+  overflow: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: none;
+}
+.overlay h1 {
+  color: #592633;
+}
+.overlay .close-btn {
+  width: 100%;
+  position: relative;
+}
+.overlay .close-btn span {
+  color: #592633;
+  transition: all 100ms ease-in-out;
+  font-size: 40px;
+}
+.overlay .close-btn span:hover {
+  -webkit-transform: scale(1.2, 1.2);
+          transform: scale(1.2, 1.2);
+}
+.overlay .modalWindow {
+  width: auto;
+  height: auto;
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.4);
+  background: #813140;
+  border-radius: 5px;
+  padding: auto;
+  display: block;
+}
+.overlay .modalWindow form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 15px;
+  padding: 20px;
+}
+.overlay .modalWindow form input {
+  position: relative;
+  margin-top: 5px;
+  padding: 5px 8px;
+  background-color: #f1dade;
+  border: 2px solid #f1dade;
+  border-radius: 2px;
+  color: #592633;
+  font-size: 13px;
+}
+.overlay .modalWindow form div {
+  margin-top: 30px;
+}
+.overlay .modalWindow form div button {
+  width: 100%;
+  color: #592633;
+  background-color: #f1dade;
+  border: 2px solid #f1dade;
+  border-radius: 1px;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: lighter;
+}
+.overlay .modalWindow form div button:hover {
+  color: #f1dade;
+  background-color: #592633;
+  border: 2px solid #f1dade;
+  box-shadow: 1px 1px 8px #a63f52;
+}
+.overlay .modalWindow form p {
+  color: #f1dade;
+  margin: 8px auto 5px 0;
+  padding: 0;
+  font-size: 13px;
+  font-style: italic;
+  font-weight: lighter;
+}
+.overlay .modalWindow form a {
+  color: #f1dade;
+  margin: 8px auto 5px 0;
+  padding: 0;
+  cursor: pointer;
+  font-size: 13px;
+  font-style: italic;
+  font-weight: bold;
+}
+.overlay .modalWindow form a:hover {
+  text-decoration: underline;
+}
+
+.overlay1 {
+  position: absolute;
+  overflow: scroll;
+  background-color: rgba(241, 218, 222, 0.975);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: none;
+}
+.overlay1 h1 {
+  color: #592633;
+}
+.overlay1 .close-btn {
+  width: 100%;
+  position: relative;
+}
+.overlay1 .close-btn span {
+  color: #592633;
+  transition: all 100ms ease-in-out;
+  font-size: 40px;
+}
+.overlay1 .close-btn span:hover {
+  -webkit-transform: scale(1.2, 1.2);
+          transform: scale(1.2, 1.2);
+}
+.overlay1 .modalWindow1 {
+  max-width: 500px;
+  height: auto;
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.4);
+  background: #813140;
+  border-radius: 5px;
+  padding: auto;
+  display: block;
+}
+.overlay1 .modalWindow1 form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 15px;
+  padding: 20px;
+}
+.overlay1 .modalWindow1 form input {
+  margin-top: 5px;
+  padding: 5px 8px;
+  background-color: #f1dade;
+  border: 2px solid #f1dade;
+  border-radius: 2px;
+  color: #592633;
+  font-size: 13px;
+}
+.overlay1 .modalWindow1 form div {
+  margin-top: 30px;
+}
+.overlay1 .modalWindow1 form div button {
+  width: 100%;
+  color: #592633;
+  background-color: #f1dade;
+  border: 2px solid #f1dade;
+  border-radius: 1px;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: lighter;
+}
+.overlay1 .modalWindow1 form div button:hover {
+  color: #f1dade;
+  background-color: #592633;
+  border: 2px solid #f1dade;
+  box-shadow: 1px 1px 8px #a63f52;
+}
+.overlay1 .modalWindow1 form p {
+  color: #f1dade;
+  margin: 8px auto 5px 0;
+  padding: 0;
+  font-size: 13px;
+  font-style: italic;
+  font-weight: lighter;
+}
+.overlay1 .modalWindow1 form a {
+  color: #f1dade;
+  margin: 8px auto 5px 0;
+  padding: 0;
+  cursor: pointer;
+  font-size: 13px;
+  font-style: italic;
+  font-weight: bold;
+}
+.overlay1 .modalWindow1 form a:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 400px) {
+  .homePage h1 {
+    font-size: 25px;
+  }
+  .homePage .subTitle, .homePage footer, .homePage .signBtns {
+    font-size: 10px;
+  }
+
+  .overlay h1 {
+    font-size: 25px;
+  }
+  .overlay .modalWindow {
+    max-width: 280px;
+  }
+  .overlay .modalWindow form input, .overlay .modalWindow form a, .overlay .modalWindow form p {
+    font-size: 10px;
+  }
+
+  .overlay1 h1 {
+    font-size: 25px;
+  }
+  .overlay1 .modalWindow1 {
+    max-width: 295px;
+  }
+  .overlay1 .modalWindow1 form input, .overlay1 .modalWindow1 form a, .overlay1 .modalWindow1 form p {
+    font-size: 10px;
+  }
+}
+@media only screen and (max-width: 769px) and (min-width: 401px) {
+  .homePage h1 {
+    font-size: 30px;
+  }
+  .homePage .subTitle, .homePage footer, .homePage .signBtns {
+    font-size: 11px;
+  }
+
+  .overlay h1 {
+    font-size: 30px;
+  }
+  .overlay .modalWindow {
+    max-width: 380px;
+  }
+  .overlay .modalWindow form input, .overlay .modalWindow form a, .overlay .modalWindow form p {
+    font-size: 11px;
+  }
+
+  .overlay1 h1 {
+    font-size: 30px;
+  }
+  .overlay1 .modalWindow1 {
+    max-width: 340px;
+  }
+  .overlay1 .modalWindow1 form input, .overlay1 .modalWindow1 form a, .overlay1 .modalWindow1 form p {
+    font-size: 11px;
+  }
+}
+@media only screen and (max-width: 1077px) and (min-width: 770px) {
+  .homePage h1 {
+    font-size: 32px;
+  }
+  .homePage .subTitle, .homePage footer, .homePage .signBtns {
+    font-size: 13px;
+  }
+
+  .overlay h1 {
+    font-size: 32px;
+  }
+  .overlay .modalWindow {
+    max-width: 400px;
+  }
+  .overlay .modalWindow form input, .overlay .modalWindow form a, .overlay .modalWindow form p {
+    font-size: 13px;
+  }
+
+  .overlay1 h1 {
+    font-size: 32px;
+  }
+  .overlay1 .modalWindow1 {
+    max-width: 400px;
+  }
+  .overlay1 .modalWindow1 form input, .overlay1 .modalWindow1 form a, .overlay1 .modalWindow1 form p {
+    font-size: 13px;
+  }
+}

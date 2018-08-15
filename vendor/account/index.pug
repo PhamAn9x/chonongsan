@@ -1,0 +1,42 @@
+// Home page
+.homePage
+  h1(class="mainTitle animated fadeInDown") Project SMS
+  p(class="subTitle") Version 1.0
+  span
+    button(class="signBtns animated slideInUp" onclick="document.querySelector('.overlay1').style.display='flex'") Sign Up
+    button(class="signBtns animated slideInUp" onclick="document.querySelector('.overlay').style.display='flex'") Sign In
+  footer &copy Copyright 2017, All rights reserved.
+
+// Login Page
+.overlay.animated.zoomIn
+  .close-btn
+    span(class="close" title="Close" onclick="document.querySelector('.overlay').style.display='none'") &times  
+  h1 Login
+  .modalWindow
+    form
+      input(type="email" placeholder="Email address" required)
+      input(type="password" placeholder="Password" required)
+      div
+        button(type="submit") Login
+      a(href="#") Forgot your password?
+      p 
+        | Not a member? <a id="signInClick" onclick="document.querySelector('.overlay1').style.display='flex'"> Click here </a> to register.
+
+// Signup Page
+.overlay1.animated.zoomIn
+  .close-btn
+    span(class="close" title="Close" onclick="document.querySelector('.overlay1').style.display='none'") &times
+  h1 Signup 
+  .modalWindow1
+    form(method="POST" action="")
+      input(type="text" placeholder="First name" required)  
+      input(type="text" placeholder="Last name" required)
+      input(type="text" placeholder="Company name (optional)")
+      input(type="email" placeholder="Email address" required)
+      input(type="password" placeholder="Password" required)
+      div
+        button(class="signBtns" type="submit") Signup
+      p Already a member? <a id="signUpClick"  onclick="document.querySelector('.overlay').style.display='flex'"> Click here </a> to Login.
+      
+      p
+        | By clicking on the Signup button or otherwise using our services you agree to be bound by the <a href="#"> Terms of Use </a> and <a href="#"> Private Policy </a>

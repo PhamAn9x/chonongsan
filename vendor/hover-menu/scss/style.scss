@@ -1,0 +1,58 @@
+@import "compass/css3";
+
+body {
+  background-color:#333;
+  font-family:helvetica;
+}
+.menu {
+  position:absolute;
+  top:  20px; left: 20px;
+  height: 50px; width: 50px;
+  background-color:#FFF;
+  border-radius: 50px;
+  font-size: 9pt;
+  color:#444;
+  padding: 18px 10px 10px 10px;
+  @include box-sizing(border-box);
+  @include transition(all 350ms ease-in-out);
+  overflow:hidden;
+  &:hover {
+    height: 240px; width: 150px;
+    border-radius:0;
+    cursor:pointer;
+  }
+  
+  ul, li {
+    list-style:none;
+    list-style-type:none;
+    margin:0;
+    padding:0;
+  }
+  
+  li {
+    position:relative;
+    border-bottom:#EEE;
+    padding: 15px 20px 15px 20px;
+    overflow:hidden;
+    &:before {
+      position:absolute;
+      height:0px; width:0px;
+      top:50%; left:50%;
+      margin: -5px 0 0 -5px;
+      background-color:rgba(black, 0.05);
+      content: '';
+      border-radius:100px;
+      @include transition(all 350ms ease-in-out);
+    }
+    &:first-child {
+      margin: 20px 0 0 0;
+    }
+    &:hover {
+      &:before {
+        height: 300px; width:300px;
+        margin: -150px 0 0 -150px;
+      }      
+    }
+  }
+  
+}

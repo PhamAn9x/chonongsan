@@ -2,75 +2,66 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-
 	<link href="css/boxsp.css" rel="stylesheet" type="text/css"/>
 	<link href="css/demo-page.css" rel="stylesheet">
     <link href="css/imagehover.css" rel="stylesheet">
-
 	<link rel="stylesheet" type="text/css" href="css/style.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/demo.css" media="all" />
 	<script type="text/javascript" src="js/boxsp.js"></script>
 	<title></title>
 </head>
-<?php include("vendor/vine/index.html"); ?>
-<body style="width: 99%; margin-left: 0.5%; ">
-	<div class="w3-row">
-		<div class="w3-col s8 w3-black">
-			<img src="logo_image/banner.png">
-		</div>
-		<div class="w3-col s4 w3-black">
-			<?php  ?>
-		</div>
+<?php 
+	include("config/connect.php");
+	session_start();
+?>
+<body style="margin: 3px;">
+	<div class="w3-row w3-blue">
+		<img src="logo_image/banner.png" width="1360">
 	</div>
-	<div class="w3-row" style="margin-top: 1%;">
+	<div class="w3-row">
 		<?php include("views/banner_bar.php");?>
 	</div>
 	<div class="w3-row">
-		
-				<?php 
-					if(!isset($_GET['view'])){
-						include("views/tinmoidang.php"); 
-					}
-					?>
-	</div>
-	<div class="w3-row">
 		<?php 
-					if(!isset($_GET['view'])){
-						include("views/timkiemnangcao.php");
-					}
+			if(!isset($_GET['view']))
+			{
+				include("views/tinmoidang.php"); 
+			}
 		?>
 	</div>
 	<div class="w3-row">
 		<?php 
-					if(!isset($_GET['view'])){
-						include("vendor/menu/index_danhmucsp.php");
-					}
+			if(!isset($_GET['view']))
+			{
+				include("views/timkiemnangcao.php");
+			}
 		?>
-		
 	</div>
-			<div class="w3-col s9" style="text-align: center; margin-top: 5px; width:999px; padding-top: 0%;padding-right: 10px; padding-left: 50px;">
-				<div style="">
-					<?php
-						if(isset($_GET['view'])){
-							$view = $_GET['view'];
-							if($view == "dangky") include("views/dangky.php");
-							else
-								if($view == "dangnhap") include("views/dangnhap.php");
-						}
-						//else include("vendor/pd_item/index_sp.php");
-						else include("views/dangtin.php");
-					?>
-				</div>
-			</div>
-			
-		</div>
+	<div class="w3-row w3-col s3">
+		<?php 
+			if(!isset($_GET['view']))
+			{
+			    include("vendor/menu/index_danhmucsp.php");
+			}
+		?>
 	</div>
-	<div class="w3-row">
-		<div class="w3-col s12" style="margin: 10px;">
-			<img src="logo_image/bannerft.png" style="height: 100px; width: 100%; margin-top: 40%;">
-		</div>
+	<div class="w3-row w3-col s9" style="padding-left: 3.5%;">
+		<?php
+			if(isset($_GET['view'])){
+				$view = $_GET['view'];
+				if($view == "dangky") include("views/dangky.php");
+				else
+					if($view == "dangnhap") include("views/dangnhap.php");
+					else
+						if($view == "dangtin") include("views/dangtin.php");
+						else 
+							if($view == "dangxuat") include("views/dangxuat.php");
+			}
+			else include("vendor/pd_item/index_sp.php");
+						 
+		?>
 	</div>
-	</div>
+	
 </body>
 </html>
 

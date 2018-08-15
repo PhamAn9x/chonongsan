@@ -1,0 +1,337 @@
+$burgandy: #592633
+$burgandyWhite: #f1dade
+$burgandyButton: #813140
+
+
+body
+  background-color: $burgandy
+  color: $burgandyWhite
+
+// Home Page  
+.homePage
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  text-align: center
+  height: 100vh
+  
+.subTitle
+  margin: -10px 0 20px 0 
+  padding: 0
+  font:
+    size: 13px
+    style: italic
+    weight: lighter
+span
+  margin: 20px
+.signBtns
+  color: $burgandy
+  background-color: $burgandyWhite
+  border: 2px solid $burgandyWhite
+  border-radius: 1px
+  text-transform: uppercase
+  margin: auto 2px
+  padding: 8px
+  cursor: pointer
+  font:
+    size: 15px
+    weight: normal
+  &:hover
+    color: $burgandyWhite
+    background-color: $burgandy
+    border: 2px solid $burgandyWhite
+    box-shadow: 1px 1px 8px #a63f52
+    opacity: 0.7
+     
+footer
+  margin: 20px auto
+  padding: 0
+  font:
+    size: 13px
+    style: italic
+    weight: lighter
+
+    
+// Modal Login 
+.overlay
+  position: absolute
+  background: fade-out($burgandyWhite, 0.025)
+  overflow: auto
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  align-items: center
+  display: none
+  h1
+    color: $burgandy
+  .close-btn
+    width: 100%
+    position: relative
+    span
+      color: $burgandy
+      transition: all 100ms ease-in-out
+      font:
+        size: 40px
+      &:hover
+        transform: scale(1.2,1.2)
+  .modalWindow
+    width: auto
+    height: auto
+    box-shadow: 0 4px 40px rgba(0,0,0,0.4)
+    background: $burgandyButton
+    border-radius: 5px
+    padding: auto
+    display: block
+   
+    form
+      position: relative
+      display: flex
+      flex-direction: column
+      justify-content: center
+      margin: 15px
+      padding: 20px
+      input
+        position: relative
+        margin-top: 5px
+        padding: 5px 8px
+        background-color: $burgandyWhite
+        border: 2px solid $burgandyWhite
+        border-radius: 2px
+        color: $burgandy
+        font:
+          size: 13px
+      div
+        margin-top: 30px
+        button
+          width: 100%
+          color: $burgandy
+          background-color: $burgandyWhite
+          border: 2px solid $burgandyWhite
+          border-radius: 1px
+          text-transform: uppercase
+          margin: 0
+          padding: 5px
+          cursor: pointer
+          font:
+            size: 15px
+            weight: lighter
+          &:hover
+            color: $burgandyWhite
+            background-color: $burgandy
+            border: 2px solid $burgandyWhite
+            box-shadow: 1px 1px 8px #a63f52
+      p
+        color: $burgandyWhite
+        margin: 8px auto 5px 0
+        padding: 0
+        font:
+          size: 13px
+          style: italic
+          weight: lighter  
+      a
+        color: $burgandyWhite
+        margin: 8px auto 5px 0
+        padding: 0
+        cursor: pointer
+        font:
+          size: 13px
+          style: italic
+          weight: bold 
+        
+        &:hover
+          text-decoration: underline     
+         
+
+// Modal Signup
+.overlay1
+  position: absolute
+  overflow: scroll
+  background-color: fade-out($burgandyWhite, 0.025)
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  align-items: center
+  display: none
+  h1
+    color: $burgandy
+  .close-btn
+    width: 100%
+    position: relative
+    
+    span
+      color: $burgandy
+      transition: all 100ms ease-in-out
+      font:
+        size: 40px
+      &:hover
+        transform: scale(1.2,1.2)
+  .modalWindow1
+    max-width: 500px
+    height: auto
+    box-shadow: 0 4px 40px rgba(0,0,0,0.4)
+    background: $burgandyButton
+    border-radius: 5px
+    padding: auto
+    display: block
+      
+    form
+      display: flex
+      flex-direction: column
+      justify-content: center
+      margin: 15px
+      padding: 20px
+      
+      input
+        margin-top: 5px
+        padding: 5px 8px
+        background-color: $burgandyWhite
+        border: 2px solid $burgandyWhite
+        border-radius: 2px
+        color: $burgandy
+        font:
+          size: 13px
+      div  
+        margin-top: 30px
+        button
+          width: 100%
+          color: $burgandy
+          background-color: $burgandyWhite
+          border: 2px solid $burgandyWhite
+          border-radius: 1px
+          text-transform: uppercase
+          margin: 0
+          padding: 5px
+          cursor: pointer
+          font:
+            size: 15px
+            weight: lighter
+          &:hover
+            color: $burgandyWhite
+            background-color: $burgandy
+            border: 2px solid $burgandyWhite
+            box-shadow: 1px 1px 8px #a63f52
+      p
+        color: $burgandyWhite
+        margin: 8px auto 5px 0
+        padding: 0
+        font:
+          size: 13px
+          style: italic
+          weight: lighter  
+      
+      a
+        color: $burgandyWhite
+        margin: 8px auto 5px 0
+        padding: 0
+        cursor: pointer
+        font:
+          size: 13px
+          style: italic
+          weight: bold 
+        
+        &:hover
+          text-decoration: underline  
+          
+// Media Queries
+
+// For Mobile
+@media only screen 
+  @media (max-width: 400px)
+    .homePage
+      h1
+        font-size: 25px  
+      .subTitle, footer, .signBtns
+        font-size: 10px  
+    .overlay
+      h1
+        font-size: 25px
+      .modalWindow
+        max-width: 280px
+        
+        form
+          input, a, p
+            font-size: 10px
+    .overlay1
+      h1
+        font-size: 25px
+      .modalWindow1
+        max-width: 295px 
+        
+        form
+          input, a, p
+            font-size: 10px
+        
+
+  // For Tabs  
+  @media (max-width: 769px) and (min-width: 401px)
+    .homePage
+      h1
+        font-size: 30px
+      .subTitle, footer, .signBtns
+        font-size: 11px
+        
+    .overlay
+      h1
+        font-size: 30px
+      .modalWindow
+        max-width: 380px
+        
+        form
+          input, a, p
+            font-size: 11px
+            
+    .overlay1
+      h1
+        font-size: 30px
+      .modalWindow1
+        max-width: 340px
+        
+        form
+          input, a, p
+            font-size: 11px
+  // For Laptop
+  @media (max-width: 1077px) and (min-width: 770px)
+    .homePage
+      h1
+        font-size: 32px
+      .subTitle, footer, .signBtns
+        font-size: 13px
+     
+    .overlay
+      h1
+        font-size: 32px
+      .modalWindow
+        max-width: 400px
+        
+        form
+          input, a, p
+            font-size: 13px    
+            
+    .overlay1
+      h1
+        font-size: 32px
+      .modalWindow1
+        max-width: 400px
+        
+        form
+          input, a, p
+            font-size: 13px        
+ 
+  
+  
+  
+  
+    
+
+
+
+  
