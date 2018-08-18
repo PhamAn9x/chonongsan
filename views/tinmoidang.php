@@ -1,3 +1,27 @@
+<link rel="icon" href="http://www.thuthuatweb.net/wp-content/themes/HostingSite/favicon.ico" type="image/x-ico"/>
+     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+	<link href="vendor/pd_item/style.css" rel="stylesheet" />
+
+	<?php
+    function adddotstring($strNum) {
+
+        $len = strlen($strNum);
+        $counter = 3;
+        $result = "";
+        while ($len - $counter >= 0)
+        {
+            $con = substr($strNum, $len - $counter , 3);
+            $result = '.'.$con.$result;
+            $counter+= 3;
+        }
+        $con = substr($strNum, 0 , 3 - ($counter - $len) );
+        $result = $con.$result;
+        if(substr($result,0,1)=='.'){
+            $result=substr($result,1,$len+1);   
+        }
+        return $result;
+}
+?>
 <div class="w3-col khungsp">
 <div class="w3-row w3-teal w3-round tieude">
 				<h1 class="tdl">TIN VỪA MỚI ĐĂNG 
@@ -23,48 +47,52 @@
 	$result = mysqli_query($conn,$sql);
 	while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 ?>
-<div class="demo bsp">
-          		<figure class="imghvr-fold-up">
-          			<img src="server/php/files/<?php echo $rows['HA_TEN']; ?>" alt="example-image">
-            		<figcaption>
-            			<div style="font-size: 15px; font-family:'roboto'; margin-top: 1%;">
-	             	 		<table width="100%">
-	             	 			<tr>
-	             	 				<td colspan="2" style=" position: absolute; top:5px; width: 100%; padding-left: 27px;font-weight: 700; font-size: 23px; color: red;"><?php echo $rows['SP_TEN']; ?></td>
-	             	 			</tr>
-	             	 			<tr>
-	             	 				<td colspan="2">&nbsp</td>
-	             	 			</tr>
-	             	 			<tr>
-	             	 				<td style="text-align: left; color: blue;"> Giá:</td>
-	             	 				<td style="text-align: right;"><?php echo $rows['SP_GIA']; ?>/<?php echo $rows['SP_DONVITINH']; ?></td>
-	             	 			</tr>
-	             	 			<tr>
-	             	 				<td style="text-align: left; color: blue;">Ngày đăng:</td>
-	             	 				<td style="text-align: right;"><?php echo $rows['SP_NGAYDANG']; ?></td>
-	             	 			</tr>
-	             	 			<tr>
-	             	 				<td style="text-align: left; color: blue;">Đơn vị:</td>
-	             	 				<td style="text-align: right;">HTX Long Mỹ</td>
-	             	 			</tr>
-	             	 			<tr>
-	             	 				<td colspan="2" style="height: 10px;">&nbsp</td>
-	             	 			</tr>
-	             	 			<tr>
-	             	 				<td style="position: absolute; float: left; font-weight: 500">
-	             	 					<button style="width: 90px;" class="w3-btn w3-blue w3-round">Đặt hàng</button>
-	             	 					<button style="width: 90px;" class="w3-btn w3-green w3-round">Chi tiết</button>
-	             	 				</td>
-	             	 			</tr>
-	             	 		</table>
-             			</div>
-            		</figcaption><a href="javascript:;"></a>
-         		</figure>
-          		<textarea readonly="readonly" style="font-weight: 700; font-size: 17px;"><?php echo $rows['SP_TEN']; ?></textarea>
-          		<a href="#"><img src="logo_image/ictim.png" style="width: 40px; height: 40px; margin-bottom: 9px;"></a>
-			</div>
+ <div class="itemnew" style="width: 225px;height: 225px; margin-left: 1%;">
+                    <!-- item image -->
+                    <div class="item-img">
+                        <img src="images/<?php echo $rows['HA_TEN']; ?>" width="230px" height="230px" />
+                    </div>
+
+                    <div class="item-content">
+                        <div class="item-top-content">
+                            <div class="item-top-content-inner">
+                                <div class="item-product">
+                                    <div class="item-top-title">
+                                        <h2 style="width: 180px; font-size: 15px; font-weight: 900;text-shadow: currentColor;"><?php echo $rows['SP_TEN']; ?></h2>
+                                       
+                                    </div>
+                                </div>
+                                <div class="item-product">
+                                    <span class="price-num" style="color: red; font-size:19px; font-weight: 700"><?php echo adddotstring($rows['SP_GIA']); ?>
+                                        
+                                    </span>
+                                    /
+                                         <span style="color: black">
+                                            <?php echo $rows['SP_DONVITINH']; ?>
+                                        </span>   
+                                </div>
+                              <img style="position: absolute; top:30%; left: 80%;" src="logo_image/ictim2.png" width="30px" height="30px">
+                            </div>  
+                        </div>
+                        <div class="item-add-content">
+                            <div class="item-add-content-inner">
+                                <div class="section">
+                                    <p>Ngày đăng: <?php echo $rows['SP_NGAYDANG']; ?></p>
+                                    <p>Đơn vị: HTX Huyện Long Mỹ</p>
+                                </div> 
+                                <div class="section">
+                                    <a href="#" class="btn buy expand">Chi tiết / Đặt hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
 <?php 
 }
 ?>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+
 

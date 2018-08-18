@@ -6,17 +6,16 @@
     <span id="error_multiple_files"></span>
   <style type="text/css">
     #im:hover{
-      opacity: 0;
+      opacity: 0.5;
     }
   </style>
+  <span id="alert"></span>
 </div>
    <span id="image_table"></span>
 <script>
 var len = 0;
-  alert('dau trang');
 $(document).ready(function(){
 // load_image_data();
-
  function load_image_data()
  {
   len =  $('#multiple_files')[0].files.length;
@@ -45,6 +44,10 @@ $(document).ready(function(){
  } 
 
  $('#multiple_files').change(function(){
+  var masp = $('#masanpham').val();
+  var nsp = $('#slnhomsanpham').val();
+  var lsp = $('#slloaisanpham').val();
+  //alert(nsp);
   var error_images = '';
   var form_data = new FormData();
   var files = $('#multiple_files')[0].files;

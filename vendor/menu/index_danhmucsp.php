@@ -5,7 +5,7 @@
       <div class="w3-col s3" style="margin-top: 62px;">
         <panel style=" height: 100px; margin-bottom: 20px; font-size: 23px;font-family: 'roboto'; font-weight: 700; color: white; " ><img src="logo_image/logo_dm.png"></panel>
  <div> -->
-<div style="margin-left: 2%;">
+<div style="margin-left: 3%; width: 250px;">
   <?php 
       include("config/connect.php");
       mysqli_set_charset($conn, 'UTF8');

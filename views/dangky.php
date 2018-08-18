@@ -297,6 +297,18 @@
           <input class="radius" style="width: 209px;" type="text" name="ten" id="ten" placeholder="Tên">
         </p>
         <span style="color: red;" id="alert_ho_ten"></span>
+
+        <p>
+          <select class="" id="slgioitinh" name="slgioitinh">
+            <option value=""> Chọn giới tính</option>
+            <option value="Nam">Nam</option>
+            <option value="Nũ">Nữ</option>
+            <option value="Không xác định">Không xác định</option>
+          </select>
+          <div style="color: red;" id="alert_gioitinh"></div>
+        </p>
+
+
         <p>
           <input type="password" id="matkhau" name="matkhau" placeholder="Mật khẩu >= 8 ký tự" class="radius" />
         </p>
@@ -305,8 +317,7 @@
           <input type="password" id="rematkhau" name="rematkhau" placeholder="Xác nhận mật khẩu" class="radius" />
         </p>
         <div style="color: red;" id="alert_repass"></div>
-        
-        
+        <p>
           <select class="tinh" id="sltinh" name="sltinh">
             <option value=""> Chọn tỉnh</option>
             <?php
@@ -315,13 +326,13 @@
               $result = mysqli_query($conn,$sql);
               while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC)){
              ?>
-             <option value=<?php echo $rows['id_tinh']; ?>> <?php echo $rows['name']; ?></option>
+             <option value=<?php echo $rows['id_tinh']; ?>> <?php echo $rows['TINH_NAME']; ?></option>
             <?php 
           }
             ?>
           </select>
           <div style="color: red;" id="alert_tinh"></div>
-        
+        </p>
         <p>
           <select class="huyen" name="slhuyen" id="slhuyen">
             <option value=""> Chọn huyện</option>
@@ -334,6 +345,22 @@
           </select>
         </p>
         <div style="color: red;" id="alert_xa"></div>
+         <p>
+           <p>
+          <select class="htx" name="slhxa" id="slhxa">
+            <option value=""> Chọn hợp tác xã</option>
+            <?php
+              $sql1 = "SELECT * FROM HOPTACXA";
+              $result = mysqli_query($conn,$sql1);
+              while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+            ?>
+              <option value="<?php echo $rows['HTX_ID'];?>"> <?php echo $rows['HTX_TEN']; ?></option>
+            <?php
+              }
+            ?>
+          </select>
+        </p>
+        <div style="color: red;" id="alert_hta"></div>
          <p>
           <input type="email" id="email" name="email" placeholder="Email" value="<?php if(isset( $_SESSION['email'])) echo $_SESSION['email'];?>" class="radius" />
         </p>
@@ -351,6 +378,9 @@
 <!--loginbox-->
 <?php 
   if(isset($_POST['ten'])){
+    $ngaydangky =date("Y-m-d");
+    $gioitinh = $_POST['slgioitinh'];
+    $htx = $_POST['slhxa'];
     $ten= $_POST['ten'];
     $_SESSION['ten'] = $ten;
     $ho = $_POST['ho'];
@@ -368,12 +398,13 @@
         echo ("<script> alert('Vui lòng kiểm tra đầy đủ thông tin và xác thực không phải người máy!');</script>");
     }else
           {
-            $sql = "INSERT INTO USER (USR_SDT,USR_PASS,USR_EMAIL,HTX_ID,GH_ID,ID_TINH,ID_HUYEN,ID_XA,USR_HO,USR_TEN) VALUES ('$sdt','$pass','$email',1,1,'$tinh','$huyen','$xa','$ho','$ten')";
+            $sql = "INSERT INTO USER (USR_SDT,USR_PASS,USR_EMAIL,HTX_ID,GH_ID,ID_TINH,ID_HUYEN,ID_XA,USR_HO,USR_TEN,USR_GIOITINH,USR_NGAYDANGKY,USR_TRANGTHAI,Q_ID) VALUES ('$sdt','$pass','$email',$htx,1,'$tinh','$huyen','$xa','$ho','$ten','$gioitinh','$ngaydangky',0,3)";
            // echo $sql;
           $kq = mysqli_query($conn,$sql);
              if($kq) echo ("<script> alert('Dang ki thanh cong');</script>"); else echo ("<script> alert('Dang ki không thanh cong');</script>");
     // echo "<script> alert('Đăng ký');</script>";
       // echo $ten.$sdt.$pass.$email.$recaptcha;
+             echo "<META http-equiv='refresh' content='0;URL=index.php?view=dangnhap'";
           }
   }
 ?>

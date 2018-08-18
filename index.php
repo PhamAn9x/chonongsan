@@ -10,11 +10,11 @@
 	include("config/connect.php");
 	session_start();
 ?>
-<div>
-	<div class="w3-row w3-blue">
-		<img src="logo_image/banner.png" width="1350">
-	</div>
+<div style="background-image: url('bg-main2.jpg'); padding-bottom: 20%;">
 	<div class="w3-row">
+		<img src="logo_image/banner.png" style=" margin-left: 1%; width: 98%;">
+	</div>
+	<div class="w3-row" style=" margin-left: 1%; width: 98%;" >
 		<?php include("views/banner_bar.php");?>
 	</div>
 	<div class="w3-row">
@@ -25,7 +25,7 @@
 			}
 		?>
 	</div>
-	<div class="w3-row">
+	<div class="w3-row" style=" margin-left: 1%; width: 98%;">
 		<?php 
 			if(!isset($_GET['view']))
 			{
@@ -33,7 +33,7 @@
 			}
 		?>
 	</div>
-	<div class="w3-row w3-col s3">
+	<div class="w3-row w3-col s3" >
 		<?php 
 			if(!isset($_GET['view']))
 			{
@@ -62,7 +62,10 @@
 					else
 						if($view == "dangtin") include("views/dangtin.php");
 						else 
-					if($view == "dangxuat") include("views/dangxuat.php");
+							if($view == "dangxuat") include("views/dangxuat.php");
+							else
+								if($view == "capnhathinhanh") include("views/list_sanpham_vuadang.php");
+					
 			?>	
 		</div>
 		<?php 

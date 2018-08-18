@@ -80,26 +80,37 @@ function dangnhap(){
 <?php
   if(isset($_POST['sdt'])){
     $sdt = $_POST['sdt'];
+    $trangthai = 1;
     $matkhau = $_POST['matkhau'];
     $_SESSION['sdt'] = $sdt;
     $pass = md5($matkhau);
     $sql = "SELECT * FROM USER WHERE USR_SDT = '$sdt' AND USR_PASS = '$pass'";
+    mysqli_set_charset($conn, 'UTF8');
     $result = mysqli_query($conn,$sql);
     $row= mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $sl = $row["USR_SOLUOTDANGNHAP"];
+    $trangthai = $row['USR_TRANGTHAI'];
     $kq = mysqli_num_rows($result);
-    if($kq>0){
+    if($kq>0 && $trangthai==1){
+      $sqlsl = "UPDATE USER SET USR_SOLUOTDANGNHAP = $sl+1  WHERE USR_SDT = '$sdt'";
+      mysqli_query($conn,$sqlsl);
       $_SESSION['user'] = $row['USR_TEN'];
       $_SESSION['pass'] = $row['USR_PASS'];
       ?>
       <script type="text/javascript">alert("Đăng nhập thành công!");</script>
       <META http-equiv="refresh" content="0;URL=index.php">
       <?php
-        echo "<script type='text/javascript'>alert('$kq[1]');</script>";
-    }else{
+    }else
+    if($kq==0){
+      echo $kq;
       ?>
       <script type="text/javascript"> alert("Sai tên đăng nhập hoặc mật khẩu!");</script>
       <?php
+    }else if($kq>0 && $trangthai ==0){
+      ?>
+   <script type="text/javascript"> alert("Tài khoản chưa kích hoạt!");</script>
+    <?php
+     }
     }
-  }
 ?>
 </div>

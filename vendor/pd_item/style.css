@@ -19,14 +19,16 @@ section.row{
 /* Actual content */
 .container-item{
   position: relative;
-  margin-top:40px;
+  margin-top:20px;
   float:left;
   margin-right:50px;
 }
 
 .item{
-  width:260px;
-  height:260px;
+  float: left; margin-right:4%;
+  margin-top: 3%;
+  width:190px;
+  height:190px;
   position: relative;
   top:0;
   left:0;

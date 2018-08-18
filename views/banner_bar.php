@@ -1,4 +1,4 @@
-<div style="margin-top:0.5%; margin-bottom: 2px;">
+<div style=" margin-top:0.5%; margin-bottom: 2px;">
 <link rel="stylesheet" href="css/style_hover.css">
 <div class="w3-col s2 "><a href="index.php"><img src="logo_image/logo.png"></a></div>
 		<div class="w3-col s10 ">

@@ -2,24 +2,29 @@ $(document).ready(function(){
 	$(".tinh").change(function(){
 		var id = $(".tinh").val();
 		// alert("ti day");
-		$.post("views/data_tinhthanh.php", {id: id}, function(data){
+		$.post("process_ajax/data_tinhthanh.php", {id: id}, function(data){
 			$(".huyen").html(data);
 		})
 	})
 	$(".huyen").change(function(){
 		var id1 = $(".huyen").val();
-		$.post("views/data_tinhthanh.php", {id1: id1}, function(data){
+		$.post("process_ajax/data_tinhthanh.php", {id1: id1}, function(data){
 			$(".xa").html(data);
 		})
 	})
 
-	$("#sdt").change(function(){
-		var id2 = $("#sdt").val();
-		alert(id2);
-		// $.post("views/data_tinhthanh.php", {id1: id1}, function(data){
-		// 	$(".xa").html(data);
-		// })
+	$("#sltinh").change(function(){
+		var id = $("#sltinh").val();
+		// alert("ti day");
+		$.post("process_ajax/data_tinhthanh.php", {id: id}, function(data){
+			$("#slhuyen").html(data);
+		})
 	})
-
+	$("#slhuyen").change(function(){
+		var id1 = $("#slhuyen").val();
+		$.post("process_ajax/data_tinhthanh.php", {id1: id1}, function(data){
+			$("#slxa").html(data);
+		})
+	})
 
 })

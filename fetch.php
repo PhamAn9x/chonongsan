@@ -18,7 +18,7 @@ if($number_of_rows > 0)
  {
   $count ++; 
   $output .= '
-   <td><span class="delete" id="'.$row["HA_ID"].'" data-image_name="'.$row["HA_TEN"].'" ><img src="images/'.$row["HA_TEN"].'" class="img-thumbnail" width="100" height="100" /></span></td>
+   <td id="im"><span class="delete" id="'.$row["HA_ID"].'" data-image_name="'.$row["HA_TEN"].'" ><img src="images/'.$row["HA_TEN"].'" class="img-thumbnail" width="100" height="100" /></span></td>
   ';
  }
 }
