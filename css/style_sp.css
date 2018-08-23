@@ -19,9 +19,10 @@ section.row{
 /* Actual content */
 .container-item{
   position: relative;
-  margin-top:20px;
+  margin-top:5px;
   float:left;
   margin-right:50px;
+	width: 100%;
 }
 
 .item{
@@ -38,6 +39,7 @@ section.row{
           border-radius: 3px;
   -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.3);
           box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+	float: left;
 }
 
 .item-img{

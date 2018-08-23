@@ -579,14 +579,40 @@ section.content-section:nth-of-type(5) .content-item .graph:nth-last-of-type(2) 
 }
 
 .hover:hover{
-  background-color: #008899;
+  
   transition-duration: 0.7s;
   
   }
 .hover td:hover{
   transition-duration: 0.7s;
-  color: white;
+ 
 }
 .fm td{
   color: white;
 }
+.st img{
+	transition-duration: 0.5s;
+}
+.st img:hover{
+	width: 40px;
+	height: 40px;
+	transition-duration: 0.1s;
+	
+}
+
+.xoa a img{
+	transition-duration: 0.5s;
+}
+.xoa a img:hover{
+	width: 25px;
+	height: 25px;
+	transition-duration: 0.1s;
+	
+}
+
+
+
+
+
+
+

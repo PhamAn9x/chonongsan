@@ -1,0 +1,125 @@
+/* CSS Document */
+body{
+	font-family:Cambria, Hoefler Text, Liberation Serif, Times, Times New Roman, serif;
+}
+.an-tensanpham{
+	padding-left: 0%;
+	padding-top: 2%;
+	font-family: 'roboto';
+	font-size: 25px;
+	font-weight: 800;
+	
+}
+.an-danhgia{
+	font-style: italic;
+}
+.an-gia{
+	color: #E18115;
+	font-size: 25px;
+	font-weight:bolder;
+	margin-bottom: 2%;
+	text-align: center;
+}
+.an-gia span{
+	color: green;
+	font-weight:bolder;
+}
+.an-hinhanh{
+	margin-top: 3%;
+	margin-left: 2%;
+	height: 35%;
+	padding-top: -6%;
+	border-radius: 5px;
+}
+
+
+
+
+.an-chitiet{
+	margin-top: 1%;
+	margin-left: 2%;
+	height: 300px;
+}
+.an-title{
+	margin-left: 0%;
+	border-radius: 3px;
+	padding: 0.5%;
+	text-align: center;
+}
+.an-title img{
+	border: 1px solid black;
+	border-radius: 4px;
+	opacity: 1;
+	transition-duration: 0.5s;
+}
+.an-title img:hover{
+	opacity: 0.5;
+	transition-duration: 0.5s;
+	height: 93px;
+}
+.an-table{
+	border: 2px solid #009688;
+	margin-top: -4.85%;
+}
+.an-table td{
+	text-align: center;
+}
+.an-table tr th{
+	width: 180px;
+	color: darkgreen;
+	font-family: 'roboto';
+	font-weight: bolder;
+	font-size: 20px;
+	margin-top: -10%;
+}
+
+.an-table-sl{
+	margin-top: 2%;
+	margin-bottom: 10%;
+	
+}
+.an-table-sl td{
+	text-align: center;
+	width: 175px;
+	font-size: 19px;
+}
+.an-table-sl tr th{
+	font-style: italic;
+	width: 137px;
+	color: darkgreen;
+	font-family: 'roboto';
+	font-weight: bolder;
+	font-size: 20px;
+}
+.an-chitiet{
+	margin-top: 1%;
+	margin-left: 2%;
+	height: auto;
+	vertical-align: middle;
+}
+.an-chitietnguoiban{
+	padding-left: 2%;
+	font-size: 22px;
+	height: 7%; 
+	padding-top: 1%;
+	margin-top: 2%;
+}
+.an-chitietsanpham{
+	padding-left: 2%;
+	font-size: 19px;
+	height: 7%; 
+	padding-top: 1%; 
+}
+.an-thongtinchusanpham tr td{
+	font-size: 19px;
+	text-align: left;
+}
+
+
+
+
+
+
+
+
+

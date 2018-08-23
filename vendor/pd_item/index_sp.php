@@ -2,7 +2,7 @@
     <link rel="icon" href="http://www.thuthuatweb.net/wp-content/themes/HostingSite/favicon.ico" type="image/x-ico"/>
      <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link href="vendor/pd_item/style.css" rel="stylesheet" />
-   <div class="w3-teal w3-round" style=" width:98%; height: 50px;  margin-top: 10px; font-size: 25px;text-align: center; padding-top: 10px;">SẢN PHẨM TRƯNG BÀY</div>
+   <div class="w3-teal" style=" width:30%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 0px;">SẢN PHẨM TRƯNG BÀY</div>
 </div>
  <div class="container-item" style="margin-left: 4.5%">
 <?php
@@ -28,7 +28,7 @@
 <?php 
     include("config/connect.php");
     mysqli_set_charset($conn, 'UTF8');
-    $sql = "SELECT * FROM SANPHAM AS SP LEFT JOIN HINHANH AS HA ON SP.SP_ID = HA.SP_ID";
+    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM sanpham as sp";
     $result = mysqli_query($conn,$sql);
     while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC))
     {
@@ -37,7 +37,7 @@
                 <div class="item">
                     <!-- item image -->
                     <div class="item-img">
-                        <img src="images/<?php echo $rows['HA_TEN']; ?>" width="260" height="260" />
+                        <img src="upload/<?php echo $rows['HA_TEN']; ?>" width="260" height="260" />
                     </div>
 
                     <div class="item-content">
@@ -58,7 +58,22 @@
                                             <?php echo $rows['SP_DONVITINH']; ?>
                                         </span>   
                                 </div>
-                              <img style="position: absolute; top:30%; left: 80%;" src="logo_image/ictim2.png" width="30px" height="30px">
+                              <?php
+								if(isset($_SESSION['sdt'])){
+									$sp_id = $rows['SP_ID'];
+									$sdt = $_SESSION['sdt'];
+									$dathich = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM THICH WHERE USR_SDT = $sdt AND SP_ID = $sp_id"));
+															if($dathich < 1){
+								?>
+                              <a href="views/xuly_thich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" src="logo_image/ictim2.png" width="30px" height="30px"></a>
+                              <?php
+								} else{
+							?>
+                           		 <a href="views/xuly_bothich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" src="logo_image/ictim.png" width="37px" height="37px"></a>
+                           <?php 
+								}
+								}
+							?>
                             </div>  
                         </div>
                         <div class="item-add-content">
@@ -68,7 +83,7 @@
                                     <p>Đơn vị: HTX Huyện Long Mỹ</p>
                                 </div> 
                                 <div class="section">
-                                    <a href="#" class="btn buy expand">Chi tiết / Đặt hàng</a>
+                                    <a href="index.php?xem=chiietsanpham&id=<?php echo $rows['SP_ID'];?>" class="btn buy expand">Chi tiết / Đặt hàng</a>
                                 </div>
                             </div>
                         </div>

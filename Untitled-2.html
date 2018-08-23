@@ -1,0 +1,342 @@
+<body>
+<?php
+	include('config/connect.php');
+	if(isset($_GET['id'])){
+					$sp_id = $_GET['id'];
+	}
+?>
+
+<link rel="stylesheet" href="css/chitietsanpham.css" />
+<div>
+    <link rel="icon" href="http://www.thuthuatweb.net/wp-content/themes/HostingSite/favicon.ico" type="image/x-ico"/>
+     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+	<link href="vendor/pd_item/style.css" rel="stylesheet" />
+  
+   <div class="w3-row">
+   		<div class="w3-col s6">
+   			<div class="row an-hinhanh" style="height: 430px;">
+  
+						<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+						  <style>
+					/*Gallery Container*/
+					.image-gallery{
+					  position:relative;  
+					  margin:3% 0;
+					  width:490px;  
+					  border-radius:20px;  
+					}
+					/*Sets Big Image style*/
+					.image-gallery .big-image{
+					  width:490px;
+					  height:320px;   
+					  margin: 0;  
+					  position:relative;
+						margin-top: -6%;
+					}
+					.image-gallery .big-image img{
+					  opacity:0;position:absolute;left:0px;top:0px; width:600px;
+					  margin:5% auto;
+					  transition: opacity 350ms;
+					  box-shadow:0 1px 20px 1px rgba(0,0,0,0.7);
+						width: 490px;
+						height: 290px;
+					}
+
+					/*Selected image display*/
+					.image-gallery .big-image img:target{opacity:1;}
+					/*on select image display none the default image*/
+					.image-gallery .big-image img:target ~ img#default{opacity:0;}
+
+					/*Show Default Image in first load*/
+					.image-gallery .big-image img#default{opacity:1;}
+
+
+					/***Button***/
+					.image-gallery .button{
+					  font-weight:bold;
+					  font-size:30px;
+					  display:inline-block;
+					  transform:scale(1,2);
+					  background-color:#ccc;
+					  color:#222;
+					  padding:0 10px;   
+					}
+					.image-gallery .prev{position:absolute; left:0; height: 30%; margin-bottom: 40%; padding-bottom: 46px; margin-top:7%; }
+					.image-gallery .next{position:absolute; right:0;height: 30%; margin-bottom: 40%; padding-bottom: 46px; margin-top:7%; }
+
+					/***move thumbs on click on buttons***/
+					.image-gallery .prev:active ~ .thumbs  ul{
+					  transform:translateX(0%);
+					  transition:3s all;
+					}
+					.image-gallery  .next:active ~ .thumbs  ul{
+					  transform:translateX(-90%);
+					  transition:3s all;  
+					}
+
+					/***thumbs***/
+					.image-gallery .thumbs{
+					  overflow:hidden; white-space:nowrap; margin:10px 45px;
+					}
+					.image-gallery .thumbs ul{
+					  float:left; transition:999999s all; transform:translateX(0);
+					}
+					.image-gallery .thumbs li{display:inline-block; margin-right:3px;}
+					.image-gallery .thumbs li a:hover{opacity:1;}
+					.image-gallery .thumbs li a{opacity:0.85;}
+					.image-gallery .thumbs li a:focus{opacity:1;}
+					.image-gallery .thumbs li img{width:120px; height: 90px;}
+
+					/*other styles*/
+					.title{font-size:30px;font-weight:bold;text-align:center;margin:15px 0;
+					text-shadow:1px 1px 2px #1f1f1f;}
+					/*reset CSS*/
+					*{font-family:arial;}
+					ul,li{list-style:none;margin:0;padding:0;}
+
+					/*footer text*/
+					footer{position:fixed; left:0; bottom:0;}
+					footer a{color:#222; font-weight:bold; font-size:22px;}
+						</style>
+
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+					<div class="image-gallery">  
+				  
+					  <div class="big-image">    
+						  <?php
+								include("config/connect.php");
+							mysqli_set_charset($conn, 'UTF8');
+							$sql = "SELECT HA_TEN FROM HINHANH WHERE SP_ID = $sp_id limit 0,1";
+							$result = mysqli_query($conn,$sql);
+							$row = mysqli_fetch_array($result);
+						  ?>		
+						  		
+							<img id="default" src="upload/<?php echo $row['HA_TEN']; ?>" />
+							
+							<?php
+								mysqli_set_charset($conn, 'UTF8');
+								$sql = "SELECT COUNT(*) AS KQ FROM HINHANH WHERE SP_ID = $sp_id";
+								$result1 = mysqli_query($conn,$sql);
+								$row1 = mysqli_fetch_array($result1);
+								$sl=$row1['KQ'];
+								$sql2 = "SELECT * FROM HINHANH WHERE SP_ID = $sp_id LIMIT 1,$sl";
+								$row2 = mysqli_query($conn,$sql2);
+						  		$i =1;
+								foreach($row2 as $dong){
+							?>
+							<img id="<?php echo 'image'.$i ?>" src="upload/<?php echo $dong['HA_TEN']; ?>" />
+							
+							<?php
+									$i++;
+								}
+						  ?>
+					  </div>  
+
+
+					<a class="button prev" style="height: 7%; cursor: pointer;"><</a>
+					<a class="button next" style="height: 7%;cursor: pointer;">></a>  
+					
+					
+					
+					<div class="thumbs">  
+					<ul>    
+					<?php
+								mysqli_set_charset($conn, 'UTF8');
+								$sql = "SELECT COUNT(*) AS KQ FROM HINHANH WHERE SP_ID = $sp_id";
+								$result1 = mysqli_query($conn,$sql);
+								$row1 = mysqli_fetch_array($result1);
+								$sl=$row1['KQ'];
+								$sql2 = "SELECT * FROM HINHANH WHERE SP_ID = $sp_id LIMIT 1,$sl";
+								$row2 = mysqli_query($conn,$sql2);
+						  		$i =1;
+								foreach($row2 as $dong){
+							?>
+						<li>
+							<a href="<?php echo "#image".$i ?>"><img  src="upload/<?php echo $dong['HA_TEN']; ?>" /></a></li>
+						<li>
+						<?php
+									$i++;
+								}
+						?>
+					</ul>
+					</div>
+					</div>  	
+   			</div>
+   			
+						<?php
+				include("config/connect.php");
+				mysqli_set_charset($conn,"UTF8");
+				
+					$sql = "SELECT * FROM SANPHAM AS SP, USER AS USR WHERE SP.USR_SDT = USR.USR_SDT AND SP.SP_ID = $sp_id";
+					$result = mysqli_query($conn,$sql);
+					$row = mysqli_fetch_array($result);
+				
+			?>
+
+   			
+   			<div style="width: 52%; margin-top: 4%; margin-bottom: 2%;" class="w3-col s6 w3-teal an-chitietsanpham">Mô tả sản phẩm</div>
+   			<div class="w3-row box" id="box" style="text-align: justify; font-size: 17px; font-weight: 100; padding-right: 4%; padding-left: 2%;">
+   			
+   			 <link rel="stylesheet" href="css/style_readmore.css">
+
+				
+				
+					<div class="wrap">
+					  <div class="read-more">
+						<div class="content">
+						 <?php echo $row['SP_MOTA']; ?>
+						</div>
+						<span class="trigger" onclick="this.parentElement.classList.add('expanded')">Xem Thêm</span>
+						<span class="collapse" onclick="this.parentElement.classList.remove('expanded')">Thu Gọn</span>
+					  </div>
+					</div>
+				
+				
+			</div>
+  			<div style="width: 52%; margin-top: 2%; margin-bottom: 2%;" class="w3-col s6 w3-teal an-chitietsanpham">Thông tin người bán</div>
+   			<div class="w3-row an-thongtinchusanpham">
+   				<table class="w3-table ">
+				<tr>
+					<td>Liên hệ: </td> <td><?php echo $row['USR_HO'].' '.$row['USR_TEN']; ?></td>
+				</tr>
+				<tr>
+					<td>Số điện thoại: </td><td><?php echo $row['USR_SDT']; ?></td>
+				</tr>
+				<tr>
+					<td>Email: </td> <td><?php echo $row['USR_EMAIL']; ?></td>
+				</tr>
+				<tr>
+					<td>Địa chỉ</td><td><?php echo $row['SP_DIACHI']; ?></td>
+				</tr>
+				</table>
+   			</div>
+   			
+	   	</div>
+	   	
+	   	
+	   	
+   		<div class="w3-col s6 ">
+   				<div class="w3-row">
+   					<table border="0" class="w3-table an-table-sl"  style="margin-top: 32%; height:290px;">
+   					<tr>
+   						<td colspan="2">
+   								<div style="margin-left: 5%;"><?php echo $row['SP_TEN'];?></div>
+   						</td>
+   					</tr>
+					<tr>
+					<td style="vertical-align: middle; text-align: center;"><span style="color: red; font-size: 28px; font-weight: bolder;">Giá <br>20.000 - 40.000</span>/Kg </td>
+					<td style="padding-top: 40px;">
+				 	<input style="opacity: 0" id="qr" value="Phạm Nguyễn Trường An"/>
+					<img src="https://chart.googleapis.com/chart?cht=qr&chl=Hello+World&chs=160x160&chld=L|0"
+					class="qr-code img-thumbnail img-responsive">
+					<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+					<script  src="js/QR_code.js"></script>
+					</td>
+					</tr>
+					</table>
+   				</div>	
+   				<div class="w3-row an-table-sl">
+   					<table border="1" class="w3-table" style="margin-top: -17%;">
+					<tr >
+						<th style="text-align: center;" >Số lượng </th><th style="font-weight: bolder; font-size: 20px; text-align: center">Giá</th>
+					</tr>
+					<tr>
+						<th>từ 10 đến 20 sp: </th><td>100000</td>
+					</tr>
+					<tr>
+						<th>21-50 sp: </th><td>90000</td>
+					</tr>
+					</table>
+   				</div>
+   				<div class="w3-row">
+   					<table border="1" width="100%;" class="w3-table an-table">
+					<tr>
+						<th>Tình Trạng: </th><td style="font-weight: bolder; font-size: 20px;">Còn hàng</td>
+					</tr>
+					<tr>
+						<th>Khả năng cung cấp: </th><td>Liên hệ</td>
+					</tr>
+					<tr>
+						<th>Số điện thoại liên hệ: </th><td>0979837717</td>
+					</tr>
+					<tr>
+						<th>Địa chỉ: </th><td>Long Mỹ - Hậu Giang</td>
+					</tr>
+					<tr>
+						<th>Phí vận chuyển:</th><td>Liên hệ</td>
+					</tr>
+					<tr>
+						<th>Ngày đăng tin: </th><td>10/2/1998</td>
+					</tr>
+					<tr>
+						<th>Ngày hết hạn: </th><td>20/8/2018</td>
+					</tr>
+					<tr>
+					<th><span style="float: left;margin-top: 5px; ">Số lượng:</span> <input style="float: right; width: 90px; vertical-align: middle;border-radius: 4px; text-align: center;" class="w3-input" type="number" name="ipsoluong" id="ípoluong" value="0" /></th><td><input class="w3-btn w3-large w3-red w3-round w3-hover-teal" type="button" value="Đặt hàng"/></td>
+					</tr>
+					</table>
+   				</div>
+		</div>
+   </div>
+   
+  <div style="width: 100%;" class="w3-col s6 w3-teal an-chitietnguoiban">Sản phẩm cùng loại
+			</div>
+  
+ <div class="w3-row w3-col s12 w3-red" style="padding-left: 7%; padding-bottom: 3%;">
+	   <?php 
+    include("config/connect.php");
+    mysqli_set_charset($conn, 'UTF8');
+    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM sanpham as sp";
+    $result = mysqli_query($conn,$sql);
+    while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC))
+    {
+?>
+           
+                <div class="item">
+                    <!-- item image -->
+                    <div class="item-img">
+                        <img src="upload/<?php echo $rows['HA_TEN']; ?>" width="260" height="260" />
+                    </div>
+
+                    <div class="item-content">
+                        <div class="item-top-content">
+                            <div class="item-top-content-inner">
+                                <div class="item-product">
+                                    <div class="item-top-title">
+                                        <h2 style="width: 180px; font-size: 15px; font-weight: 900;text-shadow: currentColor;"><?php echo $rows['SP_TEN']; ?></h2>
+                                       
+                                    </div>
+                                </div>
+                                <div class="item-product">
+                                    <span class="price-num" style="color: red; font-size:19px; font-weight: 700"><?php echo adddotstring($rows['SP_GIA']); ?>
+                                        
+                                    </span>
+                                    /
+                                         <span style="color: black">
+                                            <?php echo $rows['SP_DONVITINH']; ?>
+                                        </span>   
+                                </div>
+                              <img style="position: absolute; top:50%; left: 75%;" src="logo_image/ictim2.png" width="30px" height="30px">
+                            </div>  
+                        </div>
+                        <div class="item-add-content">
+                            <div class="item-add-content-inner">
+                                <div class="section">
+                                    <p>Ngày đăng: <?php echo $rows['SP_NGAYDANG']; ?></p>
+                                    <p>Đơn vị: HTX Huyện Long Mỹ</p>
+                                </div> 
+                                <div class="section">
+                                    <a href="#" class="btn buy expand">Chi tiết / Đặt hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+<?php
+    }
+?>
+ </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+</div>
+	   </body>

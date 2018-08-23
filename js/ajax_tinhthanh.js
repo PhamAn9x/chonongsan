@@ -15,7 +15,7 @@ $(document).ready(function(){
 
 	$("#sdt").blur(function(){
 		var id2 = $("#sdt").val();
-		$.post("views/data_tinhthanh.php", {id2: id2}, function(data){
+		$.post("process_ajax/data_tinhthanh.php", {id2: id2}, function(data){
 			$("#alert_sdt").html(data);
 		})
 	})

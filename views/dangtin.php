@@ -1,5 +1,8 @@
+    <?php 
+        if(isset($_SESSION['sdt'])){
+    ?>
     <link rel="icon" href="http://www.thuthuatweb.net/wp-content/themes/HostingSite/favicon.ico" type="image/x-ico"/>
-     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+<!--     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>-->
      <script type="text/javascript" src="https://cdn.ckeditor.com/4.5.1/standard/ckeditor.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="css/tindang.css" rel="stylesheet" />
@@ -68,7 +71,7 @@
             <div class="w3-row w3-col s6" style="padding-left: 2%;">
                 <h2>Thông tin người đăng</h2>
                 <div class="w3-row">
-                    <input style="width: 97%; border-radius: 5px 5px 0 0; " type="text" name="sdt" id="sdt" placeholder="Số điện thoại" class="w3-input">
+                    <input style="width: 97%; border-radius: 5px 5px 0 0; " type="text" name="sdt" id="sdt" placeholder="Số điện thoại" class="w3-input" value="<?php echo $_SESSION['sdt']; ?>">
                 </div>
                 <div id="data_sdt">
                  <div class="w3-row">
@@ -153,7 +156,7 @@
 		$mota = $_POST['ck'];
 		$sdt = $_POST['sdt'];
 		$ngayhethan = $_POST['ngayhethan'];
-		$ngaydang = date("Y-d-m");
+		$ngaydang = date("Y-m-d");
 		$diachi = $_POST['diachi'];
 	$sql = "INSERT INTO SANPHAM(SP_TEN,NSP_ID,LSP_ID,SP_SOLUONG,SP_GIA,SP_DONVITINH,SP_PHIVANCHUYEN,SP_MOTA,USR_SDT,SP_NGAYDANG,SP_NGAYHETHAN,SP_DIACHI,SP_TRANGTHAI) VALUES ('$tieude',$nhomsanpham,$loaisanpham,$soluong,$gia,'$donvitinh','$phi','$mota','$sdt','$ngaydang','$ngayhethan','$diachi',0)";
 	if(mysqli_query($conn,$sql)){
@@ -167,30 +170,9 @@
 	}
 	else echo "<script>alert('Đăng tin thất bại! Vui lòng kiểm tra lại!');</script>";
 	}
+    } else 
+        {
+            echo "<script>alert('Vui lòng đăng nhập trước khi đăng tin!');</script>";
+            echo '<meta http-equiv="Refresh" content="0,URL=index.php?view=dangnhap" />';
+        }
 ?>
-
-	  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

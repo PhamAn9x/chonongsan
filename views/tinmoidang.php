@@ -1,27 +1,8 @@
 <link rel="icon" href="http://www.thuthuatweb.net/wp-content/themes/HostingSite/favicon.ico" type="image/x-ico"/>
-     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+<!--     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>-->
 	<link href="vendor/pd_item/style.css" rel="stylesheet" />
 
-	<?php
-    function adddotstring($strNum) {
-
-        $len = strlen($strNum);
-        $counter = 3;
-        $result = "";
-        while ($len - $counter >= 0)
-        {
-            $con = substr($strNum, $len - $counter , 3);
-            $result = '.'.$con.$result;
-            $counter+= 3;
-        }
-        $con = substr($strNum, 0 , 3 - ($counter - $len) );
-        $result = $con.$result;
-        if(substr($result,0,1)=='.'){
-            $result=substr($result,1,$len+1);   
-        }
-        return $result;
-}
-?>
+	
 <div class="w3-col khungsp">
 <div class="w3-row w3-teal w3-round tieude">
 				<h1 class="tdl">TIN VỪA MỚI ĐĂNG 
@@ -43,14 +24,14 @@
 <?php
 	include("config/connect.php");
 	mysqli_set_charset($conn, 'UTF8');
-	$sql = "SELECT * FROM SANPHAM AS SP,HINHANH AS HA WHERE SP.SP_ID = HA.SP_ID LIMIT 5";
+	$sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM sanpham as sp ORDER BY sp.SP_ID DESC LIMIT 5";
 	$result = mysqli_query($conn,$sql);
 	while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 ?>
  <div class="itemnew" style="width: 225px;height: 225px; margin-left: 1%;">
                     <!-- item image -->
                     <div class="item-img">
-                        <img src="images/<?php echo $rows['HA_TEN']; ?>" width="230px" height="230px" />
+                        <img src="upload/<?php echo $rows['HA_TEN']; ?>" width="230px" height="230px" />
                     </div>
 
                     <div class="item-content">
@@ -71,7 +52,22 @@
                                             <?php echo $rows['SP_DONVITINH']; ?>
                                         </span>   
                                 </div>
-                              <img style="position: absolute; top:30%; left: 80%;" src="logo_image/ictim2.png" width="30px" height="30px">
+                                <?php
+								if(isset($_SESSION['sdt'])){
+									$sp_id = $rows['SP_ID'];
+									$sdt = $_SESSION['sdt'];
+									$dathich = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM THICH WHERE USR_SDT = $sdt AND SP_ID = $sp_id"));
+															if($dathich < 1){
+								?>
+                              <a href="views/xuly_thich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" src="logo_image/ictim2.png" width="30px" height="30px"></a>
+                              <?php
+								} else{
+							?>
+                           		 <a href="views/xuly_bothich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" src="logo_image/ictim.png" width="37px" height="37px"></a>
+                           <?php 
+								}
+								}
+							?>
                             </div>  
                         </div>
                         <div class="item-add-content">
@@ -81,7 +77,7 @@
                                     <p>Đơn vị: HTX Huyện Long Mỹ</p>
                                 </div> 
                                 <div class="section">
-                                    <a href="#" class="btn buy expand">Chi tiết / Đặt hàng</a>
+                                    <a href="index.php?xem=chiietsanpham&id=<?php echo $rows['SP_ID'];?>" class="btn buy expand">Chi tiết / Đặt hàng</a>
                                 </div>
                             </div>
                         </div>

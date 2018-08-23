@@ -2,7 +2,7 @@
 <div style="margin-left: 20%; margin-top: 5%;">
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" type="text/javascript"></script>
-<script src="./js/ajax_tinhthanh.js" type="text/javascript"></script>
+<script src="ajax/ajax_tinhthanh.js" type="text/javascript"></script>
 <script type="text/javascript">
   var check = 0;
   function check_dk() {
@@ -288,12 +288,11 @@
     <div class="loginform">
       <form id="dangky" action="" method="post">
         <p>
-          <input type="text" id="sdt" name="sdt" placeholder="Nhập số điện thoại >= 10 và <=  11 ký tự!" value="<?php if(isset( $_SESSION['sdt'])) echo $_SESSION['sdt'];?>" class="radius" />
+          <input type="text" id="sdt" name="sdt" placeholder="Nhập số điện thoại >= 10 và <=  11 ký tự!" class="radius" />
         </p>
         <div style="color: red;" id="alert_sdt"></div>
         <p>
-          <input style=" width: 209px; text-align: left;" class="radius" class="ho" type="text" name="ho" id="ho" value="<?php 
-          if(isset($_SESSION['ten'])) echo $_SESSION['ten']; else echo ''; ?>" placeholder="Họ">
+          <input style=" width: 209px; text-align: left;" class="radius" class="ho" type="text" name="ho" id="ho" placeholder="Họ">
           <input class="radius" style="width: 209px;" type="text" name="ten" id="ten" placeholder="Tên">
         </p>
         <span style="color: red;" id="alert_ho_ten"></span>

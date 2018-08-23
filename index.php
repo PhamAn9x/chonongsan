@@ -1,8 +1,9 @@
-
+<body style="position: fixed" bgcolor="#FFFFFF">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link href="css/boxsp.css" rel="stylesheet" type="text/css"/>
 	<link href="css/demo-page.css" rel="stylesheet">
     <link href="css/imagehover.css" rel="stylesheet">
+    <link href="css/style_sp.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/style.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/demo.css" media="all" />
 	<script type="text/javascript" src="js/boxsp.js"></script>
@@ -10,7 +11,27 @@
 	include("config/connect.php");
 	session_start();
 ?>
-<div style="background-image: url('bg-main2.jpg'); padding-bottom: 20%;">
+<?php
+    function adddotstring($strNum) {
+
+        $len = strlen($strNum);
+        $counter = 3;
+        $result = "";
+        while ($len - $counter >= 0)
+        {
+            $con = substr($strNum, $len - $counter , 3);
+            $result = '.'.$con.$result;
+            $counter+= 3;
+        }
+        $con = substr($strNum, 0 , 3 - ($counter - $len) );
+        $result = $con.$result;
+        if(substr($result,0,1)=='.'){
+            $result=substr($result,1,$len+1);   
+        }
+        return $result;
+}
+?>
+<div style=" padding-bottom: 20%;">
 	<div class="w3-row">
 		<img src="logo_image/banner.png" style=" margin-left: 1%; width: 98%;">
 	</div>
@@ -19,7 +40,7 @@
 	</div>
 	<div class="w3-row">
 		<?php 
-			if(!isset($_GET['view']))
+			if(!isset($_GET['view']) && !isset($_GET['xem']))
 			{
 				include("views/tinmoidang.php"); 
 			}
@@ -27,7 +48,7 @@
 	</div>
 	<div class="w3-row" style=" margin-left: 1%; width: 98%;">
 		<?php 
-			if(!isset($_GET['view']))
+			if(!isset($_GET['view']) && !isset($_GET['xem']))
 			{
 				include("views/timkiemnangcao.php");
 			}
@@ -44,13 +65,20 @@
 		<?php
 			if(!isset($_GET['view'])){
 		?>
-	<div class="w3-row w3-col s9">
+	<div class="w3-row w3-col s9" style=" border: 2px solid #009688;border-radius: 5px 0 0 0; margin-top: 10px; margin-bottom: 10%; padding-bottom: 3%;">
 		<?php
-				include("vendor/pd_item/index_sp.php");
+				if(isset($_GET['xem'])){
+					$xem = $_GET['xem'];
+					if($xem == 'chiietsanpham') include('views/chitietsanpham.php');
+					else
+						if($xem == 'sanphamdathich') include('views/sanphamdathich.php');
+							
 		?>
 	</div>
 		<?php 
-			}
+			} else
+			include("views/index_sp.php");
+			} 
 			else {		 
 		?>
 		<div class="w3-row" style="padding-left: 3%; padding-right: 3%;">
@@ -69,10 +97,10 @@
 			?>	
 		</div>
 		<?php 
-				}	
+				}
 		?>
 	</div>
 	<div class="w3-row" style="height: 30%; margin-top: 5%;">
 		Footer
 	</div>
-</div>
+<body>

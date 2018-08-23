@@ -60,14 +60,16 @@
 	Số điện thoại đã được đăng ký!
 	<script type="text/javascript">
 		$(document).ready(function(){
-			document.getElementById('ten').disabled = true; 
-			document.getElementById('ho').disabled = true; 
-			document.getElementById('matkhau').disabled = true; 
-			document.getElementById('rematkhau').disabled = true; 
-			document.getElementById('sltinh').disabled = true; 
-			document.getElementById('slhuyen').disabled = true; 
-			document.getElementById('slxa').disabled = true; 
-			document.getElementById('email').disabled = true;
+			document.getElementById('ten').style.visibility = 'hidden'; 
+			document.getElementById('ho').style.visibility = 'hidden'; 
+			document.getElementById('matkhau').style.visibility = 'hidden'; 
+			document.getElementById('rematkhau').style.visibility = 'hidden'; 
+			document.getElementById('sltinh').style.visibility = 'hidden'; 
+			document.getElementById('slhuyen').style.visibility = 'hidden'; 
+			document.getElementById('slxa').style.visibility = 'hidden'; 
+			document.getElementById('email').style.visibility = 'hidden';
+			document.getElementById('slgioitinh').style.visibility = 'hidden';
+			document.getElementById('slhxa').style.visibility = 'hidden';
 			document.getElementById('dk').style.visibility = 'hidden';
 			document.getElementById('capchar').style.visibility = 'hidden';
 
@@ -80,14 +82,16 @@
 			?>
 			<script type="text/javascript">
 				$(document).ready(function(){
-			document.getElementById('ten').disabled = true; 
-			document.getElementById('ho').disabled = true;
-			document.getElementById('matkhau').disabled = true; 
-			document.getElementById('rematkhau').disabled = true; 
-			document.getElementById('sltinh').disabled = true; 
-			document.getElementById('slhuyen').disabled = true; 
-			document.getElementById('slxa').disabled = true; 
-			document.getElementById('email').disabled = true;
+			document.getElementById('ten').style.visibility = 'hidden'; 
+			document.getElementById('ho').style.visibility = 'hidden';
+			document.getElementById('matkhau').style.visibility = 'hidden'; 
+			document.getElementById('rematkhau').style.visibility = 'hidden'; 
+			document.getElementById('sltinh').style.visibility = 'hidden'; 
+			document.getElementById('slhuyen').style.visibility = 'hidden'; 
+			document.getElementById('slxa').style.visibility = 'hidden'; 
+			document.getElementById('email').style.visibility = 'hidden';
+			document.getElementById('slgioitinh').style.visibility = 'hidden';
+			document.getElementById('slhxa').style.visibility = 'hidden';
 			document.getElementById('dk').style.visibility = 'hidden';
 			document.getElementById('capchar').style.visibility = 'hidden';
 			document.getElementById("alert_sdt").innerHTML="Số điện thoại không đúng định dạng!"
@@ -101,14 +105,16 @@
 				?>
 					<script type="text/javascript">
 				$(document).ready(function(){
-			document.getElementById('ten').disabled = true; 
-			document.getElementById('ho').disabled = true;
-			document.getElementById('matkhau').disabled = true; 
-			document.getElementById('rematkhau').disabled = true; 
-			document.getElementById('sltinh').disabled = true; 
-			document.getElementById('slhuyen').disabled = true; 
-			document.getElementById('slxa').disabled = true; 
-			document.getElementById('email').disabled = true;
+			document.getElementById('ten').style.visibility = 'hidden'; 
+			document.getElementById('ho').style.visibility = 'hidden';
+			document.getElementById('matkhau').style.visibility = 'hidden'; 
+			document.getElementById('rematkhau').style.visibility = 'hidden'; 
+			document.getElementById('sltinh').style.visibility = 'hidden'; 
+			document.getElementById('slhuyen').style.visibility = 'hidden'; 
+			document.getElementById('slxa').style.visibility = 'hidden'; 
+			document.getElementById('email').style.visibility = 'hidden';
+			document.getElementById('slgioitinh').style.visibility = 'hidden';
+			document.getElementById('slhxa').style.visibility = 'hidden';
 			document.getElementById('dk').style.visibility = 'hidden';
 			document.getElementById('capchar').style.visibility = 'hidden';
 			document.getElementById("alert_sdt").innerHTML="Số điện phải bắt đầu bằng số 0!"
@@ -120,14 +126,16 @@
 			?>
 			<script type="text/javascript">
 				$(document).ready(function(){
-				document.getElementById('ten').disabled = false; 
-				document.getElementById('ho').disabled = false;
-				document.getElementById('matkhau').disabled = false; 
-				document.getElementById('rematkhau').disabled = false; 
-				document.getElementById('sltinh').disabled = false; 
-				document.getElementById('slhuyen').disabled = false; 
-				document.getElementById('slxa').disabled = false; 
-				document.getElementById('email').disabled = false;
+				document.getElementById('ten').style.visibility = 'visible';; 
+				document.getElementById('ho').style.visibility = 'visible';;
+				document.getElementById('matkhau').style.visibility = 'visible';; 
+				document.getElementById('rematkhau').style.visibility = 'visible';; 
+				document.getElementById('sltinh').style.visibility = 'visible';; 
+				document.getElementById('slhuyen').style.visibility = 'visible';; 
+				document.getElementById('slxa').style.visibility = 'visible';; 
+				document.getElementById('email').style.visibility = 'visible';;
+				document.getElementById('slgioitinh').style.visibility = 'visible';;
+				document.getElementById('slhxa').style.visibility = 'visible';;
 				document.getElementById('dk').style.visibility = 'visible';
 				document.getElementById('capchar').style.visibility = 'visible';
 

@@ -1,3 +1,12 @@
+<?php
+	include('config/connect.php');
+	if(isset($_SESSION['sdt'])){
+		$sdt = $_SESSION['sdt'];
+	$slthich = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM THICH WHERE USR_SDT = $sdt"));
+	} else $slthich = 0;
+?>
+
+
 <div style=" margin-top:0.5%; margin-bottom: 2px;">
 <link rel="stylesheet" href="css/style_hover.css">
 <div class="w3-col s2 "><a href="index.php"><img src="logo_image/logo.png"></a></div>
@@ -19,7 +28,7 @@
 							</div>						
 						</td>
 							<td
-								style=" font-size: 16px; font-weight: 800; float:left; margin-top:10px; margin-right: 7px;"><img src="logo_image/ictim.png" width="30px" height="30px"><a href="" style=" text-decoration: none; color: black"> Thích(0)</a>
+								style=" font-size: 16px; font-weight: 800; float:left; margin-top:10px; margin-right: 7px;"><img src="logo_image/ictim.png" width="30px" height="30px"><a href="index.php?xem=sanphamdathich&id=<?php echo $sdt; ?>" style=" text-decoration: none; color: black">Thích(<span style="color: red; font-size: 22px;"><?php echo $slthich; ?></span>)</a>
 							</td>
 							<?php
 								if(isset($_SESSION['user'])){
