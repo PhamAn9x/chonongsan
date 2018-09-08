@@ -21,7 +21,7 @@
 	font-size: 15px;
 	box-shadow: -10px -10px 30px 10px grey;
 	width: 97%;
-	background:#70AEAF;
+	background: white;/*#70AEAF;*/
 }
 .khung select,option{
 	margin-left: 3%;
@@ -53,12 +53,12 @@
 .tindang h1{
 	font-family: 'roboto';
 	color: red;
-	font-size: 30px;
+	font-size: 40px;
 	font-weight: 900;
 	text-align: center;
 	height: 35px;
 	margin-top: 1%;
-	margin-bottom: 1%;
+	margin-bottom: 3%;
 }
 .tindang h2{
 	font-family: 'roboto';

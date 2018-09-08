@@ -1,399 +1,131 @@
-<style type="text/css">
-  .product-image {
-  float: left;
-  width: 20%;
-}
- 
-.product-details {
-  float: left;
-  width: 37%;
-}
- 
-.product-price {
-  float: left;
-  width: 12%;
-}
- 
-.product-quantity {
-  float: left;
-  width: 10%;
-}
- 
-.product-removal {
-  float: left;
-  width: 9%;
-}
- 
-.product-line-price {
-  float: left;
-  width: 12%;
-  text-align: right;
-}
- 
-/* This is used as the traditional .clearfix class */
-.group:before, .shopping-cart:before, .column-labels:before, .product:before, .totals-item:before,
-.group:after,
-.shopping-cart:after,
-.column-labels:after,
-.product:after,
-.totals-item:after {
-  content: '';
-  display: table;
-}
- 
-.group:after, .shopping-cart:after, .column-labels:after, .product:after, .totals-item:after {
-  clear: both;
-}
- 
-.group, .shopping-cart, .column-labels, .product, .totals-item {
-  zoom: 1;
-}
- 
-/* Apply clearfix in a few places */
-/* Apply dollar signs */
-.product .product-price:before, .product .product-line-price:before, .totals-value:before {
-  content: '$';
-}
- 
-/* Body/Header stuff */
-body {
-  padding: 0px 30px 30px 20px;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 100;
-}
- 
-h1 {
-  font-weight: 100;
-}
- 
-label {
-  color: #aaa;
-}
- 
-.shopping-cart {
-  margin-top: -45px;
-}
- 
-/* Column headers */
-.column-labels label {
-  padding-bottom: 15px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #eee;
-}
-.column-labels .product-image, .column-labels .product-details, .column-labels .product-removal {
-  text-indent: -9999px;
-}
- 
-/* Product entries */
-.product {
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
-}
-.product .product-image {
-  text-align: center;
-}
-.product .product-image img {
-  width: 100px;
-}
-.product .product-details .product-title {
-  margin-right: 20px;
-  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
-}
-.product .product-details .product-description {
-  margin: 5px 20px 5px 0;
-  line-height: 1.4em;
-}
-.product .product-quantity input {
-  width: 40px;
-}
-.product .remove-product {
-  border: 0;
-  padding: 4px 8px;
-  background-color: #c66;
-  color: #fff;
-  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
-  font-size: 12px;
-  border-radius: 3px;
-}
-.product .remove-product:hover {
-  background-color: #a44;
-}
- 
-/* Totals section */
-.totals .totals-item {
-  float: right;
-  clear: both;
-  width: 100%;
-  margin-bottom: 10px;
-}
-.totals .totals-item label {
-  float: left;
-  clear: both;
-  width: 79%;
-  text-align: right;
-}
-.totals .totals-item .totals-value {
-  float: right;
-  width: 21%;
-  text-align: right;
-}
-.totals .totals-item-total {
-  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
-}
- 
-.checkout {
-  float: right;
-  border: 0;
-  margin-top: 20px;
-  padding: 6px 25px;
-  background-color: #6b6;
-  color: #fff;
-  font-size: 25px;
-  border-radius: 3px;
-}
- 
-.checkout:hover {
-  background-color: #494;
-}
- 
-/* Make adjustments for tablet */
-@media screen and (max-width: 650px) {
-  .shopping-cart {
-    margin: 0;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-  }
- 
-  .column-labels {
-    display: none;
-  }
- 
-  .product-image {
-    float: right;
-    width: auto;
-  }
-  .product-image img {
-    margin: 0 0 10px 10px;
-  }
- 
-  .product-details {
-    float: none;
-    margin-bottom: 10px;
-    width: auto;
-  }
- 
-  .product-price {
-    clear: both;
-    width: 70px;
-  }
- 
-  .product-quantity {
-    width: 100px;
-  }
-  .product-quantity input {
-    margin-left: 20px;
-  }
- 
-  .product-quantity:before {
-    content: 'x';
-  }
- 
-  .product-removal {
-    width: auto;
-  }
- 
-  .product-line-price {
-    float: right;
-    width: 70px;
-  }
-}
-/* Make more adjustments for phone */
-@media screen and (max-width: 350px) {
-  .product-removal {
-    float: right;
-  }
- 
-  .product-line-price {
-    float: right;
-    clear: left;
-    width: auto;
-    margin-top: 10px;
-  }
- 
-  .product .product-line-price:before {
-    content: 'Item Total: $';
-  }
- 
-  .totals .totals-item label {
-    width: 60%;
-  }
-  .totals .totals-item .totals-value {
-    width: 40%;
-  }
-}
-</style>
+<?php
+ if(isset($_SESSION['giohang'])){
+?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" type="text/javascript"></script>
 
+<div class="w3-col s12 w3-teal" style="font-size: 22px; padding: 1%;"> THÔNG TIN GIỎ HÀNG</div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-<h1>Shopping Cart</h1>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
 
-<div class="shopping-cart">
+      <link rel="stylesheet" href="../css/style_giohang.css">
 
-  <div class="column-labels">
-    <label class="product-image">Image</label>
-    <label class="product-details">Product</label>
-    <label class="product-price">Price</label>
-    <label class="product-quantity">Quantity</label>
-    <label class="product-removal">Remove</label>
-    <label class="product-line-price">Total</label>
-  </div>
-
-  <div class="product">
-    <div class="product-image">
-      <img src="images/nike.jpg">
-    </div>
-    <div class="product-details">
-      <div class="product-title">Nike Flex Form TR Women's Sneaker</div>
-      <p class="product-description"> It has a lightweight, breathable mesh upper with forefoot cables for a locked-down fit.</p>
-    </div>
-    <div class="product-price">12.99</div>
-    <div class="product-quantity">
-      <input type="number" value="2" min="1">
-    </div>
-    <div class="product-removal">
-      <button class="remove-product">
-        Remove
-      </button>
-    </div>
-    <div class="product-line-price">25.98</div>
-  </div>
-
-  <div class="product">
-    <div class="product-image">
-      <img src="images/adidas.jpg">
-    </div>
-    <div class="product-details">
-      <div class="product-title">ULTRABOOST UNCAGED SHOES</div>
-      <p class="product-description">Born from running culture, these men's shoes deliver the freedom of a cage-free design</p>
-    </div>
-    <div class="product-price">45.99</div>
-    <div class="product-quantity">
-      <input type="number" value="1" min="1">
-    </div>
-    <div class="product-removal">
-      <button class="remove-product">
-        Remove
-      </button>
-    </div>
-    <div class="product-line-price">45.99</div>
-  </div>
-
-  <div class="totals">
-    <div class="totals-item">
-      <label>Subtotal</label>
-      <div class="totals-value" id="cart-subtotal">71.97</div>
-    </div>
-    <div class="totals-item">
-      <label>Tax (5%)</label>
-      <div class="totals-value" id="cart-tax">3.60</div>
-    </div>
-    <div class="totals-item">
-      <label>Shipping</label>
-      <div class="totals-value" id="cart-shipping">15.00</div>
-    </div>
-    <div class="totals-item totals-item-total">
-      <label>Grand Total</label>
-      <div class="totals-value" id="cart-total">90.57</div>
-    </div>
-  </div>
-      
-      <button class="checkout">Checkout</button>
-
-</div>
-
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
-     
-<script type="text/javascript">
-$(document).ready(function() {
- 
-/* Set rates + misc */
-var taxRate = 0.05;
-var shippingRate = 15.00; 
-var fadeTime = 300;
- 
- 
-/* Assign actions */
-$('.product-quantity input').change( function() {
-  updateQuantity(this);
-});
- 
-$('.product-removal button').click( function() {
-  removeItem(this);
-});
- 
- 
-/* Recalculate cart */
-function recalculateCart()
-{
-  var subtotal = 0;
-   
-  /* Sum up row totals */
-  $('.product').each(function () {
-    subtotal += parseFloat($(this).children('.product-line-price').text());
-  });
-   
-  /* Calculate totals */
-  var tax = subtotal * taxRate;
-  var shipping = (subtotal > 0 ? shippingRate : 0);
-  var total = subtotal + tax + shipping;
-   
-  /* Update totals display */
-  $('.totals-value').fadeOut(fadeTime, function() {
-    $('#cart-subtotal').html(subtotal.toFixed(2));
-    $('#cart-tax').html(tax.toFixed(2));
-    $('#cart-shipping').html(shipping.toFixed(2));
-    $('#cart-total').html(total.toFixed(2));
-    if(total == 0){
-      $('.checkout').fadeOut(fadeTime);
-    }else{
-      $('.checkout').fadeIn(fadeTime);
+  <style type="text/css">
+    table tr td{
+      text-align: center;
+      vertical-align: middle;
     }
-    $('.totals-value').fadeIn(fadeTime);
-  });
-}
+  </style>
+</head>
+
+<body>
+<span id="alert"></span>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container" style="width: 96%;">
+  <table id="cart" class="table table-hover table-condensed">
+    <thead>
+      <tr>
+        <th style="width:50%">Sản phẩm</th>
+        <th style="width:10%">Giá</th>
+        <th style="width:9%">Số lượng</th>
+        <th style="width:22%" class="text-center">Thành tiền</th>
+        <th style="width:10%"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      mysqli_set_charset($conn,"UTF8");
+      $i = 1;
+        foreach ($_SESSION['giohang'] as $value) {
+       ?>
+         <input style="opacity: 0" id="id<?php echo $i; ?>" type="" name="" value="<?php echo $value['id']; ?>">
+      <tr id="sp<?php echo $i; ?>">
+        <td data-th="Product">
+          <div class="row">
+            <div class="col-sm-4 hidden-xs"><img style="height: 80px; width: 100px; margin-top: 3%;" src="upload/<?php echo $value['hinhanh']; ?>" alt="..." class="img-responsive" /></div>
+            <div class="col-sm-8">
+              <h4 class="nomargin" style="font-weight: 800; font-family: 'roboto';"><?php echo $value['ten']; ?></h4>
+              <p><?php echo $value['mota']; ?></p>
+            </div>
+          </div>
+        </td>
+        <input style="opacity: 0; width: 0.5px;" id="gia<?php echo $i; ?>" type="" name="" value="<?php echo $value['gia']; ?>">
+        <td data-th="Price"><?php echo adddotstring($value['gia']); ?></td>
+        <td data-th="Quantity">
+          <input id="soluong<?php echo $i; ?>" style="font-weight: 700; font-size: 18px;" type="number" class="form-control text-center" value="<?php echo $value['soluong']; ?>">
+        </td>
+        <td style="font-weight: 800;" id ="thanhtien<?php echo $i; ?>" data-th="Subtotal" class="text-center"><?php echo adddotstring($value['gia'] * $value['soluong']).' VNĐ'; ?></td>
+        <td class="actions" data-th="">
+          <button id="delete<?php echo $i; ?>" class="btn btn-danger btn-sm"><i  class="fa fa-trash-o"></i></button>
+        </td>
+      </tr>
+
+      <script type="text/javascript">
  
- 
-/* Update quantity */
-function updateQuantity(quantityInput)
-{
-  /* Calculate line price */
-  var productRow = $(quantityInput).parent().parent();
-  var price = parseFloat(productRow.children('.product-price').text());
-  var quantity = $(quantityInput).val();
-  var linePrice = price * quantity;
-   
-  /* Update line price display and recalc cart totals */
-  productRow.children('.product-line-price').each(function () {
-    $(this).fadeOut(fadeTime, function() {
-      $(this).text(linePrice.toFixed(2));
-      recalculateCart();
-      $(this).fadeIn(fadeTime);
+    $("#soluong<?php echo $i; ?>").change(function(){
+       var idsp = $("#id<?php echo $i; ?>").val();
+        var sl = $("#soluong<?php echo $i; ?>").val();
+      $.post("process_ajax/data_update_ss.php", {id_sp: idsp,sl: sl}, function(data){
+        $("#alert").html(data);
+             })
+
+        if(sl <=0)
+        { 
+         
+         if(confirm('Số sản phẩm đã nhỏ hơn 0 bạn có muốn xóa sản phẩm này ra khỏi giỏ hàng?'))
+         {
+                  $.post("process_ajax/data_usert_ss.php", {id_sp: idsp}, function(data){
+              $("#alert").html(data);
+               })
+              $("#sp<?php echo $i; ?>").html("");
+          }
+        }
+        var gia = $("#gia<?php echo $i; ?>").val();
+        var thanhtien = sl*gia;
+        var thanhtiendot = thanhtien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+        $("#thanhtien<?php echo $i; ?>").html(thanhtiendot+ " VNĐ");
+        $.post("process_ajax/data_update_ttt.php", {id_sp: idsp}, function(data){
+              $("#tongthanhtoan").html(data);
+               })
     });
-  });  
-}
- 
- 
-/* Remove item from cart */
-function removeItem(removeButton)
-{
-  /* Remove row from DOM and recalc cart total */
-  var productRow = $(removeButton).parent().parent();
-  productRow.slideUp(fadeTime, function() {
-    productRow.remove();
-    recalculateCart();
-  });
-}
- 
-});
- 
-</script>   
+
+       $("#delete<?php echo $i; ?>").click(function(){
+            var idsp = $("#id<?php echo $i; ?>").val();
+           if(confirm('Bạn có chắc muốn xóa sản phẩm này!')){
+            $.post("process_ajax/data_usert_ss.php", {id_sp: idsp}, function(data){
+              $("#sp<?php echo $i; ?>").html(data);
+               })
+          }
+       });
+
+  
+</script>
+
+     <?php
+     $i++;
+      }
+      
+     ?>
+      
+    </tbody>
+    <tfoot>
+      <tr class="visible-xs">
+      </tr>
+      <tr>
+        <td><a style="text-align: left;" href="index.php" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng
+        <td colspan="3" class="hidden-xs text-center" style="width: 300px;"><strong>Tổng thanh toán:</strong><span id="tongthanhtoan" style="font-size: 23px; color: red; font-weight: 600;">
+          <?php 
+            $tongthanhtoan =0;
+            foreach ($_SESSION['giohang'] as $value) {
+              $tongthanhtoan += $value['soluong']*$value['gia'];
+            }
+            echo '&nbsp'.adddotstring($tongthanhtoan).'  VNĐ';
+          ?>
+        </span></td>
+        <td colspan="2"><a href="index.php?view=thanhtoan" class="btn btn-success btn-block">Thanh toán<i class="fa fa-angle-right"></i></a></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+</body>
+</html>

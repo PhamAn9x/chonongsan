@@ -1,6 +1,7 @@
 <link rel="icon" href="http://www.thuthuatweb.net/wp-content/themes/HostingSite/favicon.ico" type="image/x-ico"/>
 <!--     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>-->
-	<link href="vendor/pd_item/style.css" rel="stylesheet" />
+	<!-- <link href="vendor/pd_item/style.css" rel="stylesheet" /> -->
+    <link href="css/style_sp.css" rel="stylesheet" />
 
 	
 <div class="w3-col khungsp">
@@ -76,9 +77,9 @@
                                     <p>Ngày đăng: <?php echo $rows['SP_NGAYDANG']; ?></p>
                                     <p>Đơn vị: HTX Huyện Long Mỹ</p>
                                 </div> 
-                                <div class="section">
-                                    <a href="index.php?xem=chiietsanpham&id=<?php echo $rows['SP_ID'];?>" class="btn buy expand">Chi tiết / Đặt hàng</a>
-                                </div>
+                                 <div class="section">
+                                        <a href="index.php?xem=chitietsanpham&id=<?php echo $rows['SP_ID'];?>" class="btn buy expand">Chi tiết / Đặt hàng</a>
+                                    </div>
                             </div>
                         </div>
                     </div>

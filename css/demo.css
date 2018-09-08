@@ -38,14 +38,7 @@ section, header{
 	display: block;
 }
 /* General Demo Style */
-body{
-	font-family:'roboto';
-	background:url(images/bgnoise_lg.png);
-	font-weight: 400;
-	font-size: 15px;
-	color: #3a2127;
-	overflow-y: scroll;
-}
+
 a{
 	color: #333;
 	text-decoration: none;

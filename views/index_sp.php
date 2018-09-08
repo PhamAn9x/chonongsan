@@ -1,10 +1,11 @@
-<div>
+<div class="w3-col s1">QC</div>
+<div class="w3-col s10">
     <link rel="icon" href="http://www.thuthuatweb.net/wp-content/themes/HostingSite/favicon.ico" type="image/x-ico"/>
      <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link href="css/style_sp.css" rel="stylesheet" />
-   <div class="w3-teal" style=" width:30%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 0px;">SẢN PHẨM TRƯNG BÀY</div>
-</div>
- <div class="container-item" style="padding-left:7%;">
+   <div class="w3-teal" style=" width: 90%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 0px; margin-left: 5%; ">SÀN GIAO DỊCH</div>
+
+ <div class="container-item" style="padding-left: 4%;">
 <?php
 //     function adddotstring($strNum) {
 
@@ -34,10 +35,10 @@
     {
 ?>
            
-                <div class="item">
+                <div class="itemnew" style="width: 225px;height: 225px; margin-left: 1%;">
                     <!-- item image -->
                     <div class="item-img">
-                        <img src="upload/<?php echo $rows['HA_TEN']; ?>" width="260" height="260" />
+                        <img src="upload/<?php echo $rows['HA_TEN']; ?>" width="230px" height="230px" />
                     </div>
 
                     <div class="item-content">
@@ -58,22 +59,22 @@
                                             <?php echo $rows['SP_DONVITINH']; ?>
                                         </span>   
                                 </div>
-                              <?php
-								if(isset($_SESSION['sdt'])){
-									$sp_id = $rows['SP_ID'];
-									$sdt = $_SESSION['sdt'];
-									$dathich = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM THICH WHERE USR_SDT = $sdt AND SP_ID = $sp_id"));
-															if($dathich < 1){
-								?>
+                                <?php
+                                if(isset($_SESSION['sdt'])){
+                                    $sp_id = $rows['SP_ID'];
+                                    $sdt = $_SESSION['sdt'];
+                                    $dathich = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM THICH WHERE USR_SDT = $sdt AND SP_ID = $sp_id"));
+                                                            if($dathich < 1){
+                                ?>
                               <a href="views/xuly_thich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" src="logo_image/ictim2.png" width="30px" height="30px"></a>
                               <?php
-								} else{
-							?>
-                           		 <a href="views/xuly_bothich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" src="logo_image/ictim.png" width="37px" height="37px"></a>
+                                } else{
+                            ?>
+                                 <a href="views/xuly_bothich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" src="logo_image/ictim.png" width="37px" height="37px"></a>
                            <?php 
-								}
-								}
-							?>
+                                }
+                                }
+                            ?>
                             </div>  
                         </div>
                         <div class="item-add-content">
@@ -82,9 +83,9 @@
                                     <p>Ngày đăng: <?php echo $rows['SP_NGAYDANG']; ?></p>
                                     <p>Đơn vị: HTX Huyện Long Mỹ</p>
                                 </div> 
-                                <div class="section">
-                                    <a href="index.php?xem=chiietsanpham&id=<?php echo $rows['SP_ID'];?>" class="btn buy expand">Chi tiết / Đặt hàng</a>
-                                </div>
+                                 <div class="section">
+                                        <a href="index.php?xem=chitietsanpham&id=<?php echo $rows['SP_ID'];?>" class="btn buy expand">Chi tiết / Đặt hàng</a>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -94,6 +95,8 @@
     }
 ?>
  </div>
+ </div>
+ <div class="w3-col s1">ƯC</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
     
 <script type="text/javascript">

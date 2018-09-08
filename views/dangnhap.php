@@ -94,8 +94,9 @@ function dangnhap(){
     if($kq>0 && $trangthai==1){
       $sqlsl = "UPDATE USER SET USR_SOLUOTDANGNHAP = $sl+1  WHERE USR_SDT = '$sdt'";
       mysqli_query($conn,$sqlsl);
+      if($row['Q_ID'] == 2) $_SESSION['htx'] = $row['Q_ID'];
       $_SESSION['user'] = $row['USR_TEN'];
-		$_SESSION['sdt'] = $row['USR_SDT'];
+		  $_SESSION['sdt'] = $row['USR_SDT'];
       $_SESSION['pass'] = $row['USR_PASS'];
       ?>
       <script type="text/javascript">alert("Đăng nhập thành công!");</script>

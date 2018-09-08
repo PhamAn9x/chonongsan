@@ -63,9 +63,9 @@
                 <div class="w3-row">
                     <input class="w3-input" type="text" name="phi" id="phi" placeholder="Phí vận chuyển">
                 </div>
-                <div class="w3-row" style="padding-left: 3%; width: 100%;">
-                     <textarea name="ck" id="ck" rows="10" cols="90"></textarea>
-                     <script>CKEDITOR.replace('ck');</script>
+                <div class="w3-row" style="padding-left: 0%; width: 100%;">
+                     <textarea name="ck" placeholder="Nhập mô tả sản phẩm" id="ck" rows="6" cols="79"></textarea>
+                     <script>//CKEDITOR.replace('ck');</script>
                 </div>
             </div>
             <div class="w3-row w3-col s6" style="padding-left: 2%;">

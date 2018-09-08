@@ -1,4 +1,4 @@
-/* CSS Document */
+ /* CSS Document */
 body{
 	font-family:Cambria, Hoefler Text, Liberation Serif, Times, Times New Roman, serif;
 }
@@ -65,12 +65,13 @@ body{
 	text-align: center;
 }
 .an-table tr th{
-	width: 180px;
+	width: 290px;
 	color: darkgreen;
 	font-family: 'roboto';
 	font-weight: bolder;
 	font-size: 20px;
 	margin-top: -10%;
+	border: 1px dotted black;
 }
 
 .an-table-sl{
@@ -114,7 +115,42 @@ body{
 	font-size: 19px;
 	text-align: left;
 }
+.an-thongtin{
+	margin-left: 2%;
+	margin-right: 2%;
+	width: 98%;
 
+}
+.an-thongtin tr th{
+		vertical-align: middle;
+		font-weight: 700;
+		color: white;
+		background-color: #218c74;
+		text-align: center;
+}
+.an-tieude{
+	font-size: 23px;
+	color: red;
+	font-weight: 700;
+	margin-top: 2%;
+	text-align: center;
+}
+.an-datlenh tr th{
+	text-align: center;
+	background-color: #218c74;
+	color: white;
+	font-size: 19px;
+	font-weight: 700;
+	width: 100px;
+
+}
+.an-datlenh tr td{
+	text-align: center;
+	font-size: 19px;
+}
+.an-datlenh tr th{
+	text-align: center;
+	}
 
 
 

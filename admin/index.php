@@ -38,16 +38,17 @@
          <li class="nav-item">
             <span>Quản lý hợp tác xã</span>
             <ul class="subnav">
-               <li><a href="#">Danh sách hợp tác xã</a></li>
-               <li><a href="#">Thêm mới hợp tác xã</a></li>
+               <li><a href="?view=danhsachhoptacxa">Danh sách hợp tác xã</a></li>
+               <li><a href="?view=themmoihoptacxa">Thêm mới hợp tác xã</a></li>
                <li><a href="#">Thống kê sản phẩm của hợp tác xã</a></li>
             </ul class="subnav">
          </li>
          <li class="nav-item">
             <span>Quản lý sản phẩm</span>
             <ul class="subnav">
-               <li><a href="#">Thêm mới nhóm sản phẩm</a></li>
-               <li><a href="#">Thêm mới loại sản phẩm</a></li>
+               <li><a href="?view=danhsachsanpham">Danh sách sản phẩm</a></li>
+               <li><a href="?view=themmoinhomsanpham">Thêm mới nhóm sản phẩm</a></li>
+               <li><a href="?view=themmoiloaisanpham">Thêm mới loại sản phẩm</a></li>
                <li><a href="#">Thống kê các loại sản phẩm</a></li>
             </ul>
          </li>
@@ -65,6 +66,14 @@
               if($view == 'danhsachnguoidung') include('ad_danhsachnguoidung.php');
                 else
                   if($view == 'capnhatthongtinnguoidung')include('ad_capnhatthongtinnguoidung.php');
+                  else
+                    if($view == 'danhsachhoptacxa') include('danhsachhoptacxa.php');
+                    else
+                      if($view == 'themmoihoptacxa') include('themmoihoptacxa.php');
+                      else
+                        if($view == 'danhsachsanpham') include('ad_danhsachsanpham.php');
+                        else
+                          if($view == 'themmoinhomsanpham') include('themmoinhomsanpham.php');
             }
          ?>
       </div>
