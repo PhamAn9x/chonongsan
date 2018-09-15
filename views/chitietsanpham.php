@@ -167,7 +167,7 @@
 
 			</div>
 			<div class="w3-col s6">
-				<?php //include('views/maps.php'); ?>
+				<?php include('views/maps.php'); ?>
 			</div>
 			<div class="w3-col s12"><hr /></div>
 			<div class="w3-col s6">

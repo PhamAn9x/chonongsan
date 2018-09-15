@@ -141,6 +141,9 @@
 													if($view == "tt_taikhoan") include('views/thongtin_taikhoan.php');
 														else
 															if($view == "doimatkhau") include('views/doimatkhau.php');
+															else
+																if($view == "kichhoat") include('views/xacthuc_taikhoan.php');
+					
 					
 			?>	
 		</div>

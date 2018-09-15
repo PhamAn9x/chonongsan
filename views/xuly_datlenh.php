@@ -26,7 +26,8 @@ if(isset($_POST['sldatlenh'])){
 	}else
 	{
 		if($loai == 0){
-			$sql = "SELECT * FROM LENH WHERE L_TEN = 'ban' AND SP_ID = $spid AND L_GIA <= $gia ORDER BY L_GIA ASC";
+			$sql = "SELECT * FROM LENH WHERE L_TEN = 'ban' AND SP_ID = $spid AND L_GIA <= $gia AND L_SDT <> '$sdt' ORDER BY L_GIA ASC";
+			echo $sql;
 			$result = mysqli_query($conn,$sql);
 			$count = mysqli_num_rows($result);
 			if($count > 0){
@@ -104,7 +105,7 @@ if(isset($_POST['sldatlenh'])){
 		}
 		else{
 			if($loai == 1){
-				$sql = "SELECT * FROM LENH WHERE L_TEN = 'mua' AND SP_ID = $spid AND L_GIA >= $gia ORDER BY L_GIA DESC";
+				$sql = "SELECT * FROM LENH WHERE L_TEN = 'mua' AND SP_ID = $spid AND L_GIA >= $gia AND L_SDT <> '$sdt' ORDER BY L_GIA DESC";
 				$result = mysqli_query($conn,$sql);
 				$count = mysqli_num_rows($result);
 				if($count > 0){
