@@ -1,4 +1,4 @@
-<body>
+<div style="width: 97%; padding-left: 4%;">
 	<?php
 	include('config/connect.php');
 	if(isset($_GET['id'])){
@@ -23,7 +23,7 @@
 		<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 		<link href="vendor/pd_item/style.css" rel="stylesheet" />
 
-		<div class="w3-row">
+		<div class="w3-row" style="border: 3px solid #01a3a4; border-radius: 5px; box-shadow: -2px 2px 2px 2px #01a3a4">
 			<div class="w3-col s12 w3-teal" style="font-size: 22px; padding: 1%; text-align: center;"> THÔNG TIN CHI TIẾT SẢN PHẨM</div>
 			<div class="w3-col s6">
 				<div class="row an-hinhanh" style="height: 350px;">
@@ -110,11 +110,11 @@
 
 
 			<div class="w3-col s6 " style="padding-top: 1px;">
-				<div class="w3-row" style="padding-top: 1px; margin-bottom: 8%;">
-					<table border="0" class="w3-table an-table-sl"  style=" height:400px;">
+				<div class="w3-row" style="padding-top: 1px; margin-bottom: -2%;">
+					<table border="0" class="w3-table an-table-sl"  style=" height:400px; border:3px solid #01a3a4; width: 98%; margin-left: 1%; margin-top: 3%; box-shadow: -1px 1px 1px 1px #01a3a4">
 						<tr>
 							<td colspan="5">
-								<div style="margin-left: 5%; font-size: 30px;text-transform: uppercase; font-weight: bolder;  color:red; border-radius: 2px; height: 60px; padding: 2%; margin-right: 4%; font-family:Segoe, Segoe UI, DejaVu Sans, Trebuchet MS, Verdana,' sans-serif';"><?php echo $row['SP_TEN'];?>
+								<div style="margin-left: 5%; font-size: 25px;text-transform: uppercase; font-weight: bolder;  color:red; border-radius: 2px; height: 60px; padding: 2%; margin-right: 2%; font-family:Segoe, Segoe UI, DejaVu Sans, Trebuchet MS, Verdana,' sans-serif';"><?php echo $row['SP_TEN'];?>
 									
 								</div>
 							</td>
@@ -126,11 +126,11 @@
 							if( $dong[0] != null){
 								
 							?>
-							<td style="vertical-align: middle; text-align: center;"><span style=" font-size: 28px; font-weight: bolder; padding-top: 1%;">Giá bán :  </span><span style="color: red;font-size: 28px;font-weight: bolder;"><?php echo adddotstring($dong[0]); ?></span>/<?php echo $row['SP_DONVITINH']; ?> </td>
+							<td style=" padding-top: -1%; vertical-align: middle; text-align: center;"><span style=" font-size: 25px; font-weight: bolder; padding-top: 1%;">Giá bán :  </span><span style="color: red;font-size: 28px;font-weight: bolder;"><?php echo adddotstring($dong[0]); ?></span>/<?php echo $row['SP_DONVITINH']; ?> </td>
 							<?php
 								}else{
 									?>
-									<td style="vertical-align: middle; text-align: center;"><span style=" font-size: 28px; font-weight: bolder; padding-top: 1%;">Giá Mua :  </span><span style="color: red;font-size: 23px;font-weight: bolder;"><?php echo "Đang cập nhật";?></span> </td>
+									<td style="vertical-align: middle; text-align: center;"><span style=" font-size: 25px; font-weight: bolder; padding-top: 1%;">Giá Mua :  </span><span style="color: red;font-size: 23px;font-weight: bolder;"><?php echo "Đang cập nhật";?></span> </td>
 							<?php
 									
 								}
@@ -141,22 +141,22 @@
 							if( $dong[0] != null){
 								
 							?>
-							<td style="vertical-align: middle; text-align: center;"><span style=" font-size: 28px; font-weight: bolder; padding-top: 1%;">Giá Mua :  </span><span style="color: red;font-size: 28px;font-weight: bolder;"><?php echo adddotstring($dong[0]); ?></span>/<?php echo $row['SP_DONVITINH']; ?> </td>
+							<td style="vertical-align: middle; text-align: center; padding-top: -1%;"><span style=" font-size: 25px; font-weight: bolder; padding-top: 1%;">Giá Mua :  </span><span style="color: red;font-size: 28px;font-weight: bolder;"><?php echo adddotstring($dong[0]); ?></span>/<?php echo $row['SP_DONVITINH']; ?> </td>
 							<?php
 								}else{
 									?>
-									<td style="vertical-align: middle; text-align: center;"><span style=" font-size: 28px; font-weight: bolder; padding-top: 1%;">Giá Mua :  </span><span style="color: red;font-size: 23px;font-weight: bolder;"><?php echo "Đang cập nhật";?></span> </td>
+									<td style="vertical-align: middle; text-align: center;"><span style=" font-size: 25px; font-weight: bolder; padding-top: 1%;">Giá Mua :  </span><span style="color: red;font-size: 23px;font-weight: bolder;"><?php echo "Đang cập nhật";?></span> </td>
 							<?php
 									
 								}
 							?>
-							<td style="border-left: 1px dotted black; padding-bottom: 1%;" >
+							<td style="border-left: 1px dotted black; padding-top: 4%;padding-left: 0px;padding-right: 0px;" >
 								<?php 
 								$strqr = 'Tên sản phẩm:'.$row['SP_TEN'].'-Thuộc hợp tác xã: '.$row['HTX_TEN'].'-Địa chỉ: '.$row['SP_DIACHI'].'-Tên chủ sản phẩm: '.$row['USR_HO'].' '.$row['USR_TEN'].'-Ngày đăng: '.$row['SP_NGAYDANG'].'-Số điện thoại liên lạc:'.$row['USR_SDT'];
 								?>
 								<input style="opacity: 0" id="qr" value="<?php echo $strqr; ?>"/>
 								<img src="https://chart.googleapis.com/chart?cht=qr&chl=Hello+World&chs=160x160&chld=L|0"
-								class="qr-code img-thumbnail img-responsive" style="width: 160px; height: 160px;">
+								class="qr-code img-thumbnail img-responsive" style="width: 200px; height: 200px; border-radius: 5px; box-shadow: -3px 2px 2px 5px #01a3a4;">
 								<input style="opacity: 0" id="qr" value="<?php echo $strqr; ?>"/>
 								<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
 								<script  src="js/QR_code.js"></script>
@@ -166,13 +166,13 @@
 				</div>	
 
 			</div>
-			<div class="w3-col s6">
+			<div class="w3-col s6" >
 				<?php include('views/maps.php'); ?>
 			</div>
 			<div class="w3-col s12"><hr /></div>
 			<div class="w3-col s6">
 						<div class="w3-row an-tieude">ĐANG CẦN MUA</div>
-			<table class="w3-table-all w3-hoverable w3-border an-thongtin">
+			<table class="w3-table-all w3-hoverable w3-border an-thongtin" style="margin-left: 0">
 				<tr>
 					<th>STT</th>
 					<th>Họ tên</th>
@@ -197,7 +197,7 @@
 					<td><?php echo $row_mua['L_SDT']; ?></td>
 					<td><?php echo $row_mua['L_SOLUONG']; ?></td>
 					<td><?php echo adddotstring($row_mua['L_GIA']); ?></td>
-					<td><?php echo adddotstring($row_mua['L_TONGTIEN']); ?></td>
+					<td><?php echo adddotstring($row_mua['L_SOLUONG']*$row_mua['L_GIA']); ?></td>
 					<td><?php echo $row_mua['L_LOINHAN']; ?></td>
 				</tr>
 				<?php
@@ -240,7 +240,7 @@
 					<td><?php echo $row_mua['L_SDT']; ?></td>
 					<td><?php echo $row_mua['L_SOLUONG']; ?></td>
 					<td><?php echo adddotstring($row_mua['L_GIA']); ?></td>
-					<td><?php echo adddotstring($row_mua['L_TONGTIEN']); ?></td>
+					<td><?php echo adddotstring($row_mua['L_SOLUONG']*$row_mua['L_GIA']); ?></td>
 					<td><?php echo $row_mua['L_LOINHAN']; ?></td>
 				</tr>
 				<?php
@@ -288,7 +288,7 @@
 							<td>
 								<input  style="width: 100px;" type="number" name="ipgia" id="ipgia" value="0">
 							</td>
-							<td>0 VNĐ</td>
+							<td class="thanhtien"> 0 VNĐ</td>
 							<td>
 								<input type="text" name="ipdiachigiaohang" id="ipdiachigiaohang" value="<?php echo $row['SP_DIACHI'];?>">
 							</td>
@@ -409,5 +409,32 @@
 			</div>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
 			<script type="text/javascript" src="js/slider.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$("#ipsoluong").keyup(function(){
+						var ck = $("#sldatlenh").val();
+						if(ck == "") {
+							alert("Vui lòng chọn lệnh mua hoặc bán!");
+						}
+						var sl = $("#ipsoluong").val();
+						var gia = $("#ipgia").val();
+						var tong = sl * gia;
+						var price =tong;   
+						$(".thanhtien").html(tong +" VNĐ");
+					});
+					$("#ipgia").keyup(function(){
+						var ck = $("#sldatlenh").val();
+						if(ck == "") {
+							alert("Vui lòng chọn lệnh mua hoặc bán!");
+						}
+						var sl = $("#ipsoluong").val();
+						var sl = $("#ipsoluong").val();
+						var gia = $("#ipgia").val();
+						var tong = sl * gia;
+						var price =tong;   
+						$(".thanhtien").html(tong+" VNĐ");
+					});
+				});
+			</script>
 		</div>
-	</body>
+	</div>

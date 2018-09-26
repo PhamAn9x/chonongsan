@@ -93,6 +93,7 @@ if(isset($_POST['sdt'])){
                     <input type="text" style="width: 97%;" type="text" name="diachi" id="diachi" placeholder="Địa chỉ chi tiết" class="w3-input" value="<?php echo $row['USR_SONHA_AP'].','.$row['XA_NAME'].'-'.$row['HUYEN_NAME'].'-'.$row['TINH_NAME']; ?>">
                 </div>
                 <div class="w3-row">
+                    <input style="display: none;" type="text" name="htx_id" id="htx_id" value="<?php echo $row['HTX_ID']; ?>">
                     <input type=text; style="width: 97%;" type="text" name="hoptacxa" id="hoptacxa" placeholder="Địa chỉ chi tiết" class="w3-input" value="<?php echo $row['HTX_TEN']; ?>">
                 </div>
                 <?php

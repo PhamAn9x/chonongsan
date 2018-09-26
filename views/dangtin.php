@@ -127,6 +127,8 @@
 					</select>
                 </div>
 		</div>
+
+
                 <div class="w3-row">
                     <input style="width: 97%; border-radius: 0 0 5px 5px" type="date" name="ngayhethan" id="ngayhethan" placeholder="Ngày hết hạn" placeholder="Chọn ngày" class="w3-input">
                     
@@ -158,7 +160,9 @@
 		$ngayhethan = $_POST['ngayhethan'];
 		$ngaydang = date("Y-m-d");
 		$diachi = $_POST['diachi'];
-	$sql = "INSERT INTO SANPHAM(SP_TEN,NSP_ID,LSP_ID,SP_SOLUONG,SP_GIA,SP_DONVITINH,SP_PHIVANCHUYEN,SP_MOTA,USR_SDT,SP_NGAYDANG,SP_NGAYHETHAN,SP_DIACHI,SP_TRANGTHAI) VALUES ('$tieude',$nhomsanpham,$loaisanpham,$soluong,$gia,'$donvitinh','$phi','$mota','$sdt','$ngaydang','$ngayhethan','$diachi',0)";
+        $htx = $_POST['htx_id'];
+        echo $htx;
+	$sql = "INSERT INTO SANPHAM(SP_TEN,NSP_ID,LSP_ID,SP_SOLUONG,SP_GIA,SP_DONVITINH,SP_PHIVANCHUYEN,SP_MOTA,USR_SDT,SP_NGAYDANG,SP_NGAYHETHAN,SP_DIACHI,SP_TRANGTHAI,SP_HTX_ID) VALUES ('$tieude',$nhomsanpham,$loaisanpham,$soluong,$gia,'$donvitinh','$phi','$mota','$sdt','$ngaydang','$ngayhethan','$diachi',0,$htx)";
 	if(mysqli_query($conn,$sql)){
 		$_SESSION['dinhanh']=$sdt;
 		echo "<script>
@@ -168,7 +172,7 @@
 		mysqli_close($conn);
 		
 	}
-	else echo "<script>alert('Đăng tin thất bại! Vui lòng kiểm tra lại!');</script>";
+	else {}//echo "<script>alert('Đăng tin thất bại! Vui lòng kiểm tra lại!');</script>";
 	}
     } else 
         {

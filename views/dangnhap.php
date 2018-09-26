@@ -94,19 +94,30 @@ function dangnhap(){
     if($kq>0 && $trangthai==1){
       $sqlsl = "UPDATE USER SET USR_SOLUOTDANGNHAP = $sl+1  WHERE USR_SDT = '$sdt'";
       mysqli_query($conn,$sqlsl);
+      $id =$row['HTX_ID'];
+      $sqln = "SELECT HTX_TEN FROM HOPTACXA WHERE HTX_ID = $id";
+      $rs = mysqli_fetch_row(mysqli_query($conn,$sqln));
+      if($row['Q_ID'] == 1) $_SESSION['admin'] = $row['Q_ID'];
+      if($row['Q_ID'] == 3) $_SESSION['ndthuong'] = $row['Q_ID'];
       if($row['Q_ID'] == 2) $_SESSION['htx'] = $row['Q_ID'];
+      if($row['Q_ID'] == 4) $_SESSION['giaohang'] = $row['Q_ID'];
       $_SESSION['user'] = $row['USR_TEN'];
 		  $_SESSION['sdt'] = $row['USR_SDT'];
       $_SESSION['pass'] = $row['USR_PASS'];
+      $_SESSION['htx_ten'] = $rs[0];
+      $_SESSION['popup']="";
+      $_SESSION['alert'] ='<span style="color: red;">CHÚC MỪNG BẠN</span><br />Đăng Nhập Thành Công!';
+       $_SESSION['redirect']='index.php';
+      include('views/alert.php');
+
       ?>
-      <script type="text/javascript">alert("Đăng nhập thành công!");</script>
-      <META http-equiv="refresh" content="0;URL=index.php">
       <?php
     }else
     if($kq==0){
-      echo $kq;
+      $_SESSION['alert'] ='<span style="color: red;">XIN LỖI!</span><br />Sai tên đang nhập hoặc mật khẩu';
+       $_SESSION['redirect']='index.php?view=dangnhap';
+      include('views/alert.php');
       ?>
-      <script type="text/javascript"> alert("Sai tên đăng nhập hoặc mật khẩu!");</script>
       <?php
     }else if($kq>0 && $trangthai ==0){
       ?>

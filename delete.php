@@ -1,49 +1,12 @@
-<?php
-//delete.php
+<?php 
+	include('config/connect.php');
+	echo "ok";
+	mysqli_set_charset($conn,'UTF8');
+	$rs = mysqli_query($conn,"SELECT * FROM tinh_thanh");
+	while($row = mysqli_fetch_array($rs,MYSQLI_ASSOC)){
+		$tinh = $row['TINH_NAME'];
+		$id = $row['id_tinh'];
+		mysqli_query($conn,"INSERT INTO KHOANCACH(KC_TINH_TEN,KC_TINH_ID) VALUES ('$tinh',$id)");
 
-include('database_connection.php');
-
-if(isset($_POST["image_id"]))
-{
-	$query = "DELETE FROM HINHANH WHERE HA_ID = '".$_POST["image_id"]."'";
-  $statement = $connect->prepare($query);
-  $statement->execute();
- $file_path = 'images/' . $_POST["image_name"];
- if($statement)
- {
- 		unlink($file_path);
- }
-}
-
-if(isset($_POST["check"]) && $_POST["check"] > 0 ){
-	$check = $_POST["check"];
-
-$query = "SELECT * FROM HINHANH ORDER BY HA_ID DESC LIMIT $check";
-$statement = $connect->prepare($query);
-$statement->execute();
-$result = $statement->fetchAll();
-$number_of_rows = $statement->rowCount();
-$output = '';
-$output .= '';
-if($number_of_rows > 0)
-{
- $count = 0;
- foreach($result as $row)
- {
-  $count ++; 
-  $output .= '
-   <td id="im"><span class="delete" id="'.$row["HA_ID"].'" data-image_name="'.$row["HA_TEN"].'" ><img src="images/'.$row["HA_TEN"].'" class="img-thumbnail" width="100" height="100" /></span></td>
-  ';
- }
-}
-else
-{
- $output .= '
- ';
-}
-$output .= '</table>';
-echo $output;
-} else {
-	$output ='Chưa có ảnh nào được chon!';
-}
+	}
 ?>

@@ -467,7 +467,7 @@ if(isset($_POST['ten'])){
    }
     // echo "<script> alert('Đăng ký');</script>";
       // echo $ten.$sdt.$pass.$email.$recaptcha;
-   echo "<META http-equiv='refresh' content='0;URL=https://mail.google.com/'";
+   // echo "<META http-equiv='refresh' content='0;URL=https://mail.google.com/'";
  }
 }
 ?>

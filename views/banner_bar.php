@@ -20,20 +20,26 @@
 					<tr>
 						<td>
 							<div style="float: left;">
-								<select class="w3-input w3-border" style="width: 250px;">
-									<option>Chọn danh mục</option>
+								<select id="slnsp" class="w3-input w3-border" style="width: 250px;">
+									<option value="">Chọn danh mục</option>
+									<?php 
+									mysqli_set_charset($conn,"UTF8");
+										$nsp = mysqli_query($conn,"SELECT * FROM NHOMSANPHAM ");
+										while ($row = mysqli_fetch_array($nsp,MYSQLI_ASSOC)){
+											?>
+												<option value="<?php echo $row['NSP_ID']; ?>"><?php echo $row['NSP_TEN']; ?></option>
+											<?php
+										}
+									?>
 								</select>
 							</div>
 							<div style="float: left; padding-left: 10px;">
-								<input class="w3-input w3-border" type="tetx" name="iptimkiem" id="iptimkiem" placeholder="Nhập từ khóa cần tìm">
+								<input class="w3-input w3-border" type="text" name="iptimkiem" id="iptimkiem" placeholder="Nhập từ khóa cần tìm">
 							</div>	
 							<div style="float: left; margin-left:5px; width: 150px;">
-								<button class="w3-btn w3-round w3-green" name="btntimkiem" id="btntimkiem" style=" width: 125px;margin-left: 5px;" ><span style="font-weight: 700;">Tìm kiếm</span></button>
+								<input type="button" class="w3-btn w3-round w3-green" name="btntimkiem" id="btntimkiem" value="Tìm kiếm" style=" width: 125px;margin-left: 5px;" />
 							</div>						
 						</td>
-							<td
-								style=" font-size: 16px; font-weight: 800; float:left; margin-top:20px; margin-right: 7px;"><img src="logo_image/ictim.png" width="30px" height="30px"><a href="index.php?xem=sanphamdathich&id=<?php echo $sdt; ?>" style=" text-decoration: none; color: black">Thích(<span style="color: red; font-size: 20px;"><?php echo $slthich; ?></span>)</a>
-							</td>
 							<?php 
 								if(!isset($_SESSION['user'])){
 							?>
@@ -45,59 +51,17 @@
 									<?php 
 								}else{
 									?>
-								<td class="" style="font-weight: 600; padding-top: 3px; font-size: 16px; padding-left: 23px; padding-right: 23px; text-align: center;">
-									<span style="padding-left: 0px;font-size: 15px;">Xin chào</span>  
-									
-									<span style=" font-size: 17px; color: red;"><?php echo $_SESSION['user']; ?></span>  
-								</td>
-								
-							
-							<td>
-								
-							<td class=" ">
-									<style type="text/css">
-										#ex4 .p1[data-count]:after{
-											  position:absolute;
-											  right:10%;
-											  top:8%;
-											  content: attr(data-count);
-											  font-size:50%;
-											  padding:0;
-											  border-radius:50%;
-											  line-height:1em;
-											  color: white;
-											  background:rgba(255,0,0,.85);
-											  text-align:center;
-											  min-width: 1em;
-											  font-weight:bold;
-											}
-
-									</style>
-								<?php
-									$sdt = $_SESSION['sdt'];
-									$sp = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(*) AS tssp FROM KHOPLENH WHERE KL_SDT_MUA = $sdt AND KL_TEN = 'mua'"));
-
-								?>				
-									<div id="ex4" style="display: none;">
-									  <a href="?xem=giohang"><span class="p1 fa-stack fa-2x has-badge" data-count="<?php echo $sp[0]; ?>">
-									    <!--<i class="p2 fa fa-circle fa-stack-2x"></i>-->
-									    <i class="p3 fa fa-shopping-cart fa-stack-1x xfa-inverse" data-count="4b"></i>
-									  </span></a>
-									</div>
-
-
-
-
-								</td>
-									
-								<?php
+										<td class="w3-border-left w3-border-right">
+								<a href="?view=dangxuat" class="w3-btn w3-round w3-red w3-hover-white" style="margin-top: 0px; margin-left: 35%; width: 125px;";><span style="font-weight: 700">Đăng Xuất</span></a>
+							</td>
+									<?php
 							}
 							?>
 							<?php
 								if(isset($_SESSION['htx'])){
 							?>
-							<td>
-								<a href="?view=dangtin" class="w3-btn w3-round w3-red" style="margin-top: 4px; margin-left: 30%; width: 125px;";><span style="font-weight: 700">Đăng tin</span></a>
+							<td class="w3-border-left">
+								<a href="?view=dangtin" class="w3-btn w3-round w3-border-left w3-green w3-hover-white" style="margin-top: 4px; margin-left: 90%; width: 125px;";><span style="font-weight: 700">Đăng tin</span></a>
 							</td>
 							<?php
 								}else{
@@ -112,3 +76,15 @@
 				</form>
 			</div>
 		</div>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#btntimkiem").click(function(){
+					var nsp = $("#slnsp").val();
+					var key = $("#iptimkiem").val();
+					$.post("process_ajax/xuly_timkiem.php",{key: key,nsp: nsp}, function(data){
+                            $("#cho_id").html(data);
+					//alert(nsp+" "+ key);
+				});
+			});
+			});
+		</script>

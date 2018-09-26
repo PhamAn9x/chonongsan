@@ -131,13 +131,13 @@
                                 <?php 
                                 if($value['KL_TRANGTHAI']==0 && $value['KL_SDT_MUA'] == $sdt){
                                     ?>
-                                   <span style="color: red;">Người bán <br />chưa xử lý đơn hàng </span>
+                                   <span style="color: red;">Đang chờ  <br />chốt đơn hàng </span>
                                     <?php
                                 }
                                 else{
                                     if($value['KL_TRANGTHAI']==1 && $value['KL_SDT_MUA'] == $sdt){
                                         ?>
-                                    <span class="out" style="color: blue;">Đang giao hàng! </span>
+                                    <span class="out" style="color: blue;">Chờ người bán  </span>
                                     <?php
                                 }                                
                                 }
@@ -147,22 +147,12 @@
                                 <?php
                                 if($value['KL_TRANGTHAI']==0 && $value['KL_SDT_BAN'] == $sdt){
                                     ?>
-                                   <span style="color: red;">Đơn hàng <br />đang chờ xử lý </span>
+                                   <span style="color: red;">Đơn hàng <br />đang chờ người mua xử lý </span>
                                     <?php
                                 }
                                  if($value['KL_TRANGTHAI']==1 && $value['KL_SDT_BAN'] == $sdt){
                                     ?>
-                                   <span style="color: red;"> Đã xử lý </span>
-                                    <?php
-                                }
-                                if($value['KL_TRANGTHAI']==2 && $value['KL_SDT_BAN'] == $sdt){
-                                    ?>
-                                   <span style="color: blue;"> Xử lý xong </span>
-                                    <?php
-                                }
-                                if($value['KL_TRANGTHAI']==2 && $value['KL_SDT_MUA'] == $sdt){
-                                    ?>
-                                   <span style="color: blue;"> Xử lý xong </span>
+                                   <span style="color: red;"> Người mua dã xử lý </span>
                                     <?php
                                 }
                                 ?>
@@ -171,31 +161,9 @@
                             </td>
                             <td>
                                 <?php
-                                if($value['KL_TRANGTHAI'] == 1 && $value['KL_SDT_MUA'] == $sdt){
+                                if($value['KL_TRANGTHAI']==0 && $value['KL_SDT_MUA'] == $sdt){
                                     ?>
-                                    <input type="button" id="nhanhang" class="w3-btn w3-red w3-hover-white w3-round" value="Nhận hàng" />
-                                    <?php
-                                }
-                                if($value['KL_TRANGTHAI'] == 2 && $value['KL_SDT_MUA'] == $sdt){
-                                    ?>
-                                   <span id="output-nhan" style="color: red;">Đã nhận hàng!</span>
-                                    <?php
-                                }
-                                if($value['KL_TRANGTHAI']==1 && $value['KL_SDT_BAN'] == $sdt){
-                                    ?>
-                                   <span class="out" style="color: blue;"> Đang giao hàng!</span>
-                                    <?php
-                                }
-                                if($value['KL_TRANGTHAI']==2 && $value['KL_SDT_BAN'] == $sdt){
-                                    ?>
-                                   <span style="color: red;"> Giao hàng thành công!</span>
-                                    <?php
-                                }
-                                ?>
-                                <?php
-                                if($value['KL_TRANGTHAI']==0 && $value['KL_SDT_BAN'] == $sdt){
-                                    ?>
-                                    <a style="color: white;" href="index.php?view=xulydonhang&ma=<?php echo $value['KL_ID'].'&so='.$value['KL_SDT_MUA']; ?>"><input type="button" class="w3-btn w3-red w3-hover-blue w3-round" value='Chi tiết đơn hàng'/>
+                                    <a style="color: white;" href="index.php?view=xulydonhang&ma=<?php echo $value['KL_ID'].'&so='.$value['KL_SDT_BAN']; ?>"><input type="button" class="w3-btn w3-red w3-hover-blue w3-round" value='Chốt đơn hàng'/>
                                         </a>
                                     <?php
                                 }
@@ -308,13 +276,13 @@
                                 <?php 
                                 if($value['KL_TRANGTHAI']==0 && $value['KL_SDT_MUA'] == $sdt){
                                     ?>
-                                   <span style="color: red;">Người bán <br />chưa xử lý đơn hàng </span>
+                                   <span style="color: red;">Đang chờ  <br />chốt đơn hàng </span>
                                     <?php
                                 }
                                 else{
                                     if($value['KL_TRANGTHAI']==1 && $value['KL_SDT_MUA'] == $sdt){
                                         ?>
-                                    <span class="out" style="color: blue;">Đang giao hàng! </span>
+                                    <span class="out" style="color: blue;">Chờ người bán <br /> chuyển đơn hàng đến hệ thống giao hàng!  </span>
                                     <?php
                                 }                                
                                 }
@@ -324,7 +292,7 @@
                                 <?php
                                 if($value['KL_TRANGTHAI']==0 && $value['KL_SDT_BAN'] == $sdt){
                                     ?>
-                                   <span style="color: red;">Đơn hàng <br />đang chờ xử lý </span>
+                                   <span style="color: red;">Đơn hàng <br />đang chờ người mua xử lý </span>
                                     <?php
                                 }
                                  if($value['KL_TRANGTHAI']==1 && $value['KL_SDT_BAN'] == $sdt){
@@ -348,11 +316,6 @@
                             </td>
                             <td>
                                 <?php
-                                if($value['KL_TRANGTHAI'] == 1 && $value['KL_SDT_MUA'] == $sdt){
-                                    ?>
-                                    <input type="button" id="nhanhang" class="w3-btn w3-red w3-hover-white w3-round" value="Nhận hàng" />
-                                    <?php
-                                }
                                 if($value['KL_TRANGTHAI'] == 2 && $value['KL_SDT_MUA'] == $sdt){
                                     ?>
                                    <span id="output-nhan" style="color: red;">Đã nhận hàng!</span>
@@ -360,7 +323,7 @@
                                 }
                                 if($value['KL_TRANGTHAI']==1 && $value['KL_SDT_BAN'] == $sdt){
                                     ?>
-                                   <span class="out" style="color: blue;"> Đang giao hàng!</span>
+                                   <span class="out" style="color: blue;"> Chờ người bán <br /> chuyển đơn hàng đến hệ thống giao hàng! </span>
                                     <?php
                                 }
                                 if($value['KL_TRANGTHAI']==2 && $value['KL_SDT_BAN'] == $sdt){
@@ -370,9 +333,9 @@
                                 }
                                 ?>
                                 <?php
-                                if($value['KL_TRANGTHAI']==0 && $value['KL_SDT_BAN'] == $sdt){
+                                if($value['KL_TRANGTHAI']==0 && $value['KL_SDT_MUA'] == $sdt){
                                     ?>
-                                    <a style="color: white;" href="index.php?view=xulydonhang&ma=<?php echo $value['KL_ID'].'&so='.$value['KL_SDT_MUA']; ?>"><input type="button" class="w3-btn w3-red w3-hover-blue w3-round" value='Chi tiết đơn hàng'/>
+                                    <a style="color: white;" href="index.php?view=xulydonhang&ma=<?php echo $value['KL_ID'].'&so='.$value['KL_SDT_BAN']; ?>"><input type="button" class="w3-btn w3-red w3-hover-blue w3-round" value='Chốt đơn hàng'/>
                                         </a>
                                     <?php
                                 }
@@ -419,7 +382,7 @@
                 if($load == 0 && $load1 == 0){
                     ?>
                     <tr>
-                            <td colspan="9"> <i> Không có dữ liệu!</i></td>
+                            <td colspan="10"> <i> Không có dữ liệu!</i></td>
                         </tr>
                     <?php
                 }

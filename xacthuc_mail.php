@@ -78,16 +78,23 @@ $mail = sendMail($title, $content, $nTo, $mTo,$diachicc='');
 if($mail==1){
     $qr=mysqli_query($conn,"UPDATE USER SET USR_KEY = '$key' WHERE USR_SDT = '$sdt'");
     if($qr){
+         $_SESSION['alert'] ='<span style="color: red;">CHÚC MỪNG!</span><br />Bạn đã đăng ký tài khoản thành công! Vui lòng truy cập Email để xác thực tài khoản!';
+         $_SESSION['redirect']='https://mail.google.com';
+         include('views/alert.php');
         ?>
 
-        <script type="text/javascript">alert("Bạn đã đăng ký tài khoản thành công! Vui lòng truy cập Email để xác thực tài khoản!");</script>
+        <!-- <script type="text/javascript">alert("Bạn đã đăng ký tài khoản thành công! Vui lòng truy cập Email để xác thực tài khoản!");</script> -->
         <?php
         session_destroy();
     }
 }
 else{
+    $_SESSION['alert'] ='<span style="color: red;">XIN LỖI!</span><br />Đăng ký tài khoản không thành công! Vui lòng kiểm tra lại!';
+         $_SESSION['redirect']='index.php?view=dangky';
+         include('views/alert.php');
     ?>
-    <script type="text/javascript">alert("Đã xảy ra lỗi!");</script>
+    <!-- <script type="text/javascript">alert("Đã xảy ra lỗi!");</script> -->
+
     <?php
 }
 ?>

@@ -96,10 +96,24 @@ if(isset($_POST['sldatlenh'])){
 			}
 			else
 			{
-				echo "Chưa khớp lệnh được";
-				mysqli_set_charset($conn,'UTF8');
-				mysqli_query($conn,"INSERT INTO LENH(L_TEN,SP_ID,L_SDT,SP_TEN,L_SOLUONG,L_GIA,L_TONGTIEN,L_DIACHIGIAO,L_LOINHAN) VALUES ('mua',$spid,'$sdt','$spten',$sl,$gia,$thanhtien,'$diachi','$loinhan')");
+				$sql = "SELECT * FROM LENH WHERE L_TEN='mua' AND SP_ID = $spid AND L_GIA = $gia AND L_SDT = '$sdt'";
 				echo $sql;
+				$dong = mysqli_num_rows(mysqli_query($conn,$sql));
+				$rs = mysqli_fetch_array(mysqli_query($conn,$sql),MYSQLI_ASSOC);
+				if($dong > 0)
+					{
+						$sl_update = $rs['L_SOLUONG'] + $sl;
+						$sql = "UPDATE LENH SET L_SOLUONG = $sl_update WHERE L_TEN = 'mua' AND L_SDT = '$sdt' AND SP_ID = $spid AND L_GIA = $gia";
+						mysqli_query($conn,$sql);
+							echo "co dang lenh roi";
+					}
+				else
+				{
+					echo "Chưa khớp lệnh được";
+					mysqli_set_charset($conn,'UTF8');
+					mysqli_query($conn,"INSERT INTO LENH(L_TEN,SP_ID,L_SDT,SP_TEN,L_SOLUONG,L_GIA,L_TONGTIEN,L_DIACHIGIAO,L_LOINHAN) VALUES ('mua',$spid,'$sdt','$spten',$sl,$gia,$thanhtien,'$diachi','$loinhan')");
+					echo $sql;
+				}
 			}
 			mysqli_query($conn,"DELETE FROM LENH WHERE L_TEN = 'ban' AND L_SOLUONG <=0");
 		}
@@ -201,10 +215,24 @@ if(isset($_POST['sldatlenh'])){
 				}
 				else
 				{
+					$sql = "SELECT * FROM LENH WHERE L_TEN='ban' AND SP_ID = $spid AND L_GIA = $gia AND L_SDT = '$sdt'";
+				echo $sql;
+				$dong = mysqli_num_rows(mysqli_query($conn,$sql));
+				$rs = mysqli_fetch_array(mysqli_query($conn,$sql),MYSQLI_ASSOC);
+				if($dong > 0)
+					{
+						$sl_update = $rs['L_SOLUONG'] + $sl;
+						$sql = "UPDATE LENH SET L_SOLUONG = $sl_update WHERE L_TEN = 'ban' AND L_SDT = '$sdt' AND SP_ID = $spid AND L_GIA = $gia";
+						mysqli_query($conn,$sql);
+							echo "co dang lenh ban roi";
+					}
+				else
+				{
 					echo "Chưa khớp lệnh được";
 					mysqli_set_charset($conn,'UTF8');
 					mysqli_query($conn,"INSERT INTO LENH(L_TEN,SP_ID,L_SDT,SP_TEN,L_SOLUONG,L_GIA,L_TONGTIEN,L_DIACHIGIAO,L_LOINHAN) VALUES ('ban',$spid,'$sdt','$spten',$sl,$gia,$thanhtien,'$diachi','$loinhan')");
 					echo $sql;
+				}
 				}
 			}
 		}
