@@ -130,11 +130,11 @@
 }
 <?php 
    include('../../config/connect.php');
-  if(isset($_GET['sdt'])){
-    $sdt = $_GET['sdt'];
-    mysqli_set_charset($conn,"UTF8");
-    $usr = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM USER WHERE USR_SDT = $sdt"),MYSQLI_ASSOC);
-  }
+  //if(isset($_GET['manhom'])){
+//     $manhom = $_GET['manhom'];
+//     mysqli_set_charset($conn,"UTF8");
+//     $nsp = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM NHOMSANPHAM WHERE NSP_ID = $manhom"),MYSQLI_ASSOC);
+ // }
  ?>
 </style>
 <!DOCTYPE html>
@@ -153,28 +153,21 @@
       vertical-align: middle;
     }
   </style>
-  <h1 style="text-align: center;" class="box-title">CHỈNH SỬA THÔNG TIN NGƯỜI DÙNG</h1>
-  <h2 style="text-align: center; font-weight: 800; color: red;">(<?php echo $sdt; ?>)</h2>
+  <h1 style="text-align: center;" class="box-title">THÊM NHÓM SẢN PHẨM MỚI</h1>
   <form role="form">
   <div class="row">
     <div class="col-md-6">         
       <div class="box-body">
         <div class="form-group">
-           <label for="exampleInputEmail1">Email</label>
-          <input type="email" class="form-control" id="ipemail" placeholder="Nhập Email" value="<?php echo $usr['USR_EMAIL']; ?>">
-        </div> <label for="exampleInputEmail1">Họ và tên</label>
+           <label for="exampleInputEmail1">Tên nhóm sản phẩm</label>
+          <input type="email" class="form-control" id="ipten" placeholder="Nhập tên nhóm sản phẩm">
+        </div> 
         <div class="form-group">
           
-          <input style="width: 49%; margin-right: 1%; float: left;" type="text" class="form-control" id="ipho" placeholder="Nhập họ" value="<?php echo $usr['USR_HO']; ?>">
-          <input style="width: 49%; margin-left: 1%; float: left;" type="text" class="form-control" id="ipten" placeholder="Nhập tên" value="<?php echo $usr['USR_TEN']; ?>">
+         
         </div>
         <div class="form-group">
-          <label for="exampleInputFile">Giới tính</label>
-          <select class="form-control" id="slgioitinh">
-            <option value="Nam"> Nam</option>
-            <option value="Nữ"> Nữ</option>
-            <option value="Không Xác định"> Không xác định</option>
-          </select>
+         
         </div>
       </div>
     </div>
@@ -182,39 +175,18 @@
     <div class="col-md-6">         
       <div class="box-body">
         <div class="form-group">
-          <label for="exampleInputEmail1">Hợp tác xã</label>
-          <select class="form-control" id="slhtx">
-            <?php
-            mysqli_set_charset($conn,"UTF8");
-              $htx = mysqli_query($conn,"SELECT HTX_ID,HTX_TEN FROM HOPTACXA");
-              while($row = mysqli_fetch_array($htx,MYSQLI_ASSOC)){
-            ?>
-            <option value="<?php echo $row['HTX_ID']; ?>"><?php echo $row['HTX_TEN']; ?></option>
-            <?php
-          }
-            ?>
-          </select>
+          <label for="exampleInputEmail1">Mô tả</label>
+          <input type="text" class="form-control" id="ipmota" placeholder="Nhập mô tả" />
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Cấp quyền</label>
-          <select class="form-control" id="slquyen">
-          <?php
-            mysqli_set_charset($conn,"UTF8");
-              $quyen= mysqli_query($conn,"SELECT Q_ID,Q_TEN FROM QUYEN");
-              while($row = mysqli_fetch_array($quyen,MYSQLI_ASSOC)){
-                ?>
-                 <option value="<?php echo $row['Q_ID']; ?>"><?php echo $row['Q_TEN']; ?></option>
-            <?php
-          }
-          ?>
-          </select>
+          
         </div>
       </div>
       </div>
     </div>
 
 <div class="col-md-12" style="text-align: center;">
-   <button style="width: 100px; margin-right: 2%;" id="btnUpdate" type="button" class="btn btn-primary">Cập nhật</button>
+   <button style="width: 100px; margin-right: 2%;" id="btnthem_nsp" type="button" class="btn btn-primary">Thêm</button>
     <button  style="width: 100px; margin-left: 2%;" class="btn btn-danger btnClose">Trở lại</button>
 </div>
      
@@ -256,18 +228,14 @@
       HideDialog();
       e.preventDefault();
     });
-    $("#btnUpdate").click(function(){
-        var mail = $("#ipemail").val();
-        var ho = $("#ipho").val();
+    $("#btnthem_nsp").click(function(){
         var ten = $("#ipten").val();
-        var gt = $("#slgioitinh").val();
-        var htx = $("#slhtx").val();
-        var quyen = $("#slquyen").val();
-        var sdt = <?php echo $sdt; ?>;
+        var mota = $("#ipmota").val();
+        var flat = "0";
        if(confirm("Bạn có chắc chắn đã điền đầy đủ?")){
-        if(mail=="" || ho=="" || ten=="") alert("Dự liều chưa đủ! Vui lòng kiểm tra lại thông tin!");
+        if(ten=="" || mota=="") alert("Dữ liệu chưa đủ! Vui lòng kiểm tra lại thông tin!");
           else{
-               $.post("xuly/xuly_update.php", {email: mail,ho: ho,ten: ten,gt: gt,htx: htx,quyen: quyen,sdt: sdt}, function(data){
+               $.post("xuly/xuly_them_usr.php", {them_nsp: flat,ten: ten, mota: mota}, function(data){
                             $("#pop").html(data);
                         });
           }
@@ -279,6 +247,6 @@ function HideDialog()
 {
   $("#bkgOverlay").fadeOut(200);
   $("#delayedPopup").fadeOut(100);
-  $("#cho_id").load("trang/danhsach_nguoidung.php");
+  $("#show").load("trang/danhsach_nhomsanpham.php");
 }
 </script>

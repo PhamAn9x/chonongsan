@@ -9,7 +9,8 @@
   padding: 13px;
 }
 </style>
-<div>
+<div id="cho_id">
+<div> 
 <article style="width: 98%; margin-left: 1%; padding-top: 3%;">
   <main  id="table" class="table-editable">
     
@@ -20,12 +21,12 @@
                 
         <div class="row-fluid">
           <div class="col-md-1" style="text-align: left;">
-           <button title="Xóa mục đã chọn" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i>
+           <button id="del_nsp" title="Xóa mục đã chọn" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i>
           </div>
           <div class="col-md-10">
             <input type="text" class="form-control page-filter" placeholder="Tìm kiếm.." />
           </div>
-           <div class="col-md-1" ><button class="btn btn-success"><i style="font-size: 20px;" class="fa fa-plus-square"></i></button></div>
+           <div class="col-md-1" ><button id="btn_them_nsp" class="btn btn-success"><i style="font-size: 20px;" class="fa fa-plus-square"></i></button></div>
         </div>
         </div>
       </div>
@@ -58,37 +59,56 @@
         <tbody>
           <?php
           include('../../config/connect.php');
-            $sql = "SELECT * FROM NHOMSANPHAM";
-            mysqli_set_charset($conn,"UTF8");
-            $rs = mysqli_query($conn,$sql);
-            $i =1;
-            while($row = mysqli_fetch_array($rs,MYSQLI_ASSOC)){
-          ?>
-          <tr>
-            <td><input value="<?php echo $row['NSP_ID']; ?>" type="checkbox" class="row-check" /></td>
-            <td><?php echo $i; ?></td>
-            <td contenteditable="false"><?php echo $row['NSP_ID']; ?></td>
-            <td contenteditable="false"><?php echo $row['NSP_TEN']; ?></td>
-            <?php 
+          $sql = "SELECT * FROM NHOMSANPHAM";
+          mysqli_set_charset($conn,"UTF8");
+          $rs = mysqli_query($conn,$sql);
+          $i =1;
+          while($row = mysqli_fetch_array($rs,MYSQLI_ASSOC)){
+            ?>
+            <tr>
+              <td><input name="checkbox_nsp" value="<?php echo $row['NSP_ID']; ?>" type="checkbox" class="row-check" /></td>
+              <td><?php echo $i; ?></td>
+              <td contenteditable="false"><?php echo $row['NSP_ID']; ?></td>
+              <td contenteditable="false"><?php echo $row['NSP_TEN']; ?></td>
+              <?php 
               $nsp = $row['NSP_ID'];
               $count = mysqli_num_rows(mysqli_query($conn,"SELECT COUNT(NSP_ID) as sl FROM SANPHAM WHERE NSP_ID = $nsp GROUP BY NSP_ID"));
               $sl = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(NSP_ID) as sl FROM SANPHAM WHERE NSP_ID = $nsp GROUP BY NSP_ID"));
-            ?>
-            <td><?php if($count>0) echo $sl[0]; else echo "0"; ?> </td>
-            <td><?php echo $row['NSP_MOTA']; ?></td>
-              <input style="display: none;" type="text" id="edit<?php echo $row['NSP_ID']; ?>">
-             <td><button type="button" class="btn btn-success row-edit"><i style="font-size: 20px;" class="fa fa-edit"></i></button></td>
-             <input style="display: none;" type="text" id="xoa<?php echo $row['NSP_ID']; ?>">
-            <td><button type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i></button></td>
-          </tr>
-          <?php
-          $i++;
-        }
+              ?>
+              <td><?php if($count>0) echo $sl[0]; else echo "0"; ?> </td>
+              <td><?php echo $row['NSP_MOTA']; ?></td>
+              <input style="display: none;" type="text" id="edit<?php echo $row['NSP_ID']; ?>" value="<?php echo $row['NSP_ID']; ?>">
+              <td><button id="btncapnhat<?php echo $row['NSP_ID']; ?>" type="button" class="btn btn-success row-edit"><i style="font-size: 20px;" class="fa fa-edit"></i></button></td>
+              <input style="display: none;" type="text" id="xoa<?php echo $row['NSP_ID']; ?>" value="<?php echo $row['NSP_ID']; ?>">
+              <td><button id="btnxoa<?php echo $row['NSP_ID']; ?>" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i></button></td>
+            </tr>
+
+                    <script type="text/javascript">
+                      $(document).ready(function(){
+                        $("#btnxoa<?php echo $row['NSP_ID']; ?>").click(function(){
+                          var nsp_id = $("#xoa<?php echo $row['NSP_ID']; ?>").val();
+                          if(confirm("Bạn có chắc muốn mục đã chọn?")){
+                           $.post("xuly/xuly_xoa.php", {xoa_nsp: nsp_id}, function(data){
+                            $("#cho_id").html(data);
+                          });
+                         }
+                        });
+                        $("#btncapnhat<?php echo $row['NSP_ID']; ?>").click(function(){
+                            var nsp_id = $("#edit<?php echo $row['NSP_ID']; ?>").val();
+                            $("#show").load("trang/popup_edit_nsp.php?manhom="+nsp_id);
+                        });
+                      });
+                    </script>
+
+
+            <?php
+            $i++;
+          }
           ?>
         </tbody>
       </table>
     </div>
-    
+    </div>
   </main>
 </article>
 </div>
@@ -205,7 +225,7 @@ $(document).on('change', 'table thead [type="checkbox"]', function(e){
 <script>
   $(function () {
     $('#example2').DataTable({
-      'paging'      : true,
+      'paging'      : false,
       'pageLength'  : 5,
       'lengthChange': false,
       'searching'   : false,
@@ -227,4 +247,27 @@ $(document).on('change', 'table thead [type="checkbox"]', function(e){
     $(".dataTables_info").html('');
   });
 </script>
+<script type="text/javascript">
+  $(document).ready(function(){
+       $("#del_nsp").click(function(){
+     var selectednsp = new Array();
+     $('input[name="checkbox_nsp"]:checked').each(function() {
+      selectednsp.push(this.value);
+    });
+     if(selectednsp.length == 0){
+      alert("Vui lòng chọn một mục!");
+      }else{ 
+      if(confirm("Bạn có chắc muốn xóa các mục đã chọn?")){
+           $.post("xuly/xuly_xoa.php", {xoa_multi_nsp: selectednsp}, function(data){
+            $("#cho_id").html(data);
+          });
+   }
+   }
+   });
 
+       $("#btn_them_nsp").click(function(){
+          $("#show").load("trang/popup_them_nsp.php");
+       });
+
+  });
+</script>

@@ -20,13 +20,16 @@
           <div class="panel-body">
 
             <div class="row-fluid">
-              <div class="col-md-1" style="text-align: left;">
-               <button id="del_usr" title="Xóa mục đã chọn" type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i>
+              <div class="col-md-2" style="text-align: left;">
+               <button style="float: left; margin-right: 1%;" id="del_usr" title="Xóa mục đã chọn" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i></button>
+                 <button style="float: left;margin-right: 1%;" id="btn_block_multi" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-remove"></i></button>
+                  <button style="float: left;margin-right: 1%;" id="btn_kichhoat_multi" class="btn btn-success"><i style="font-size: 20px;" class="fa fa-check-circle-o"></i></button>
+
                </div>
-               <div class="col-md-10">
+               <div class="col-md-8">
                 <input type="text" class="form-control page-filter" placeholder="Tìm kiếm.." />
               </div>
-              <div id="add_usr" class="col-md-1" ><button class="btn btn-success"><i class="fa fa-plus-square"></i></button></div>
+              <div style="text-align: center;" title="Thêm người dùng mới" id="add_usr" class="col-md-2" ><button class="btn btn-success"><i style="font-size: 20px;"  class="fa fa-plus-square"></i></button></div>
             </div>
           </div>
         </div>
@@ -293,8 +296,9 @@ $(document).on('change', 'table thead [type="checkbox"]', function(e){
 
 <script type="text/javascript">
   $(document).ready(function(){
+
     $("#add_usr").click(function(){
-      $("#cho_id").load('trang/popup_them_usr.php?sdt=78899');
+       $("#cho_id").load("trang/popup_them_usr.php");
     });
 
 
@@ -313,5 +317,38 @@ $(document).on('change', 'table thead [type="checkbox"]', function(e){
    }
 
    });
+
+    $("#btn_kichhoat_multi").click(function(){
+     var selectedLanguage = new Array();
+     $('input[name="checkbox_usr"]:checked').each(function() {
+      selectedLanguage.push(this.value);
+    });
+     if(selectedLanguage.length == 0){
+      alert("Vui lòng chọn một mục!");
+      }else
+      if(confirm("Bạn có chắc muốn kích hoạt các tài khoản đã chọn?")){
+     $.post("xuly/xuly_xoa.php", {kichhoat_multi: selectedLanguage}, function(data){
+      $("#cho_id").html(data);
+    });
+   }
+
+   });
+
+    $("#btn_block_multi").click(function(){
+     var selectedLanguage = new Array();
+     $('input[name="checkbox_usr"]:checked').each(function() {
+      selectedLanguage.push(this.value);
+    });
+     if(selectedLanguage.length == 0){
+      alert("Vui lòng chọn một mục!");
+      }else
+      if(confirm("Bạn có chắc muốn khóa các tài khoản đã chọn?")){
+     $.post("xuly/xuly_xoa.php", {block_multi: selectedLanguage}, function(data){
+      $("#cho_id").html(data);
+    });
+   }
+
+   });
+
   });
 </script>

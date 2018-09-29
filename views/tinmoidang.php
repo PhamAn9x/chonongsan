@@ -25,7 +25,7 @@
 <?php
 	include("config/connect.php");
 	mysqli_set_charset($conn, 'UTF8');
-	$sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM sanpham as sp ORDER BY sp.SP_ID DESC LIMIT 5";
+	$sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM sanpham as sp WHERE SP_TRANGTHAI = 1 ORDER BY sp.SP_ID DESC LIMIT 5";
 	$result = mysqli_query($conn,$sql);
 	while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 ?>

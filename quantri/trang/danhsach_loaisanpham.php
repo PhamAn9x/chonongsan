@@ -20,12 +20,12 @@
                 
         <div class="row-fluid">
           <div class="col-md-1" style="text-align: left; ">
-           <button title="Xóa mục đã chọn" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i>
+           <button id="del_lsp" title="Xóa mục đã chọn" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i>
           </div>
           <div class="col-md-10">
             <input type="text" class="form-control page-filter" placeholder="Tìm kiếm.." />
           </div>
-         <div class="col-md-1" ><button class="btn btn-success"><i style="font-size: 20px;" class="fa fa-plus-square"></i></button></div>
+         <div class="col-md-1" ><button id="them_lsp" class="btn btn-success"><i style="font-size: 20px;" class="fa fa-plus-square"></i></button></div>
         </div>
       </div>
 
@@ -64,7 +64,7 @@
             while($row = mysqli_fetch_array($rs,MYSQLI_ASSOC)){
           ?>
           <tr>
-            <td><input value="<?php echo $row['LSP_ID']; ?>" type="checkbox" class="row-check" /></td>
+            <td><input name="checkbox_lsp" value="<?php echo $row['LSP_ID']; ?>" type="checkbox" class="row-check" /></td>
             <td><?php echo $i; ?></td>
             <td contenteditable="false"><?php echo $row['LSP_ID']; ?></td>
             <td contenteditable="false"><?php echo $row['LSP_TEN']; ?></td>
@@ -75,11 +75,27 @@
             ?>
             <td><?php if($count>0) echo $sl[0]; else echo "0"; ?> </td>
             <td><?php echo $row['LSP_MOTA']; ?></td>
-              <input style="display: none;" type="text" id="edit<?php echo $row['LSP_ID']; ?>">
-             <td><button type="button" class="btn btn-success row-edit"><i style="font-size: 20px;" class="fa fa-edit"></i></button></td>
-             <input style="display: none;" type="text" id="xoa<?php echo $row['LSP_ID']; ?>">
-            <td><button type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i></button></td>
+              <input style="display: none;" value="<?php echo $row['LSP_ID']; ?>" type="text" id="edit<?php echo $row['LSP_ID']; ?>">
+             <td><button id="btn_edit<?php echo $row['LSP_ID']; ?>" type="button" class="btn btn-success row-edit"><i style="font-size: 20px;" class="fa fa-edit"></i></button></td>
+             <input style="display: none;" value="<?php echo $row['LSP_ID']; ?>" type="text" id="xoa<?php echo $row['LSP_ID']; ?>">
+            <td><button id="btn_xoa<?php echo $row['LSP_ID']; ?>" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i></button></td>
           </tr>
+          <script type="text/javascript">
+            $(document).ready(function(){
+                $("#btn_edit<?php echo $row['LSP_ID']; ?>").click(function(){
+                    var lsp_id = $("#edit<?php echo $row['LSP_ID']; ?>").val();
+                    $("#show").load("trang/popup_edit_lsp.php?lsp="+lsp_id);
+                });
+                 $("#btn_xoa<?php echo $row['LSP_ID']; ?>").click(function(){
+                    var lsp_id = $("#xoa<?php echo $row['LSP_ID']; ?>").val();
+                          if(confirm("Bạn có chắc muốn mục đã chọn?")){
+                           $.post("xuly/xuly_xoa.php", {xoa_lsp: lsp_id}, function(data){
+                            $("#show").html(data);
+                          });
+                         }
+                });
+            });
+          </script>
           <?php
           $i++;
         }
@@ -204,7 +220,7 @@ $(document).on('change', 'table thead [type="checkbox"]', function(e){
 <script>
   $(function () {
     $('#example2').DataTable({
-      'paging'      : true,
+      'paging'      : false,
       'pageLength'  : 5,
       'lengthChange': false,
       'searching'   : false,
@@ -224,6 +240,34 @@ $(document).on('change', 'table thead [type="checkbox"]', function(e){
     $("#example2_previous").html('<a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Trở lại</a>');
     $("#example2_next").html('<a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">Tiếp theo</a>');
     $(".dataTables_info").html('');
+  });
+</script>
+<script type="text/javascript">
+  
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+       $("#del_lsp").click(function(){
+     var selectedlsp = new Array();
+     $('input[name="checkbox_lsp"]:checked').each(function() {
+      selectedlsp.push(this.value);
+    });
+     if(selectedlsp.length == 0){
+      alert("Vui lòng chọn một mục!");
+      }else{ 
+      if(confirm("Bạn có chắc muốn xóa các mục đã chọn?")){
+           $.post("xuly/xuly_xoa.php", {xoa_multi_lsp: selectedlsp}, function(data){
+            $("#cho_id").html(data);
+          });
+   }
+   }
+   });
+
+       $("#them_lsp").click(function(){
+          $("#show").load("trang/popup_them_lsp.php");
+       });
+
   });
 </script>
 

@@ -9,8 +9,10 @@
   padding: 13px;
 }
 </style>
+<div id="cho_id">
 <div>
 <article style="width: 98%; margin-left: 1%; padding-top: 3%;">
+
   <main  id="table" class="table-editable">
     
     <div class="panel panel-default">
@@ -19,14 +21,14 @@
       <div class="panel-body">
                 
         <div class="row-fluid">
-          <div class="col-md-1" style="text-align: left;">
-           <button title="Xóa mục đã chọn" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i>
+          <div style="text-align: center;" class="col-md-2" style="text-align: left;">
+           <button id="sp_xoa_multi" title="Xóa mục đã chọn" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i></button>
+            <button id="btn_khoa_multi" title="Khóa sản phẩm" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-remove"></i></button>
+            <button id="btn_duyet_multi" title="Duyệt sản phẩm" class="btn btn-success"><i style="font-size: 20px;" class="fa fa-check-circle-o"></i></button>
           </div>
           <div class="col-md-10">
             <input type="text" class="form-control page-filter" placeholder="Tìm kiếm.." />
           </div>
-            <div class="col-md-1" ><button class="btn btn-success"><i style="font-size: 20px;" class="fa fa-plus-square"></i></button></div>
-        </div>
         </div>
       </div>
 
@@ -51,9 +53,9 @@
             <th>Tên sản phẩm</th>
             <th>Hợp tác xã</th>
             <th>Xuất xứ</th>
-            <th>Trạng thái<br /> duyệt</th>
             <th>Số lệnh đặt<br /> mua - bán</th>
-            <th style="width:20px;">Cập nhật</th>
+            <th>Chi tiết</th>
+            <th>Trạng thái<br /> duyệt</th>
             <th style="width:20px;">Xóa</th>
 
           </tr>
@@ -68,7 +70,7 @@
             while($row = mysqli_fetch_array($rs,MYSQLI_ASSOC)){
           ?>
           <tr>
-            <td><input value="<?php echo $row['SP_ID']; ?>" type="checkbox" class="row-check" /></td>
+            <td><input name="checkbox_sp" value="<?php echo $row['SP_ID']; ?>" type="checkbox" class="row-check" /></td>
             <td><?php echo $i; ?></td>
             <td contenteditable="false"><?php echo $row['SP_ID']; ?></td>
             <td contenteditable="false"><?php echo $row['SP_TEN']; ?></td>
@@ -78,30 +80,75 @@
             ?>
             <td><?php echo $htx[0]; ?></td>
             <td><?php echo $row['SP_DIACHI'];?></td>
-            <?php
-              if($row['SP_TRANGTHAI'] == 0){
-            ?>
-
-            <td>
-              <span style="display: none;">chưa duyệt</span>
-              <button title="Duyệt sản phẩm" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-remove"></i></button></td>
             
-            <?php
-              } else{
-              ?>
-            <td>
-                <span style="display: none;">đã duyệt</span>
-              <button title="Khóa sản phẩm" class="btn btn-success"><i style="font-size: 20px;" class="fa fa-check-circle-o"></i></button></td>
-              <?php
-            }
+             <?php
             $id_sp = $row['SP_ID'];
               $sl_dat = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(SP_ID) FROM LENH WHERE SP_ID = $id_sp"));
             ?>
             <td><?php echo $sl_dat[0]; ?></td>
-             <td><button type="button" class="btn btn-success  row-edit"><i style="font-size: 20px;" class="fa fa-edit"></i></button></td>
+            <td>
+              <input style="display: none;" type="text" id="chitiet<?php echo $row['SP_ID']; ?>" value="<?php echo $row['SP_ID']; ?>">
+              <button id="btn_chitiet<?php echo $row['SP_ID']; ?>" class="btn btn-info" ><i style="font-size: 20px;" class="fa fa-question-circle-o"></i></button>
+            </td>
+            <?php
+              if($row['SP_TRANGTHAI'] == 0){
+            ?>
+              
+            <td>
+              <span style="display: none;">chưa duyệt</span>
+              <input style="display: none;" type="text" id="duyet<?php echo $row['SP_ID']; ?>" value="<?php echo $row['SP_ID']; ?>">
+              <button id="btn_duyet<?php echo $row['SP_ID']; ?>" title="Duyệt sản phẩm" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-remove"></i></button></td>
             
-            <td><button type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i></button></td>
+            <?php
+              } else if($row['SP_TRANGTHAI'] == 1){
+              ?>
+            <td>
+                <span style="display: none;">đã duyệt</span>
+                  <input style="display: none;" type="text" id="khoa<?php echo $row['SP_ID']; ?>" value="<?php echo $row['SP_ID']; ?>">
+              <button id="btn_khoa<?php echo $row['SP_ID']; ?>" title="Khóa sản phẩm" class="btn btn-success"><i style="font-size: 20px;" class="fa fa-check-circle-o"></i></button></td>
+              <?php
+            }else {
+              ?>
+                  
+                  <td>
+                <span style="display: none;">Không chấp nhận</span>
+                  <input style="display: none;" type="text" id="khongchapnhan<?php echo $row['SP_ID']; ?>" value="<?php echo $row['SP_ID']; ?>">
+              <button id="btn_khongchapnhan<?php echo $row['SP_ID']; ?>" title="Khóa sản phẩm" class="btn btn-warning"><i style="font-size: 20px;" class="fa fa-remove"></i></button></td>
+
+              <?php
+            }
+            ?>
+            <input style="display: none;" type="text" id="sp_xoa<?php echo $row['SP_ID']; ?>" value="<?php echo $row['SP_ID']; ?>">
+            <td><button id="btn_sp_xoa<?php echo $row['SP_ID']; ?>" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i></button></td>
           </tr>
+          <script type="text/javascript">
+            $(document).ready(function(){
+                $("#btn_duyet<?php echo $row['SP_ID']; ?>").click(function(){
+                    var sp_id = $("#duyet<?php echo $row['SP_ID']; ?>").val();
+                           $.post("xuly/xuly_update.php", {duyet_sp: sp_id}, function(data){
+                            $("#cho_id").html(data);
+                          });
+                });
+                $("#btn_khoa<?php echo $row['SP_ID']; ?>").click(function(){
+                    var sp_id = $("#khoa<?php echo $row['SP_ID']; ?>").val();
+                     $.post("xuly/xuly_update.php", {khoa_sp: sp_id}, function(data){
+                            $("#cho_id").html(data);
+                          });
+                });
+                 $("#btn_sp_xoa<?php echo $row['SP_ID']; ?>").click(function(){
+                    var sp_id = $("#sp_xoa<?php echo $row['SP_ID']; ?>").val();
+                    if(confirm("Bạn có chắc muốn xóa?")){
+                    $.post("xuly/xuly_xoa.php", {xoa_sp: sp_id}, function(data){
+                            $("#cho_id").html(data);
+                          });
+                  }
+                });
+                 $("#btn_chitiet<?php echo $row['SP_ID']; ?>").click(function(){
+                    var sp_id = $("#chitiet<?php echo $row['SP_ID']; ?>").val();
+                    $("#show").load("trang/popup_chitiet_sp.php?sp_id="+sp_id);
+                });
+            });
+          </script>
           <?php
           $i++;
         }
@@ -109,7 +156,7 @@
         </tbody>
       </table>
     </div>
-    
+    </div>
   </main>
 </article>
 </div>
@@ -226,7 +273,7 @@ $(document).on('change', 'table thead [type="checkbox"]', function(e){
 <script>
   $(function () {
     $('#example2').DataTable({
-      'paging'      : true,
+      'paging'      : false,
       'pageLength'  : 5,
       'lengthChange': false,
       'searching'   : false,
@@ -249,3 +296,53 @@ $(document).on('change', 'table thead [type="checkbox"]', function(e){
   });
 </script>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#sp_xoa_multi").click(function(){
+         var selectedsp = new Array();
+     $('input[name="checkbox_sp"]:checked').each(function() {
+      selectedsp.push(this.value);
+    });
+     if(selectedsp.length == 0){
+      alert("Vui lòng chọn một mục!");
+      }else
+      if(confirm("Bạn có chắc muốn xóa các sản phẩm đã chọn?")){
+     $.post("xuly/xuly_xoa.php", {sp_xoa_multi: selectedsp}, function(data){
+      $("#cho_id").html(data);
+    });
+   }
+    });
+
+
+    $("#btn_khoa_multi").click(function(){
+         var selectedsp = new Array();
+     $('input[name="checkbox_sp"]:checked').each(function() {
+      selectedsp.push(this.value);
+    });
+     if(selectedsp.length == 0){
+      alert("Vui lòng chọn một mục!");
+      }else
+      if(confirm("Bạn có chắc muốn khóa các sản phẩm đã chọn?")){
+     $.post("xuly/xuly_xoa.php", {sp_khoa_multi: selectedsp}, function(data){
+      $("#cho_id").html(data);
+    });
+   }
+    });
+
+
+    $("#btn_duyet_multi").click(function(){
+         var selectedsp = new Array();
+     $('input[name="checkbox_sp"]:checked').each(function() {
+      selectedsp.push(this.value);
+    });
+     if(selectedsp.length == 0){
+      alert("Vui lòng chọn một mục!");
+      }else
+      if(confirm("Bạn có chắc muốn duyệt các sản phẩm đã chọn?")){
+     $.post("xuly/xuly_xoa.php", {sp_duyet_multi: selectedsp}, function(data){
+      $("#cho_id").html(data);
+    });
+   }
+    });
+  });
+</script>

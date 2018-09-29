@@ -1,4 +1,33 @@
 <style type="text/css">
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    opacity: 1;
+    transition: opacity 0.6s;
+    margin-bottom: 15px;
+}
+
+.alert.success {background-color: #4CAF50;}
+.alert.info {background-color: #2196F3;}
+.alert.warning {background-color: #ff9800;}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+</style>
+<style type="text/css">
 .instructions {
   text-align: center;
   font-size: 20px;
@@ -32,11 +61,11 @@
       display: none;
       position: fixed;
       width: auto;
-      max-width: 720px;
+      max-width: 900px;
       height: 460px;
       top: 50%;
       left: 50%;
-      margin-left: -260px;
+      margin-left: -350px;
       margin-top: -230px;
       background-color: #efefef;
       border: 2px solid #333;
@@ -130,11 +159,6 @@
 }
 <?php 
    include('../../config/connect.php');
-  if(isset($_GET['sdt'])){
-    $sdt = $_GET['sdt'];
-    mysqli_set_charset($conn,"UTF8");
-    $usr = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM USER WHERE USR_SDT = $sdt"),MYSQLI_ASSOC);
-  }
  ?>
 </style>
 <!DOCTYPE html>
@@ -153,20 +177,26 @@
       vertical-align: middle;
     }
   </style>
-  <h1 style="text-align: center;" class="box-title">CHỈNH SỦA THÔNG TIN NGƯỜI DÙNG</h1>
-  <h2 style="text-align: center; font-weight: 800; color: red;">(<?php echo $sdt; ?>)</h2>
+  <h1 style="text-align: center;" class="box-title">THÊM NGƯỜI DÙNG MỚI</h1>
+  <div id="canhbao"></div>
   <form role="form">
   <div class="row">
     <div class="col-md-6">         
       <div class="box-body">
+         <div class="form-group">
+           <label for="exampleInputEmail1">Số điện thoại</label>
+           <span id="alert_sdt"></span>
+          <input type="text" class="form-control" id="ipsdt" placeholder="Nhập số điện thoại" value="">
+        </div>
         <div class="form-group">
            <label for="exampleInputEmail1">Email</label>
-          <input type="email" class="form-control" id="ipemail" placeholder="Nhập Email" value="<?php echo $usr['USR_EMAIL']; ?>">
-        </div> <label for="exampleInputEmail1">Họ và tên</label>
+          <input type="email" class="form-control" id="ipemail" placeholder="Nhập Email" value="">
+        </div> 
+        <label for="exampleInputEmail1">Họ và tên</label>
         <div class="form-group">
           
-          <input style="width: 49%; margin-right: 1%; float: left;" type="text" class="form-control" id="ipho" placeholder="Nhập họ" value="<?php echo $usr['USR_HO']; ?>">
-          <input style="width: 49%; margin-left: 1%; float: left;" type="text" class="form-control" id="ipten" placeholder="Nhập tên" value="<?php echo $usr['USR_TEN']; ?>">
+          <input style="width: 49%; margin-right: 1%; float: left;" type="text" class="form-control" id="ipho" placeholder="Nhập họ" value="">
+          <input style="width: 49%; margin-left: 1%; float: left;" type="text" class="form-control" id="ipten" placeholder="Nhập tên" value="">
         </div>
         <div class="form-group">
           <label for="exampleInputFile">Giới tính</label>
@@ -209,12 +239,34 @@
           ?>
           </select>
         </div>
+        <label for="exampleInputEmail1">Địa chỉ</label>
+        <div class="form-group"> 
+          <select style="width: 32%; float: left; margin-left: 1%;" class="form-control" id="sltinh">
+            <option value=""> Chọn tỉnh</option>
+            <?php
+          mysqli_set_charset($conn, 'UTF8');
+          $sql = "SELECT * FROM tinh_thanh";
+          $result = mysqli_query($conn,$sql);
+          while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+           ?>
+           <option value=<?php echo $rows['id_tinh']; ?>> <?php echo $rows['TINH_NAME']; ?></option>
+           <?php 
+         }
+         ?>
+          </select>
+          <select style="width: 32%; float: left; margin-left: 1%;" class="form-control" id="slhuyen">
+            <option value=""> Chọn huyện</option>
+          </select>
+          <select style="width: 32%; float: left; margin-left: 1%;" class="form-control" id="slxa">
+            <option value=""> Chọn xã</option>
+          </select>
+        </div> 
       </div>
       </div>
     </div>
 
 <div class="col-md-12" style="text-align: center;">
-   <button style="width: 100px; margin-right: 2%;" id="btnUpdate" type="button" class="btn btn-primary">Cập nhật</button>
+   <button style="width: 100px; margin-right: 2%;" id="btnthem" type="button" class="btn btn-primary">Thêm</button>
     <button  style="width: 100px; margin-left: 2%;" class="btn btn-danger btnClose">Trở lại</button>
 </div>
      
@@ -245,6 +297,70 @@
 <script type="text/javascript">
   $(document).ready(function ()
   {
+
+    $("#sltinh").blur(function(){
+      var id_tinh = $("#sltinh").val();
+      $.post("xuly/xuly_them_usr.php", {get_huyen: id_tinh}, function(data){
+        $("#slhuyen").html(data);
+      });
+    });
+
+     $("#slhuyen").blur(function(){
+      var id_huyen = $("#slhuyen").val();
+      $.post("xuly/xuly_them_usr.php", {get_xa: id_huyen}, function(data){
+        $("#slxa").html(data);
+      });
+    });
+    //   $("#ipsdt").keyup(function(){
+    //     var sdt = $("#ipsdt").val();
+    //     $("#alert_sdt").html(sdt);
+    //   // var id_huyen = $("#slhuyen").val();
+    //   // $.post("xuly/xuly_them_usr.php", {get_xa: id_huyen}, function(data){
+    //   //   $("#slxa").html(data);
+    //   // });
+    // });
+      $("#ipsdt").keyup(function(){
+        var sdt = $("#ipsdt").val();
+        if(sdt.length <10 || sdt.length >11){
+              $("#canhbao").html(' <div class="alert" style="position: absolute; z-index: 10; top:3px; height: 40px;padding-top: 8px; left: 270px;"><span class="closebtn">&times;</span>  <strong>Số điện thoại </strong>chưa hợp lệ vui lòng kiểm tra lại!</div>'); 
+        }else{
+             $.post("xuly/xuly_them_usr.php", {check_sdt: sdt}, function(data){
+        $("#canhbao").html(data);
+      });
+    }
+    });
+
+
+          $("#btnthem").click(function(){
+        var sdt = $("#ipsdt").val();
+        if(sdt==""){
+                $("#canhbao").html(' <div class="alert" style="position: absolute; z-index: 10; top:3px; height: 40px;padding-top: 8px; left: 270px;"><span class="closebtn">&times;</span>  <strong>Số điện thoại </strong>Không được rỗng!</div>'); 
+        }else
+        if(sdt.length <10 || sdt.length >11){
+              $("#canhbao").html(' <div class="alert" style="position: absolute; z-index: 10; top:3px; height: 40px;padding-top: 8px; left: 270px;"><span class="closebtn">&times;</span>  <strong>Số điện thoại </strong>chưa hợp lệ vui lòng kiểm tra lại!</div>'); 
+        }else{
+        var mail = $("#ipemail").val();
+        var ho = $("#ipho").val();
+        var ten = $("#ipten").val();
+        var gt = $("#slgioitinh").val();
+        var htx = $("#slhtx").val();
+        var quyen = $("#slquyen").val();
+        var tinh = $("#sltinh").val();
+        var huyen = $("#slhuyen").val();
+        var xa = $("#slxa").val();
+          if(mail == "" || ten =="" || ho=="" || tinh=="" || huyen=="" || xa==""){
+              alert("Chưa nhập đầy đủ thông tin!");
+          }else{
+              $.post("xuly/xuly_them_usr.php", {sdt: sdt, mail: mail, ho: ho, ten: ten,gt: gt, htx: htx,quyen: quyen, tinh: tinh, huyen: huyen, xa: xa}, function(data){
+             $("#canhbao").html(data);
+      });
+    }
+    }
+    });
+
+
+
+
     //Fade in delay for the background overlay (control timing here)
     $("#bkgOverlay").delay(200).fadeIn(200);
   //Fade in delay for the popup (control timing here)
@@ -256,23 +372,7 @@
       HideDialog();
       e.preventDefault();
     });
-    $("#btnUpdate").click(function(){
-        var mail = $("#ipemail").val();
-        var ho = $("#ipho").val();
-        var ten = $("#ipten").val();
-        var gt = $("#slgioitinh").val();
-        var htx = $("#slhtx").val();
-        var quyen = $("#slquyen").val();
-        var sdt = <?php echo $sdt; ?>;
-       if(confirm("Bạn có chắc chắn đã điền đầy đủ?")){
-        if(mail=="" || ho=="" || ten=="") alert("Dự liều chưa đủ! Vui lòng kiểm tra lại thông tin!");
-          else{
-               $.post("xuly/xuly_update.php", {email: mail,ho: ho,ten: ten,gt: gt,htx: htx,quyen: quyen,sdt: sdt}, function(data){
-                            $("#pop").html(data);
-                        });
-          }
-      }
-    });
+
   });
 //Controls how the modal popup is closed with the close button
 function HideDialog()
@@ -281,4 +381,41 @@ function HideDialog()
   $("#delayedPopup").fadeOut(100);
   $("#cho_id").load("trang/danhsach_nguoidung.php");
 }
+</script>
+<script>
+  $(document).ready(function(){
+    $("#canhbao").click(function(){
+      $("#canhbao").html("");
+
+          $("#ipsdt").keyup(function(){
+        var sdt = $("#ipsdt").val();
+        if(sdt.length <10 || sdt.length >11){
+              $("#canhbao").html(' <div class="alert" style="position: absolute; z-index: 10; top:3px; height: 40px;padding-top: 8px; left: 270px;"><span class="closebtn">&times;</span>  <strong>Số điện thoại </strong>chưa hợp lệ vui lòng kiểm tra lại!</div>'); 
+        }else{
+        var mail = $("#ipmail").val();
+        var ho = $("#ipho").val();
+        var ten = $("#ipten").val();
+        var gt = $("#slgioitinh").val();
+        var htx = $("#slhtx").val();
+        var quyen = $("#slquyen").val();
+        var tinh = $("#sltinh").val();
+        var huyen = $("#slhuyen").val();
+        var xa = $("#slxa").val();
+
+
+
+
+
+
+
+
+      $.post("xuly/xuly_them_usr.php", {check_sdt: sdt}, function(data){
+        $("#canhbao").html(data);
+      });
+    }
+    });
+    })
+
+  })
+
 </script>
