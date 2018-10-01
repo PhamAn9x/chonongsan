@@ -159,7 +159,7 @@ if(isset($_SESSION['user']) && isset($_SESSION['giaohang'])){
 	}
 	?>
 </div>
-<hr />
+<!-- <hr /> -->
 <div class="w3-row" style=" margin-left: 1%; width: 98%; margin-top: 1%; margin-bottom: 1%;">
 		<?php 
 if(isset($_GET['view']) != "dangnhap" && isset($_GET['view']) != "dangky"){
@@ -170,9 +170,9 @@ if(isset($_GET['view']) != "dangnhap" && isset($_GET['view']) != "dangky"){
 	<div class="w3-row" style=" margin-left: 4%; width: 98%; margin-top: 1%; margin-bottom: 1.5%;" >
 
 		<?php 
-		if(isset($_GET['view']) != "dangnhap" && isset($_GET['view']) != "dangky"){
+		// if(isset($_GET['view']) != "dangnhap" && isset($_GET['view']) != "dangky"){
 		include("views/banner_bar.php");
-	}
+	//}
 		?>
 	</div>
 	<!-- <div class="w3-row w3-col s3" style="width:24%;" >

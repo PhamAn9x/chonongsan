@@ -24,7 +24,7 @@
                 <div class="w3-col s6 ">
                     <?php
                     $sdt = $_SESSION['sdt'];
-                        $sql = "SELECT * FROM USER AS USR, TINH_THANH AS T, QUAN_HUYEN AS H, PHUONG_XA X WHERE USR_SDT = '$sdt' AND USR.ID_TINH = T.ID_TINH AND USR.ID_HUYEN = H.ID_HUYEN AND USR.ID_XA = X.ID_XA";
+                        $sql = "SELECT * FROM USER AS USR, tinh_thanh AS T, quan_huyen AS H, phuong_xa X WHERE USR_SDT = '$sdt' AND USR.ID_TINH = T.ID_TINH AND USR.ID_HUYEN = H.ID_HUYEN AND USR.ID_XA = X.ID_XA";
                         mysqli_set_charset($conn,"UTF8");
                         $rs = mysqli_fetch_array(mysqli_query($conn,$sql),MYSQLI_ASSOC);
                     ?>

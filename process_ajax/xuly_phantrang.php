@@ -26,7 +26,7 @@ function adddotstring($strNum) {
     mysqli_set_charset($conn, 'UTF8');
     $start = ($_SESSION['click']*8);
     if($_SESSION['click'] <= $id){
-    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM sanpham as sp limit $start,4";
+    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp limit $start,4";
     $result = mysqli_query($conn,$sql);
     while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC))
     {

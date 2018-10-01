@@ -36,7 +36,7 @@ function adddotstring($strNum) {
 			<?php 
  
     mysqli_set_charset($conn, 'UTF8');
-    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM sanpham as sp WHERE SP_TEN LIKE '%$key%' LIMIT 0,8";
+    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp WHERE SP_TEN LIKE '%$key%' LIMIT 0,8";
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) <1){
     	$hienxemthem = 1;
@@ -153,7 +153,7 @@ function adddotstring($strNum) {
  
  <div class="w3-col s12" style="text-align: center;">
     <?php
-        $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM sanpham as sp WHERE SP_TEN LIKE '%$key%'"));
+        $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM SANPHAM as sp WHERE SP_TEN LIKE '%$key%'"));
         $phan_trang = ceil(($sql_trang-8)/8);
      ?>
      <div id="nut">
@@ -232,7 +232,7 @@ function adddotstring($strNum) {
 			<?php 
  
     mysqli_set_charset($conn, 'UTF8');
-    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM sanpham as sp WHERE NSP_ID = $nsp LIMIT 0,8";
+    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp WHERE NSP_ID = $nsp LIMIT 0,8";
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) <1){
     	$hienxemthem = 1;
@@ -349,7 +349,7 @@ function adddotstring($strNum) {
  
  <div class="w3-col s12" style="text-align: center;">
     <?php
-        $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM sanpham as sp WHERE NSP_ID = $nsp"));
+        $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM SANPHAM as sp WHERE NSP_ID = $nsp"));
         $phan_trang = ceil(($sql_trang-8)/8);
      ?>
      <div id="nut">
@@ -427,7 +427,7 @@ function adddotstring($strNum) {
 			<?php 
  
     mysqli_set_charset($conn, 'UTF8');
-    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM sanpham as sp WHERE NSP_ID = $nsp AND SP_TEN LIKE '%$key%' LIMIT 0,8";
+    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp WHERE NSP_ID = $nsp AND SP_TEN LIKE '%$key%' LIMIT 0,8";
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) <1){
     	$hienxemthem = 1;
@@ -545,7 +545,7 @@ function adddotstring($strNum) {
  
  <div class="w3-col s12" style="text-align: center;">
     <?php
-        $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM sanpham as sp WHERE NSP_ID = $nsp AND SP_TEN LIKE '%$key%'"));
+        $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM SANPHAM as sp WHERE NSP_ID = $nsp AND SP_TEN LIKE '%$key%'"));
         $phan_trang = ceil(($sql_trang-8)/8);
      ?>
      <div id="nut">
@@ -623,7 +623,7 @@ function adddotstring($strNum) {
 			<?php 
  
     mysqli_set_charset($conn, 'UTF8');
-    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM sanpham as sp LIMIT 0,8";
+    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp LIMIT 0,8";
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) <1){
     	$hienxemthem = 1;
@@ -741,7 +741,7 @@ function adddotstring($strNum) {
  
  <div class="w3-col s12" style="text-align: center;">
     <?php
-        $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM sanpham as sp"));
+        $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM SANPHAM as sp"));
         $phan_trang = ceil(($sql_trang-8)/8);
      ?>
      <div id="nut">
