@@ -154,7 +154,7 @@
              $.post("process_ajax/data_xuly_timkiem_qltd.php", {keys: keys}, function(data){
                 $("#output").html(data);
             });
-            alert(keys);
+           // alert(keys);
          });
 
 

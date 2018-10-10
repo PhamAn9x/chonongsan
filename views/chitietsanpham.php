@@ -1,18 +1,20 @@
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <div style="width: 97%; padding-left: 4%;">
 	<?php
 	include('config/connect.php');
 	if(isset($_GET['id'])){
 		$sp_id = $_GET['id'];
-	}
-	?>
-	<?php
-	include("config/connect.php");
-	mysqli_set_charset($conn,"UTF8");
+		$_SESSION['sp_bl'] = $sp_id;
 
+	}
+	?> 
+	<?php
+	mysqli_set_charset($conn,"UTF8");
 	$sql = "SELECT * FROM SANPHAM AS SP, USER AS USR, HOPTACXA AS HTX WHERE USR.HTX_ID = HTX.HTX_ID AND SP.USR_SDT = USR.USR_SDT AND SP.SP_ID = $sp_id";
 	$result = mysqli_query($conn,$sql);
 	$row = mysqli_fetch_array($result);
 	$_SESSION['diachi'] = $row['SP_DIACHI'];
+	$_SESSION['sdt_map'] = $row['USR_SDT'];
 
 	?>
 
@@ -31,7 +33,7 @@
 					<div class="w3-col s6">
 						<section id="slider" class="container">
 							<ul class="slider-wrapper">
-								<?php 
+								<?php
 								$sql = "SELECT HA_TEN FROM HINHANH WHERE SP_ID = $sp_id";
 								$result = mysqli_query($conn,$sql);
 								while($dong = mysqli_fetch_array($result)){
@@ -49,7 +51,7 @@
 
 
 
-									<?php 
+									<?php
 								}
 								?>
 							</ul>
@@ -89,18 +91,34 @@
 				</div>
 				<div style=" font-size: 22px; padding:2%; width: 99%;px;" class="w3-col s6 w3-teal">THÔNG TIN NGƯỜI BÁN</div>
 				<div class="w3-row an-thongtinchusanpham">
+					<style>
+						.tt tr td{
+							font-weight: 900;
+						}
+					</style>
 					<table class="w3-table ">
 						<tr>
-							<td>Liên hệ: </td> <td><?php echo $row['USR_HO'].' '.$row['USR_TEN']; ?></td>
+							<th>Họ tên: </th> <td><?php echo $row['USR_HO'].' '.$row['USR_TEN']; ?></td>
 						</tr>
 						<tr>
-							<td>Điện thoại: </td><td><?php echo $row['USR_SDT']; ?></td>
+							<th>Điện thoại: </th><td><?php echo $row['USR_SDT']; ?></td>
 						</tr>
 						<tr>
-							<td>Email: </td> <td><?php echo $row['USR_EMAIL']; ?></td>
+							<th>Ngày sinh: </th>
+							<td>
+								<?php $date=date_create($row['USR_NGAYSINH']);
+								echo date_format($date,"d/m/Y"); ?>
+									
+								</td>
 						</tr>
 						<tr>
-							<td>Địa chỉ</td><td><?php echo $row['SP_DIACHI']; ?></td>
+							<th>Email: </th> <td><?php echo $row['USR_EMAIL']; ?></td>
+						</tr>
+						<tr>
+							<th>Địa chỉ</th><td><?php echo $row['SP_DIACHI']; ?></td>
+						</tr>
+						<tr>
+							<th>Hợp tác xã</th><td><?php echo $row['HTX_TEN']; ?></td>
 						</tr>
 					</table>
 				</div>
@@ -115,16 +133,16 @@
 						<tr>
 							<td colspan="5">
 								<div style="margin-left: 5%; font-size: 25px;text-transform: uppercase; font-weight: bolder;  color:red; border-radius: 2px; height: 60px; padding: 2%; margin-right: 2%; font-family:Segoe, Segoe UI, DejaVu Sans, Trebuchet MS, Verdana,' sans-serif';"><?php echo $row['SP_TEN'];?>
-									
+
 								</div>
 							</td>
 						</tr>
 						<tr style=" border-radius: 7px;">
-							<?php 
+							<?php
 							$sql = "SELECT MAX(L_GIA) AS GIA_M FROM LENH WHERE SP_ID = $sp_id AND L_TEN = 'ban' ";
 							$dong = mysqli_fetch_row(mysqli_query($conn,$sql));
 							if( $dong[0] != null){
-								
+
 							?>
 							<td style=" padding-top: -1%; vertical-align: middle; text-align: center;"><span style=" font-size: 25px; font-weight: bolder; padding-top: 1%;">Giá bán :  </span><span style="color: red;font-size: 28px;font-weight: bolder;"><?php echo adddotstring($dong[0]); ?></span>/<?php echo $row['SP_DONVITINH']; ?> </td>
 							<?php
@@ -132,14 +150,14 @@
 									?>
 									<td style="vertical-align: middle; text-align: center;"><span style=" font-size: 25px; font-weight: bolder; padding-top: 1%;">Giá Mua :  </span><span style="color: red;font-size: 23px;font-weight: bolder;"><?php echo "Đang cập nhật";?></span> </td>
 							<?php
-									
+
 								}
 							?>
-							<?php 
+							<?php
 							$sql = "SELECT MIN(L_GIA) AS GIA_M FROM LENH WHERE SP_ID = $sp_id AND L_TEN = 'mua' ";
 							$dong = mysqli_fetch_row(mysqli_query($conn,$sql));
 							if( $dong[0] != null){
-								
+
 							?>
 							<td style="vertical-align: middle; text-align: center; padding-top: -1%;"><span style=" font-size: 25px; font-weight: bolder; padding-top: 1%;">Giá Mua :  </span><span style="color: red;font-size: 28px;font-weight: bolder;"><?php echo adddotstring($dong[0]); ?></span>/<?php echo $row['SP_DONVITINH']; ?> </td>
 							<?php
@@ -147,11 +165,11 @@
 									?>
 									<td style="vertical-align: middle; text-align: center;"><span style=" font-size: 25px; font-weight: bolder; padding-top: 1%;">Giá Mua :  </span><span style="color: red;font-size: 23px;font-weight: bolder;"><?php echo "Đang cập nhật";?></span> </td>
 							<?php
-									
+
 								}
 							?>
 							<td style="border-left: 1px dotted black; padding-top: 4%;padding-left: 0px;padding-right: 0px;" >
-								<?php 
+								<?php
 								$strqr = 'Tên sản phẩm:'.$row['SP_TEN'].'-Thuộc hợp tác xã: '.$row['HTX_TEN'].'-Địa chỉ: '.$row['SP_DIACHI'].'-Tên chủ sản phẩm: '.$row['USR_HO'].' '.$row['USR_TEN'].'-Ngày đăng: '.$row['SP_NGAYDANG'].'-Số điện thoại liên lạc:'.$row['USR_SDT'];
 								?>
 								<input style="opacity: 0" id="qr" value="<?php echo $strqr; ?>"/>
@@ -163,7 +181,7 @@
 							</td>
 						</tr>
 					</table>
-				</div>	
+				</div>
 
 			</div>
 			<div class="w3-col s6" >
@@ -183,7 +201,7 @@
 					<th>Tổng thanh toán đơn hàng</th>
 					<th>Lời nhắn</th>
 				</tr>
-				<?php 
+				<?php
 					$sql = "SELECT * FROM LENH,USER WHERE USR_SDT = L_SDT AND SP_ID=$sp_id AND L_TEN='mua'";
 					mysqli_set_charset($conn,"UTF8");
 					$result=mysqli_query($conn,$sql);
@@ -210,8 +228,8 @@
 				<?php
 				}
 				?>
-			</table>	
-				
+			</table>
+
 				</div>
 			<div class="w3-col s6">
 					<div class="w3-row an-tieude">ĐANG CẦN BÁN</div>
@@ -226,7 +244,7 @@
 					<th>Tổng thanh toán đơn hàng</th>
 					<th>Lời nhắn</th>
 				</tr>
-				<?php 
+				<?php
 					$sql = "SELECT * FROM LENH,USER WHERE USR_SDT = L_SDT AND SP_ID=$sp_id AND L_TEN='ban'";
 					mysqli_set_charset($conn,"UTF8");
 					$result=mysqli_query($conn,$sql);
@@ -267,13 +285,13 @@
 							<th>Số lượng</th>
 							<th>Đơn giá</th>
 							<th>Thành tiền</th>
-							<th>Địa chỉ giao hàng</th>
+							<th>Địa chỉ hàng hóa</th>
 							<th>Lời nhắn</th>
 
 						</tr>
-						<tr>
+						<tr >
 							<td>
-								<select id="sldatlenh" name="sldatlenh">
+								<select  id="sldatlenh" name="sldatlenh">
 									<option value="">Chọn lệnh</option>
 									<option value="0">Đặt mua</option>
 									<option value="1">Đặt bán</option>
@@ -289,16 +307,16 @@
 								<input  style="width: 100px;" type="number" name="ipgia" id="ipgia" value="0">
 							</td>
 							<td class="thanhtien"> 0 VNĐ</td>
-							<td>
-								<input type="text" name="ipdiachigiaohang" id="ipdiachigiaohang" value="<?php echo $row['SP_DIACHI'];?>">
+							<td style="width: 200px;">
+								<input style="width: 280px;" type="text" name="ipdiachigiaohang" id="ipdiachigiaohang" value="<?php echo $row['SP_DIACHI'];?>">
 							</td>
 							<td>
-								<input type="text" name="iploinhan" id="iploinhan"/>
+								<input   type="text" name="iploinhan" id="iploinhan"/>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="7" id="dat">
-								
+
 							</td>
 						</tr>
 					</table>
@@ -309,9 +327,9 @@
 					$(document).ready(function(){
 						$("#sldatlenh").change(function(){
 						var dl = $("#sldatlenh").val();
-							if(dl == 0) $("#dat").html('<input class="w3-button w3-red" type="submit" name="btndatmua" id="btndatmua" value="ĐẶT LỆNH MUA">');
-								else 
-									$("#dat").html('<input class="w3-button w3-red" type="submit" name="btndatban" id="btndatban" value="ĐẶT LỆNH BÁN"></a>');
+							if(dl == 0) $("#dat").html('<input class="w3-button w3-red w3-round" type="submit" name="btndatmua" id="btndatmua" value="ĐẶT LỆNH MUA">');
+								else
+									$("#dat").html('<input class="w3-button w3-red w3-round" type="submit" name="btndatban" id="btndatban" value="ĐẶT LỆNH BÁN"></a>');
 
 						});
 
@@ -332,31 +350,49 @@
 							}
 						});
 
-						$("#dathang").click(function(){
-							var sl = $("#ipsoluong").val();
-							var slht = <?php echo $row['SP_SOLUONG'];?>;
-							if(slht >= sl){
-								document.getElementById("frsl").submit(); 
-							}
-							else
-							{
-								alert("Số lượng hiện tại không cung cấp đủ! vui lòng chọn ít sản phẩm hơn!");
-							}
-						});
+						// $("#dathang").click(function(){
+						// 	var sl = $("#ipsoluong").val();
+						// 	var slht = <?php //echo $row['SP_SOLUONG'];?>;
+						// 	if(slht >= sl){
+						// 		document.getElementById("frsl").submit();
+						// 	}
+						// 	else
+						// 	{
+						// 		alert("Số lượng hiện tại không cung cấp đủ! vui lòng chọn ít sản phẩm hơn!");
+						// 	}
+						// });
 
 
 
 					});
 				</script>
+				<div class="w3-col s16">
+					<span style=" float: left; text-align: left; margin-left:18%;  text-transform: uppercase;" class="w3-row an-tieude">bình luận sản phẩm</span>
+				
+					<span style="float: left; margin-left: 20%; text-align: right;   text-transform: uppercase;" class="w3-row an-tieude">Sản phẩm cùng hợp tác xã</span>
+					
+				</div>
+				<hr />
+				<div class="w3-row w3-col s6">
+					<?php
+						include("views/ql_comment.php");
+					?>
+				</div>
+					<div class="w3-row w3-col s6" style="padding-left: 4%; padding-top: 2%;">
+						<?php
+				include("views/sp_cung_htx.php");
+				?>
+				</div>
+				<div class="w3-row w3-col s12">
 				<div class="w3-col s12"><hr /></div>
-				<div style=" font-size: 22px; padding:1%; width: 100%;px;" class="w3-col s6 w3-teal">SẢN PHẨM CÙNG LOẠI</div>
+				<div style=" text-align: center; font-size: 22px; padding:1%; width: 100%;" class="w3-col s6 w3-teal">SẢN PHẨM CÙNG LOẠI</div>
 
 				<div class="w3-row w3-col s12" style="padding-left: 7%; padding-bottom: 3%;">
-					<?php 
+					<?php
 					include("config/connect.php");
 					mysqli_set_charset($conn, 'UTF8');
 					$LSP =$row['LSP_ID'];
-					$sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM (SELECT * FROM sanpham WHERE LSP_ID = $LSP ) AS sp LIMIT 0,4";
+					$sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM (SELECT * FROM SANPHAM WHERE LSP_ID = $LSP ) AS sp LIMIT 0,4";
 					$result = mysqli_query($conn,$sql);
 					while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC))
 					{
@@ -384,17 +420,17 @@
 										/
 										<span style="color: black">
 											<?php echo $rows['SP_DONVITINH']; ?>
-										</span>   
+										</span>
 									</div>
 									<img style="position: absolute; top:50%; left: 75%;" src="logo_image/ictim2.png" width="30px" height="30px">
-								</div>  
+								</div>
 							</div>
 							<div class="item-add-content">
 								<div class="item-add-content-inner">
 									<div class="section">
 										<p>Ngày đăng: <?php echo $rows['SP_NGAYDANG']; ?></p>
 										<p>Đơn vị: HTX Huyện Long Mỹ</p>
-									</div> 
+									</div>
 									<div class="section">
 										<a href="index.php?xem=chitietsanpham&id=<?php echo $rows['SP_ID'];?>" class="btn buy expand">Chi tiết / Đặt hàng</a>
 									</div>
@@ -407,6 +443,7 @@
 				}
 				?>
 			</div>
+			<div style="text-align: center; margin-bottom: 5px;" class="w3-col s12"> <button id="btn-trolai" class="w3-button w3-red w3-round " style="width: 200px;">Trở lại</button></div>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
 			<script type="text/javascript" src="js/slider.js"></script>
 			<script type="text/javascript">
@@ -419,8 +456,8 @@
 						var sl = $("#ipsoluong").val();
 						var gia = $("#ipgia").val();
 						var tong = sl * gia;
-						var price =tong;   
-						$(".thanhtien").html(tong +" VNĐ");
+						var price =tong;
+						$(".thanhtien").html(parseInt(tong).toLocaleString()+" VNĐ");
 					});
 					$("#ipgia").keyup(function(){
 						var ck = $("#sldatlenh").val();
@@ -431,8 +468,11 @@
 						var sl = $("#ipsoluong").val();
 						var gia = $("#ipgia").val();
 						var tong = sl * gia;
-						var price =tong;   
-						$(".thanhtien").html(tong+" VNĐ");
+						var price =tong;
+						$(".thanhtien").html(parseInt(tong).toLocaleString()+" VNĐ");
+					});
+					$("#btn-trolai").click(function(){
+							window.history.back();
 					});
 				});
 			</script>

@@ -14,7 +14,7 @@ function adddotstring($strNum) {
 	$con = substr($strNum, 0 , 3 - ($counter - $len) );
 	$result = $con.$result;
 	if(substr($result,0,1)==','){
-		$result=substr($result,1,$len+1);   
+		$result=substr($result,1,$len+1);
 	}
 	return $result;
 }
@@ -26,13 +26,13 @@ function adddotstring($strNum) {
 		mysqli_set_charset($conn,"UTF8");
 		$rs = mysqli_fetch_row(mysqli_query($conn,"SELECT NSP_TEN FROM NHOMSANPHAM WHERE NSP_ID = $nsp"));
 		?>
- <div class="w3-teal" style=" width: 90%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 2px; margin-left: 5%; font-family: 'roboto'; font-weight: 700; "><?php echo $rs[0]; ?></div>
+ <div class="w3-teal" style=" width: 100%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 2px; margin-left: 0%; font-family: 'roboto'; font-weight: 700; "><?php echo $rs[0]; ?></div>
  <div class="container-item" style="padding-left: 4%;">
     <div id="xemthem">
-			<?php 
- 
+			<?php
+
     mysqli_set_charset($conn, 'UTF8');
-    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM sanpham as sp WHERE NSP_ID = $nsp LIMIT 0,8";
+    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp WHERE NSP_ID = $nsp LIMIT 0,8";
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) <1){
         $hienxemthem = 1;
@@ -55,19 +55,19 @@ function adddotstring($strNum) {
                                 <div class="item-product">
                                     <div class="item-top-title">
                                         <h2 style="width: 200px; font-size: 17px; font-weight: 900;text-shadow: currentColor;"><?php echo $rows['SP_TEN']; ?></h2>
-                                       
+
                                     </div>
                                 </div>
                                 <div class="item-product" style="width: 200px;">
-                                    <?php 
+                                    <?php
                                     $sp_id = $rows['SP_ID'];
                             $sql = "SELECT MIN(L_GIA) AS GIA_M FROM LENH WHERE SP_ID = $sp_id AND L_TEN = 'ban' ";
                             $dong = mysqli_fetch_row(mysqli_query($conn,$sql));
                             if( $dong[0] != null){
-                                
+
                             ?>
                                      <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
-                                        
+
                                     </span>
                                      /
                                          <span style="color: black">
@@ -77,21 +77,21 @@ function adddotstring($strNum) {
                                             }else{
                                                 ?>
                                                 <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
-                                        
+
                                     </span>
                                                 <?php
                                             }
                                         ?>
-                                         <br /> 
-                                   <?php 
+                                         <br />
+                                   <?php
                                     $sp_id = $rows['SP_ID'];
                             $sql = "SELECT MAX(L_GIA) AS GIA_M FROM LENH WHERE SP_ID = $sp_id AND L_TEN = 'mua' ";
                             $dong = mysqli_fetch_row(mysqli_query($conn,$sql));
                             if( $dong[0] != null){
-                                
+
                             ?>
                                      <span style="font-weight:600; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
-                                        
+
                                     </span>
                                      /
                                          <span style="color: black">
@@ -101,7 +101,7 @@ function adddotstring($strNum) {
                                             }else{
                                                 ?>
                                                 <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
-                                        
+
                                     </span>
                                                 <?php
                                             }
@@ -119,18 +119,18 @@ function adddotstring($strNum) {
                                 } else{
                             ?>
                                  <a href="views/xuly_bothich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" src="logo_image/ictim.png" title="Bỏ thích" width="37px" height="37px"></a>
-                           <?php 
+                           <?php
                                 }
                                 }
                             ?>
-                            </div>  
+                            </div>
                         </div>
                         <div class="item-add-content">
                             <div class="item-add-content-inner">
                                 <div class="section">
                                     <p>Ngày đăng: <?php echo $rows['SP_NGAYDANG']; ?></p>
                                     <p>Đơn vị: HTX Huyện Long Mỹ</p>
-                                </div> 
+                                </div>
                                  <div class="section">
                                         <a href="index.php?xem=chitietsanpham&id=<?php echo $rows['SP_ID'];?>" class="btn buy expand">Chi tiết / Đặt hàng</a>
                                     </div>
@@ -138,22 +138,22 @@ function adddotstring($strNum) {
                         </div>
                     </div>
                 </div>
-              
-               
+
+
 <?php
     }
 ?>
 </div>
 </div>
- 
- 
+
+
  <div class="w3-col s12" style="text-align: center;">
     <?php
-        $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM sanpham as sp WHERE NSP_ID = $nsp"));
+        $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM SANPHAM as sp WHERE NSP_ID = $nsp"));
         $phan_trang = ceil(($sql_trang-8)/8);
      ?>
      <div id="nut">
-     <?php 
+     <?php
         if($hienxemthem == 0){
         ?>
       <input class="w3-button w3-red w3-hover-green w3-round" type="button" name="btxemthem" id="btxemthem" value="Xem thêm">
@@ -162,15 +162,15 @@ function adddotstring($strNum) {
       ?>
   </div>
     <script type="text/javascript">
-        $(document).ready(function(){  
+        $(document).ready(function(){
             var id_trang =<?php echo $phan_trang;?>;
             var trang_id =<?php echo $phan_trang;?>;
             var xemthem = <?php echo $hienxemthem;?>;
             $("#btxemthem").click(function(){
-              
+
                 if(id_trang > 0){
                  $.get("process_ajax/xuly_phantrang.php", {trang: trang_id}, function(data){
-                            $(data).appendTo("#xemthem").hide().fadeIn(1500);  
+                            $(data).appendTo("#xemthem").hide().fadeIn(1500);
                         });
                  id_trang = id_trang-1;
                  if(id_trang==0 && xemthem==0){
@@ -185,14 +185,14 @@ function adddotstring($strNum) {
     </script>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
-    
+
 <script type="text/javascript">
    $(document).ready(function() {
 
         $(".share-btn").mouseenter(function() {
 
             // find the closest class .item-menu
-            
+
             $(this).closest("div.container-item").find(".item-menu").addClass("visible")
         });
         $(".share-btn").mouseleave(function() {
@@ -201,7 +201,7 @@ function adddotstring($strNum) {
             }, 500);
         });
 
-        
+
 
         $(".container-item").hover(function() {
             setTimeout(function() {
@@ -212,7 +212,7 @@ function adddotstring($strNum) {
 
 });
 
-</script>   
+</script>
 
 
 
@@ -233,15 +233,15 @@ function adddotstring($strNum) {
 		mysqli_set_charset($conn,"UTF8");
 		$rs = mysqli_fetch_row(mysqli_query($conn,"SELECT LSP_TEN FROM LOAISANPHAM WHERE LSP_ID = $lsp"));
 		?>
- <div class="w3-teal" style=" width: 90%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 2px; margin-left: 5%; font-family: 'roboto'; font-weight: 700; "><?php echo $rs[0]; ?></div>
+ <div class="w3-teal" style=" width: 100%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 2px; margin-left: 0%; font-family: 'roboto'; font-weight: 700; "><?php echo $rs[0]; ?></div>
  <div class="container-item" style="padding-left: 4%;">
     <div id="xemthem">
-			<?php 
- 
+			<?php
+
     mysqli_set_charset($conn, 'UTF8');
-    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM sanpham as sp WHERE LSP_ID = $lsp LIMIT 0,8";
+    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp WHERE LSP_ID = $lsp LIMIT 0,8";
     $result = mysqli_query($conn,$sql);
-    if(mysqli_num_rows($result) <1){
+    if(mysqli_num_rows($result) < 1){
         $hienxemthem = 1;
     	?>
         <div style="text-align: center; font-size: 17px; color: red;"><i>Chưa có dữ liệu</i></div>
@@ -262,19 +262,19 @@ function adddotstring($strNum) {
                                 <div class="item-product">
                                     <div class="item-top-title">
                                         <h2 style="width: 200px; font-size: 17px; font-weight: 900;text-shadow: currentColor;"><?php echo $rows['SP_TEN']; ?></h2>
-                                       
+
                                     </div>
                                 </div>
                                 <div class="item-product" style="width: 200px;">
-                                    <?php 
+                                    <?php
                                     $sp_id = $rows['SP_ID'];
                             $sql = "SELECT MIN(L_GIA) AS GIA_M FROM LENH WHERE SP_ID = $sp_id AND L_TEN = 'ban' ";
                             $dong = mysqli_fetch_row(mysqli_query($conn,$sql));
                             if( $dong[0] != null){
-                                
+
                             ?>
                                      <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
-                                        
+
                                     </span>
                                      /
                                          <span style="color: black">
@@ -284,21 +284,21 @@ function adddotstring($strNum) {
                                             }else{
                                                 ?>
                                                 <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
-                                        
+
                                     </span>
                                                 <?php
                                             }
                                         ?>
-                                         <br /> 
-                                   <?php 
+                                         <br />
+                                   <?php
                                     $sp_id = $rows['SP_ID'];
                             $sql = "SELECT MAX(L_GIA) AS GIA_M FROM LENH WHERE SP_ID = $sp_id AND L_TEN = 'mua' ";
                             $dong = mysqli_fetch_row(mysqli_query($conn,$sql));
                             if( $dong[0] != null){
-                                
+
                             ?>
                                      <span style="font-weight:600; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
-                                        
+
                                     </span>
                                      /
                                          <span style="color: black">
@@ -308,7 +308,7 @@ function adddotstring($strNum) {
                                             }else{
                                                 ?>
                                                 <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
-                                        
+
                                     </span>
                                                 <?php
                                             }
@@ -326,18 +326,18 @@ function adddotstring($strNum) {
                                 } else{
                             ?>
                                  <a href="views/xuly_bothich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" src="logo_image/ictim.png" title="Bỏ thích" width="37px" height="37px"></a>
-                           <?php 
+                           <?php
                                 }
                                 }
                             ?>
-                            </div>  
+                            </div>
                         </div>
                         <div class="item-add-content">
                             <div class="item-add-content-inner">
                                 <div class="section">
                                     <p>Ngày đăng: <?php echo $rows['SP_NGAYDANG']; ?></p>
                                     <p>Đơn vị: HTX Huyện Long Mỹ</p>
-                                </div> 
+                                </div>
                                  <div class="section">
                                         <a href="index.php?xem=chitietsanpham&id=<?php echo $rows['SP_ID'];?>" class="btn buy expand">Chi tiết / Đặt hàng</a>
                                     </div>
@@ -345,23 +345,23 @@ function adddotstring($strNum) {
                         </div>
                     </div>
                 </div>
-              
-               
+
+
 <?php
     }
 ?>
 </div>
 
 </div>
- 
- 
+
+
  <div class="w3-col s12" style="text-align: center;">
     <?php
         $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT LSP_TEN FROM LOAISANPHAM WHERE LSP_ID = $lsp"));
         $phan_trang = ceil(($sql_trang-8)/8);
      ?>
      <div id="nut">
-      <?php 
+      <?php
         if($hienxemthem == 0){
         ?>
       <input class="w3-button w3-red w3-hover-green w3-round" type="button" name="btxemthem" id="btxemthem" value="Xem thêm">
@@ -370,15 +370,15 @@ function adddotstring($strNum) {
       ?>
   </div>
     <script type="text/javascript">
-        $(document).ready(function(){  
+        $(document).ready(function(){
             var id_trang =<?php echo $phan_trang;?>;
             var trang_id =<?php echo $phan_trang;?>;
             var xemthem = <?php echo $hienxemthem;?>;
             $("#btxemthem").click(function(){
-              
+
                 if(id_trang > 0){
                  $.get("process_ajax/xuly_phantrang.php", {trang: trang_id}, function(data){
-                            $(data).appendTo("#xemthem").hide().fadeIn(1500);  
+                            $(data).appendTo("#xemthem").hide().fadeIn(1500);
                         });
                  id_trang = id_trang-1;
                  if(id_trang==0 && xemthem==0 ){
@@ -393,14 +393,14 @@ function adddotstring($strNum) {
     </script>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
-    
+
 <script type="text/javascript">
    $(document).ready(function() {
 
         $(".share-btn").mouseenter(function() {
 
             // find the closest class .item-menu
-            
+
             $(this).closest("div.container-item").find(".item-menu").addClass("visible")
         });
         $(".share-btn").mouseleave(function() {
@@ -409,7 +409,7 @@ function adddotstring($strNum) {
             }, 500);
         });
 
-        
+
 
         $(".container-item").hover(function() {
             setTimeout(function() {
@@ -420,7 +420,7 @@ function adddotstring($strNum) {
 
 });
 
-</script>   
+</script>
 
 		<?php
 	}

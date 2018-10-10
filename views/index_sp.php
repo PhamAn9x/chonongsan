@@ -1,4 +1,4 @@
-<div class="w3-col s1">
+<!-- <div class="w3-col s1">
   <img style="border-radius: 7px; margin-top: 15%;" src="upload/52sau_rieng_musang_king_4.jpg" width="150px" height="120px">
   <img style="border-radius: 7px; margin-top: 15%;" src="upload/52sau_rieng_musang_king_4.jpg" width="150px" height="120px">
 
@@ -7,8 +7,8 @@
   <img style="border-radius: 7px; margin-top: 15%;" src="upload/52sau_rieng_musang_king_4.jpg" width="150px" height="120px">
 
 
-</div>
-<div class="w3-col s10">
+</div> -->
+<div class="w3-col s12">
     <link rel="icon" href="http://www.thuthuatweb.net/wp-content/themes/HostingSite/favicon.ico" type="image/x-ico"/>
      <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link href="css/style_sp.css" rel="stylesheet" />
@@ -69,8 +69,8 @@
 </style>
 <div id="cho_id">
   
-  <div class="w3-teal" style=" width: 90%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 2px; margin-left: 5%; font-family: 'roboto'; font-weight: 700; ">SÀN GIAO DỊCH NÔNG SẢN TRỰC TUYẾN</div>
- <div class="container-item" style="padding-left: 4%;">
+  <div class="w3-teal" style=" width: 100%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 2px; margin-left: 0%; font-family: 'roboto'; font-weight: 700; ">SÀN GIAO DỊCH NÔNG SẢN TRỰC TUYẾN</div>
+ <div class="container-item" style="padding-left: 0%;">
 <div id="xemthem">
 
 <?php 
@@ -81,7 +81,7 @@
     while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC))
     {
 ?>
-                <div class="itemnew" style="width: 225px;height: 225px; margin-left: 1%;">
+                <div class="itemnew" style="width: 220px;height: 220px; margin-left: 1%;">
                     <!-- item image -->
                     <div class="item-img">
                         <img src="upload/<?php echo $rows['HA_TEN']; ?>" width="230px" height="230px" />
@@ -104,7 +104,7 @@
                             if( $dong[0] != null){
                                 
                             ?>
-                                     <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
+                                     <span style="font-weight:600; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
                                         
                                     </span>
                                      /
@@ -138,7 +138,7 @@
                                         <?php
                                             }else{
                                                 ?>
-                                                <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
+                                                <span style="font-weight:600; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
                                         
                                     </span>
                                                 <?php
@@ -186,7 +186,7 @@
  <div class="w3-col s12" style="text-align: center;">
     <?php
         $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM SANPHAM"));
-        $phan_trang = ceil(($sql_trang-8)/8);
+        $phan_trang = ceil(($sql_trang-10)/10);
      ?>
      <div id="nut">
       <input class="w3-button w3-red w3-hover-green w3-round" type="button" name="btxemthem" id="btxemthem" value="Xem thêm">
@@ -244,7 +244,7 @@
 </script>   
 </div>
  </div>
- <div class="w3-col s1" style="padding-left: 0%;">
+<!--  <div class="w3-col s1" style="padding-left: 0%;">
     <img style="border-radius: 7px; margin-left: -40px; margin-top: 15%;" src="upload/52sau_rieng_musang_king_4.jpg" width="150px" height="120px">
   <img style="border-radius: 7px; margin-left: -40px; margin-top: 15%;" src="upload/52sau_rieng_musang_king_4.jpg" width="150px" height="120px">
 
@@ -252,4 +252,4 @@
 
   <img style="border-radius: 7px; margin-left: -40px; margin-top: 15%;" src="upload/52sau_rieng_musang_king_4.jpg" width="150px" height="120px">
 
- </div>
+ </div> -->

@@ -1,4 +1,4 @@
-    <?php 
+    <?php
         if(isset($_SESSION['sdt'])){
     ?>
     <link rel="icon" href="http://www.thuthuatweb.net/wp-content/themes/HostingSite/favicon.ico" type="image/x-ico"/>
@@ -18,11 +18,11 @@
         include("config/connect.php");
     ?>
 
-   
+
     <form name="dangtin" id="dangtin" method="post" class="tindang">
         <div class="w3-row khung">
             <div class="w3-row">
-            <h1>ĐĂNG TIN SẢN PHẨM TRÊN CHỢ NÔNG SẢN HỢP TÁC XÃ</h1>
+            <h1>ĐĂNG TIN SẢN PHẨM</h1>
             </div>
             <div class="w3-row w3-col s6" style="border-right: 1px dotted black; padding-right: 4%;">
                 <h2>Thông tin sản phẩm</h2>
@@ -51,21 +51,14 @@
                        <option value="">Chọn loại sản phẩm</option>";
                     </select>
                 </div>
-                <div class="w3-row">
-                    <input class="w3-input" type="text" name="soluong" id="soluong" placeholder="Số lượng cần bán">
-                </div>
-                <div class="w3-row">
-                    <input class="w3-input" type="text" name="gia" id="gia" placeholder="Giá bán">
-                             </div>
+               
+               
                 <div class="w3-row">
                     <input class="w3-input" type="text" name="donvitinh" id="donvitinh" placeholder="Đơn vị tính">
                 </div>
-                <div class="w3-row">
-                    <input class="w3-input" type="text" name="phi" id="phi" placeholder="Phí vận chuyển">
-                </div>
                 <div class="w3-row" style="padding-left: 0%; width: 100%;">
                      <textarea name="ck" placeholder="Nhập mô tả sản phẩm" id="ck" rows="6" cols="79"></textarea>
-                     <script>//CKEDITOR.replace('ck');</script>
+                     <script>CKEDITOR.replace('ck');</script>
                 </div>
             </div>
             <div class="w3-row w3-col s6" style="padding-left: 2%;">
@@ -97,7 +90,7 @@
                           while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC)){
                          ?>
                          <option value=<?php echo $rows['id_tinh']; ?>> <?php echo $rows['TINH_NAME']; ?></option>
-                        <?php 
+                        <?php
                       }
                         ?>
                     </select>
@@ -109,16 +102,16 @@
                     </select>
                 </div>
                 <div class="w3-row">
-                    <input style="width: 97%;" type="text" name="diachi" id="diachi" placeholder="Địa chỉ chi tiết" class="w3-input">
+                    <input style="width: 97%;" type="text" name="diachi" id="diachi" placeholder="Địa chỉ chi tiết" class="w3-input" value="">
                 </div>
                 <div class="w3-row">
-                    <select style="width: 97%;" type="text" name="hoptacxa" id="hoptacxa" placeholder="Địa chỉ chi tiết" class="w3-input">
+                    <select style="width: 97%;" type="text" name="hoptacxa" id="hoptacxa" class="w3-input">
                     	<option value="">Chọn hợp tác xã</option>
                     	<?php
 							mysqli_set_charset($conn,"UTF8");
 							$sql="SELECT * FROM HOPTACXA";
 							$result = mysqli_query($conn,$sql);
-							foreach($result as $rows){	
+							foreach($result as $rows){
 						?>
 						<option value="<?php echo $rows['HTX_ID']; ?>"><?php echo $rows['HTX_TEN']; ?></option>
 						<?php
@@ -131,7 +124,7 @@
 
                 <div class="w3-row">
                     <input style="width: 97%; border-radius: 0 0 5px 5px" type="date" name="ngayhethan" id="ngayhethan" placeholder="Ngày hết hạn" placeholder="Chọn ngày" class="w3-input">
-                    
+
                 </div>
                 <div class="w3-row" style="margin-top: 2%; padding-left: 10%;">
                    <p id="capchar" style="padding-left: 17%;" class="g-recaptcha" data-sitekey="6LdjITIUAAAAAN_4SReoxN5n0SmUhLYCNBAvCOkm"></p>
@@ -144,25 +137,31 @@
             </div>
          </div>
     </form>
-    
-   
-  <?php 
+
+
+  <?php
 	if(isset($_POST['tieude'])){
+        $xa_id = $_POST['slxa'];
+        $huyen_id = $_POST['slhuyen'];
+        $tinh_id = $_POST['sltinh'];
+        $rs_tinh= mysqli_fetch_row(mysqli_query($conn,"SELECT TINH_NAME FROM tinh_thanh WHERE id_tinh = $tinh_id"));
+        $rs_huyen= mysqli_fetch_row(mysqli_query($conn,"SELECT HUYEN_NAME FROM quan_huyen WHERE id_huyen = $huyen_id"));
+        $rs_xa= mysqli_fetch_row(mysqli_query($conn,"SELECT XA_NAME FROM phuong_xa WHERE id_xa = $xa_id"));
+        $tinh = $rs_tinh[0];
+        $huyen = $rs_huyen[0];
+        $xa = $rs_xa[0];
 		$tieude = $_POST['tieude'];
 		$nhomsanpham = $_POST['slnhomsanpham'];
 		$loaisanpham = $_POST['slloaisanpham'];
-		$soluong = $_POST['soluong'];
-		$gia = $_POST['gia'];
 		$donvitinh = $_POST['donvitinh'];
-		$phi = $_POST['phi'];
 		$mota = $_POST['ck'];
 		$sdt = $_POST['sdt'];
 		$ngayhethan = $_POST['ngayhethan'];
 		$ngaydang = date("Y-m-d");
-		$diachi = $_POST['diachi'];
-        $htx = $_POST['htx_id'];
+		$diachi = $xa." - ".$huyen." - ".$tinh;
+        $htx = $_POST['hoptacxa'];
         echo $htx;
-	$sql = "INSERT INTO SANPHAM(SP_TEN,NSP_ID,LSP_ID,SP_SOLUONG,SP_GIA,SP_DONVITINH,SP_PHIVANCHUYEN,SP_MOTA,USR_SDT,SP_NGAYDANG,SP_NGAYHETHAN,SP_DIACHI,SP_TRANGTHAI,SP_HTX_ID) VALUES ('$tieude',$nhomsanpham,$loaisanpham,$soluong,$gia,'$donvitinh','$phi','$mota','$sdt','$ngaydang','$ngayhethan','$diachi',0,$htx)";
+	$sql = "INSERT INTO SANPHAM(SP_TEN,NSP_ID,LSP_ID,SP_DONVITINH,SP_MOTA,USR_SDT,SP_NGAYDANG,SP_NGAYHETHAN,SP_DIACHI,SP_TRANGTHAI,SP_HTX_ID) VALUES ('$tieude',$nhomsanpham,$loaisanpham,'$donvitinh','$mota','$sdt','$ngaydang','$ngayhethan','$diachi',0,$htx)";
 	if(mysqli_query($conn,$sql)){
 		$_SESSION['dinhanh']=$sdt;
 		echo "<script>
@@ -170,11 +169,11 @@
 	   window.location.href = 'index.php?view=capnhathinhanh&id=$sdt';
 	  </script>";
 		mysqli_close($conn);
-		
+
 	}
 	else {}//echo "<script>alert('Đăng tin thất bại! Vui lòng kiểm tra lại!');</script>";
 	}
-    } else 
+    } else
         {
             echo "<script>alert('Vui lòng đăng nhập trước khi đăng tin!');</script>";
             echo '<meta http-equiv="Refresh" content="0,URL=index.php?view=dangnhap" />';

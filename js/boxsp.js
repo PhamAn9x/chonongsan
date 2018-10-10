@@ -1,6 +1,3 @@
-
-<script>
-  /*Jquery time*/
 $(document).ready(function(){
 	var item, img, title, large_img;
 	var CW, CH, CL, CT, hpadding, vpadding, imgtag;

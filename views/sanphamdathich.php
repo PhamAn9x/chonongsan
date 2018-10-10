@@ -34,7 +34,7 @@
         echo '<meta http-equiv="Refresh" content="0,URL=index.php" />';
         echo '<script> alert("Bạn vui lòng đăng nhập để sử dụng tính năng này!"); </script>';
     }
-    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM sanpham as sp, THICH AS T WHERE sp.SP_ID = T.SP_ID AND T.USR_SDT = $sdt ";
+    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp, THICH AS T WHERE sp.SP_ID = T.SP_ID AND T.USR_SDT = $sdt ";
     $result = mysqli_query($conn,$sql);
     while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC))
     {
@@ -55,14 +55,54 @@
                                        
                                     </div>
                                 </div>
-                                <div class="item-product">
-                                    <span class="price-num" style="color: red; font-size:19px; font-weight: 700"><?php echo adddotstring($rows['SP_GIA']); ?>
+                          <div class="item-product" style="width: 200px;">
+                                    <?php 
+                                    $sp_id = $rows['SP_ID'];
+                            $sql = "SELECT MIN(L_GIA) AS GIA_M FROM LENH WHERE SP_ID = $sp_id AND L_TEN = 'ban' ";
+                            $dong = mysqli_fetch_row(mysqli_query($conn,$sql));
+                            if( $dong[0] != null){
+                                
+                            ?>
+                                     <span style="font-weight:600; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
                                         
                                     </span>
-                                    /
+                                     /
                                          <span style="color: black">
                                             <?php echo $rows['SP_DONVITINH']; ?>
-                                        </span>   
+                                        </span>
+                                        <?php
+                                            }else{
+                                                ?>
+                                                <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
+                                        
+                                    </span>
+                                                <?php
+                                            }
+                                        ?>
+                                         <br /> 
+                                   <?php 
+                                    $sp_id = $rows['SP_ID'];
+                            $sql = "SELECT MAX(L_GIA) AS GIA_M FROM LENH WHERE SP_ID = $sp_id AND L_TEN = 'mua' ";
+                            $dong = mysqli_fetch_row(mysqli_query($conn,$sql));
+                            if( $dong[0] != null){
+                                
+                            ?>
+                                     <span style="font-weight:600; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
+                                        
+                                    </span>
+                                     /
+                                         <span style="color: black">
+                                            <?php echo $rows['SP_DONVITINH']; ?>
+                                        </span>
+                                        <?php
+                                            }else{
+                                                ?>
+                                                <span style="font-weight:600; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
+                                        
+                                    </span>
+                                                <?php
+                                            }
+                                        ?>
                                 </div>
                               <?php
 								if(isset($_SESSION['sdt'])){
@@ -89,7 +129,7 @@
                                     <p>Đơn vị: HTX Huyện Long Mỹ</p>
                                 </div> 
                                 <div class="section">
-                                    <a href="index.php?xem=chiietsanpham&id=<?php echo $rows['SP_ID'];?>" class="btn buy expand">Chi tiết / Đặt hàng</a>
+                                    <a href="index.php?xem=chitietsanpham&id=<?php echo $rows['SP_ID'];?>" class="btn buy expand">Chi tiết / Đặt hàng</a>
                                 </div>
                             </div>
                         </div>

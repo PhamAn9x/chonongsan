@@ -12,6 +12,17 @@ crossorigin=""></script>
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <?php 
+	$sdt = $_SESSION['sdt_map'];
+	$sql = "SELECT HA_TEN FROM HINHANH WHERE USR_SDT = '$sdt'";
+	if(mysqli_num_rows(mysqli_query($conn,$sql)) > 0){
+	$ha = mysqli_fetch_row(mysqli_query($conn,$sql));
+	$hat = "upload/".$ha[0];
+	}
+	else{
+		$hat = "logo_image/guest.png";
+	}
+?>
 <script type="text/javascript">
 
 var geocoder = new google.maps.Geocoder();
@@ -21,7 +32,7 @@ geocoder.geocode( { 'address': address}, function(results, status) {
 
 if (status == google.maps.GeocoderStatus.OK) {
     var latitude = results[0].geometry.location.lat();
-    var longitude = results[0].geometry.location.lng();
+    var longitude = results[0].geometry.location.lng(); 
     
  var map = L.map('mapid').setView([latitude, longitude], 9);
 
@@ -31,7 +42,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 L.marker([latitude, longitude]).addTo(map)
     .bindPopup(
-      '<img src="upload/58hat-giong-dau-tay-do-1.5_.jpg" width="50px" height="50px"/><br /><a href="#"><?php echo $_SESSION['diachi']; ?></a> <br /> Hợp tác xã <br /> '
+      ' <div style="font-size:16px;"><img style="margin-left:0; border-radius:5px;" src="<?php echo $hat; ?>" width="100" height="100px"/> </div>'
       )
     .openPopup();
 
@@ -39,5 +50,4 @@ L.marker([latitude, longitude]).addTo(map)
   } 
 }); 
 </script>
-
 

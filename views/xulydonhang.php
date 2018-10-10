@@ -135,7 +135,7 @@
     mysqli_set_charset($conn,"UTF8");
     $dong = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM USER usr, tinh_thanh t, quan_huyen h, phuong_xa x WHERE USR_SDT = '$sdtb' and usr.id_tinh = t.id_tinh and usr.id_huyen = h.id_huyen and usr.id_xa = x.id_xa"));
     $dong1 = mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM USER usr, tinh_thanh t, quan_huyen h, phuong_xa x WHERE USR_SDT = '$sdtm' and usr.id_tinh = t.id_tinh and usr.id_huyen = h.id_huyen and usr.id_xa = x.id_xa"));
-    echo $sdtm;
+    //echo $sdtm;
     ?>
     <form method="post" id="ttdonhang" name="ttdonhang">
         <style type="text/css">
@@ -168,8 +168,8 @@
     <tr>
         <th>Địa chỉ</th>
         <td>
-            <input class="w3-input" type="text" id="diachi" name="diachi" value="<?php echo $dong['USR_SONHA_AP'].'-'.$dong['XA_NAME'].'-'.$dong['HUYEN_NAME'].'-'.$dong['TINH_NAME']; ?>" placeholder="Địa chỉ">
-            <input style="" class="w3-input" type="text" id="diachi" name="diachi1" value="<?php echo $dong1['USR_SONHA_AP'].'-'.$dong1['XA_NAME'].'-'.$dong1['HUYEN_NAME'].'-'.$dong1['TINH_NAME']; ?>" placeholder="Địa chỉ">
+            <input class="w3-input" type="text" id="diachi" name="diachi" value="<?php echo $dong['XA_NAME'].'-'.$dong['HUYEN_NAME'].'-'.$dong['TINH_NAME']; ?>" placeholder="Địa chỉ">
+            <input  style=" display: none;" class="w3-input" type="text" id="diachi" name="diachi1" value="<?php echo $dong1['XA_NAME'].'-'.$dong1['HUYEN_NAME'].'-'.$dong1['TINH_NAME']; ?>" placeholder="Địa chỉ">
         </td>
     </tr>
     <tr>
@@ -189,8 +189,8 @@
  <table style="width: 104%;">
     <tr>
         <?php 
-        $sqlden = "SELECT TINH_NAME,usr.id_tinh FROM USER usr , TINH_THANH tt WHERE usr.id_tinh = tt.id_tinh AND USR_SDT = $sdtm";
-        $sqltu = "SELECT TINH_NAME,usr.id_tinh FROM USER usr , TINH_THANH tt WHERE usr.id_tinh = tt.id_tinh AND USR_SDT = $sdtb";
+        $sqlden = "SELECT TINH_NAME,usr.id_tinh FROM USER usr , tinh_thanh tt WHERE usr.id_tinh = tt.id_tinh AND USR_SDT = $sdtm";
+        $sqltu = "SELECT TINH_NAME,usr.id_tinh FROM USER usr , tinh_thanh tt WHERE usr.id_tinh = tt.id_tinh AND USR_SDT = $sdtb";
         $den = mysqli_fetch_row(mysqli_query($conn,$sqlden));
         $tu = mysqli_fetch_row(mysqli_query($conn,$sqltu));
         $gtu = $tu[1];
@@ -229,14 +229,14 @@
    $sql = "SELECT * FROM DONVIVANCHUYEN DV, LOAIHANGVANCHUYEN LH WHERE DV.DVVC_ID = LH.DVVC_ID";
    $rs = mysqli_query($conn,$sql);
    foreach ($rs as $value) {
-    echo $value['DVVC_SDT'];
+  //  echo $value['DVVC_SDT'];
     ?>
     <tr>
        <td>
         <input type="radio" class="rd_vt" name="rd_vt" value="<?php echo $value['DVVC_SDT']; ?>">
         <input style="display: none;" type="text" name="dv" id="<?php echo 'dv'.$value['DVVC_SDT']; ?>" value="<?php echo $value['DVVC_SDT']; ?>" >
-        <div style="" id="dv_chot"></div>
-        <div style="" id="phi_chot"></div>
+        <div style="display: none;" id="dv_chot"></div>
+        <div style="display: none;" id="phi_chot"></div>
     </td>
 
     <input style="display: none;" type="text" name="dvvc_tt" id="<?php echo 'dvvc_tt'.$value['DVVC_SDT']; ?>" value="<?php echo $tongkhoiluong*$value['LH_GIA_NHANH']; ?>" >

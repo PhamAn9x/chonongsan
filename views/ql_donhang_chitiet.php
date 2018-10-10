@@ -161,7 +161,7 @@
     <tr>
         <th>Địa chỉ</th>
         <td>
-            <input class="w3-input" type="text" id="diachi" name="diachi" value="<?php echo $dong['USR_SONHA_AP'].'-'.$dong['XA_NAME'].'-'.$dong['HUYEN_NAME'].'-'.$dong['TINH_NAME']; ?>" placeholder="Địa chỉ">
+            <input class="w3-input" type="text" id="diachi" name="diachi" value="<?php echo $dong['XA_NAME'].'-'.$dong['HUYEN_NAME'].'-'.$dong['TINH_NAME']; ?>" placeholder="Địa chỉ">
         </td>
     </tr>
     <tr>
@@ -186,8 +186,8 @@
  <table style="width: 104%;">
     <tr>
         <?php 
-        $sqlden = "SELECT TINH_NAME,usr.id_tinh FROM USER usr , TINH_THANH tt WHERE usr.id_tinh = tt.id_tinh AND USR_SDT = $sdtm";
-        $sqltu = "SELECT TINH_NAME,usr.id_tinh FROM USER usr , TINH_THANH tt WHERE usr.id_tinh = tt.id_tinh AND USR_SDT = $sdtb";
+        $sqlden = "SELECT TINH_NAME,usr.id_tinh FROM USER usr , tinh_thanh tt WHERE usr.id_tinh = tt.id_tinh AND USR_SDT = $sdtm";
+        $sqltu = "SELECT TINH_NAME,usr.id_tinh FROM USER usr , tinh_thanh tt WHERE usr.id_tinh = tt.id_tinh AND USR_SDT = $sdtb";
         $den = mysqli_fetch_row(mysqli_query($conn,$sqlden));
         $tu = mysqli_fetch_row(mysqli_query($conn,$sqltu));
         $gtu = $tu[1];
@@ -228,9 +228,16 @@
 </tr>
 </table>
 </div>
-
-    <input style="width: 20%;margin-left: 30%; margin-top: 3%;" type="button" class="w3-btn w3-red w3-round w3-hover-white" name="btdanhan" id="btdanhan" value="Đã nhận hàng">
+<div style="text-align: center;">
+<?php
+ if($rs[0] == 3){
+    ?>
+    <input style="width: 20%;margin-left: 0%; margin-top: 3%;" type="button" class="w3-btn w3-red w3-round w3-hover-white" name="btdanhan" id="btdanhan" value="Đã nhận hàng">
+    <?php
+}
+    ?>
      <a href="index.php?view=ql_donhang"><input style="width: 20%;margin-left: 0%; margin-top: 3%;" type="button" class="w3-btn w3-blue w3-round w3-hover-white" name="btnhuy" id="btnhuy" value="Trở lại"></a>
+ </div>
 </div>
 <div id ="cho_id"></div>
 <script type="text/javascript">

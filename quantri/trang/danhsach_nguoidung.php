@@ -64,6 +64,7 @@
         </thead>
         <tbody>
           <?php
+          error_reporting(0);
           include('../../config/connect.php');
           $sql = "SELECT * FROM USER";
           mysqli_set_charset($conn,"UTF8");

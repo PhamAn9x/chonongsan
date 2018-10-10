@@ -46,7 +46,7 @@ function dangnhap(){
 </script>
 <link rel="stylesheet" type="text/css" href="./css/dangky.css">
 <!-- header ends here -->
-<div class="loginbox radius" style="margin-left:200px;">
+<div class="loginbox radius" style="margin-left:10%;">
   <h2 style="color:#141823; text-align:center; font-size: 30px; 
   line-height:38px; font-weight:1000; font-family: 'roboto';">ĐĂNG NHẬP</h2>
   <div class="loginboxinner radius">
@@ -98,8 +98,8 @@ function dangnhap(){
       $sqln = "SELECT HTX_TEN FROM HOPTACXA WHERE HTX_ID = $id";
       $rs = mysqli_fetch_row(mysqli_query($conn,$sqln));
       if($row['Q_ID'] == 1) $_SESSION['admin'] = $row['Q_ID'];
-      if($row['Q_ID'] == 3) $_SESSION['ndthuong'] = $row['Q_ID'];
-      if($row['Q_ID'] == 2) $_SESSION['htx'] = $row['Q_ID'];
+      if($row['Q_ID'] == 2) $_SESSION['ndthuong'] = $row['Q_ID'];
+      if($row['Q_ID'] == 3) $_SESSION['htx'] = $row['Q_ID'];
       if($row['Q_ID'] == 4) $_SESSION['giaohang'] = $row['Q_ID'];
       $_SESSION['user'] = $row['USR_TEN'];
 		  $_SESSION['sdt'] = $row['USR_SDT'];

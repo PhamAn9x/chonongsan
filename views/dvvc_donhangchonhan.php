@@ -32,7 +32,7 @@
 </head>
 <!-- <link rel="stylesheet" type="text/css" href="css/tindang.css"> -->
 <div class="tindang" style="width: 90%; margin-left: 5%;">
-   <h1 style="text-align: center; font-weight: 700; color: red;">ĐƠN HÀNG CHỜ GIAO</h1>
+   <h1 style="text-align: center; font-weight: 700; color: red;">ĐƠN HÀNG CHỜ NHẬN </h1>
    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>

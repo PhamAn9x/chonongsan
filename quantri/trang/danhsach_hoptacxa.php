@@ -9,23 +9,24 @@
   padding: 13px;
 }
 </style>
+<div id="cho_id">
 <div>
 <article style="width: 98%; margin-left: 1%; padding-top: 3%;">
   <main  id="table" class="table-editable">
-    
+
     <div class="panel panel-default">
       <!-- Default panel contents -->
       <div class="panel-heading" style="text-align: center; font-size: 22px;">DANH SÁCH HỢP TÁC XÃ</div>
       <div class="panel-body">
-                
+
         <div class="row-fluid">
           <div class="col-md-1" style="text-align: left;">
-           <button title="Xóa mục đã chọn" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i>
+           <button id="btn_xoa_multi" title="Xóa mục đã chọn" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i>
           </div>
           <div class="col-md-10">
             <input type="text" class="form-control page-filter" placeholder="Tìm kiếm.." />
           </div>
-           <div class="col-md-1" ><button class="btn btn-success"><i style="font-size: 20px;" class="fa fa-plus-square"></i></button></div>
+           <div class="col-md-1" ><button id="btn_themmoi" class="btn btn-success"><i style="font-size: 20px;" class="fa fa-plus-square"></i></button></div>
         </div>
         </div>
       </div>
@@ -67,31 +68,46 @@
             while($row = mysqli_fetch_array($rs,MYSQLI_ASSOC)){
           ?>
           <tr>
-            <td><input value="<?php echo $row['HTX_ID']; ?>" type="checkbox" class="row-check" /></td>
+            <td><input name="checkbox_htx" value="<?php echo $row['HTX_ID']; ?>" type="checkbox" class="row-check" /></td>
             <td><?php echo $i; ?></td>
             <td contenteditable="false"><?php echo $row['HTX_ID']; ?></td>
             <td contenteditable="false"><?php echo $row['HTX_TEN']; ?></td>
            <td><?php echo $row['HTX_DIACHI']; ?></td>
-             <?php 
+             <?php
               $id_htx = $row['HTX_ID'];
               $thanhvien = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(*) FROM USER WHERE HTX_ID = $id_htx"));
             ?>
             <td><?php echo $thanhvien[0];?></td>
-            <?php 
+            <?php
               $id_htx = $row['HTX_ID'];
               $sanpham = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(*) FROM SANPHAM WHERE SP_HTX_ID = $id_htx"));
             ?>
             <td><?php echo $sanpham[0] ; ?></td>
-            <?php 
+            <?php
               $sdt_ndd = $row['NDD_SDT'];
               $nguoidd = mysqli_fetch_row(mysqli_query($conn,"SELECT USR_HO,USR_TEN FROM USER WHERE USR_SDT = $sdt_ndd"));
             ?>
             <td><?php echo $nguoidd[0]." ".$nguoidd[1] ?></td>
-              <input style="display: none;" type="text" id="edit<?php echo $row['NSP_ID']; ?>">
-             <td><button type="button" class="btn btn-success row-edit"><i style="font-size: 20px;" class="fa fa-edit"></i></button></td>
-             <input style="display: none;" type="text" id="xoa<?php echo $row['NSP_ID']; ?>">
-            <td><button type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i></button></td>
+              <input style="display: none;" type="text" id="capnhat<?php echo $row['HTX_ID']; ?>" value="<?php echo $row['HTX_ID']; ?>" />
+             <td><button id="btn_capnhat<?php echo $row['HTX_ID']; ?>" type="button" class="btn btn-success row-edit"><i style="font-size: 20px;" class="fa fa-edit"></i></button></td>
+             <input style="display: none;" type="text" id="xoa<?php echo $row['HTX_ID']; ?>" value="<?php echo $row['HTX_ID']; ?>" />
+            <td><button  id="btn_xoa<?php echo $row['HTX_ID']; ?>" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-trash-o"></i></button></td>
           </tr>
+          <script type="text/javascript">
+            $("#btn_xoa<?php echo $row['HTX_ID']; ?>").click(function(){
+              var htx_id = <?php echo $row['HTX_ID']; ?>;
+              if(confirm("Bạn có chắc muốn xóa?")){
+                $.post("xuly/xuly_xoa.php", {xoa_htx: htx_id}, function(data){
+                 $("#cho_id").html(data);
+               });
+              }
+
+            });
+            $("#btn_capnhat<?php echo $row['HTX_ID']; ?>").click(function(){
+                  var id_htx = <?php echo $row['HTX_ID']; ?>;
+                $("#show").load("trang/popup_edit_htx.php?htx_id="+id_htx);
+            });
+          </script>
           <?php
           $i++;
         }
@@ -99,7 +115,7 @@
         </tbody>
       </table>
     </div>
-    
+</div>
   </main>
 </article>
 </div>
@@ -128,25 +144,25 @@ $BTN.click(function () {
   var $rows = $TABLE.find('tr:not(:hidden)');
   var headers = [];
   var data = [];
-  
+
   // Get the headers (add special header logic here)
   $($rows.shift()).find('th:not(:empty)').each(function () {
     headers.push($(this).text().toLowerCase());
   });
-  
+
   // Turn all existing rows into a loopable array
   $rows.each(function () {
     var $td = $(this).find('td');
     var h = {};
-    
+
     // Use the headers from earlier to name our hash keys
     headers.forEach(function (header, i) {
-      h[header] = $td.eq(i).text();   
+      h[header] = $td.eq(i).text();
     });
-    
+
     data.push(h);
   });
-  
+
   // Output the result
   $EXPORT.text(JSON.stringify(data));
 });
@@ -216,7 +232,7 @@ $(document).on('change', 'table thead [type="checkbox"]', function(e){
 <script>
   $(function () {
     $('#example2').DataTable({
-      'paging'      : true,
+      'paging'      : false,
       'pageLength'  : 5,
       'lengthChange': false,
       'searching'   : false,
@@ -238,4 +254,26 @@ $(document).on('change', 'table thead [type="checkbox"]', function(e){
     $(".dataTables_info").html('');
   });
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#btn_xoa_multi").click(function(){
+    var selectedhtx = new Array();
+    $('input[name="checkbox_htx"]:checked').each(function() {
+    selectedhtx.push(this.value);
+    });
+    if(selectedhtx.length == 0){
+    alert("Vui lòng chọn một mục!");
+    }else{
+    if(confirm("Bạn có chắc muốn xóa các mục đã chọn?")){
+        $.post("xuly/xuly_xoa.php", {xoa_multi_htx: selectedhtx}, function(data){
+         $("#cho_id").html(data);
+       });
+    }
+    }
+  });
+  $("#btn_themmoi").click(function(){
+    $("#show").load("trang/popup_them_htx.php")
+  });
+});
 
+</script>

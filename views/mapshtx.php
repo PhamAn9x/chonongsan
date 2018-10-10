@@ -10,10 +10,10 @@
 </head>
 <body>
 	<div class="w3-col s2"></div>
-	<div class="w3-teal w3-col s8" style=" width: 79.5%; border-radius:5px 0 0 0; height: 45px;  margin-top: 2%; font-size: 25px;text-align: center;margin-top: 10px; margin-left: 8%; font-family: 'roboto'; font-weight: 700; ">VỊ TRÍ CÁC HỢP TÁC XÃ</div>
+	<div class="w3-teal w3-col s8" style=" width: 100%; border-radius:5px 0 0 0; height: 45px;  margin-top: 2%; font-size: 25px;text-align: center;margin-top: 10px; margin-left: 0%; font-family: 'roboto'; font-weight: 700; ">VỊ TRÍ CÁC HỢP TÁC XÃ</div>
 	<div class="w3-col s2"></div>
 
-    <div id="map" style="box-shadow: -1px 1px 1px 2px #01a3a4; width: 79%; margin-left: 8.3%; margin-top: 5%; height: 500px"></div>
+    <div id="map" style="box-shadow: -1px 1px 1px 2px #01a3a4; width: 100%; margin-left: 0%; margin-top: 5%; height: 700px"></div>
 
     <script
         src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js">
@@ -26,12 +26,12 @@
 	$sql="SELECT * FROM HOPTACXA";
 	$rs= mysqli_query($conn,$sql);
 	while($row = mysqli_fetch_array($rs,MYSQLI_ASSOC)){
-		echo '["'.$row['HTX_TEN'].'",'.$row["HTX_KINHDO"].",".$row["HTX_VIDO"].'],';
+		echo '["<a href=index.php?view=htx_chitiet&id='.$row['HTX_ID'].'>'.$row['HTX_TEN'].'</a>",'.$row["HTX_KINHDO"].",".$row["HTX_VIDO"].'],';
 		
 			}
 		?>
 		];
-        var map = L.map('map').setView([9.681007, 105.614058], 9);
+        var map = L.map('map').setView([9.757082, 105.608154], 11);
         mapLink = 
             '<a href="http://openstreetmap.org">OpenStreetMap</a>';
         L.tileLayer(

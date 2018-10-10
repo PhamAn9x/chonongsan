@@ -1,5 +1,5 @@
-<?php 
-	include("../../config/connect.php"); 
+<?php
+	include("../../config/connect.php");
 	if(isset($_POST['xoa_usr'])){
 		$sdt = $_POST['xoa_usr'];
 		if(mysqli_query($conn,"DELETE FROM USER WHERE USR_SDT = $sdt")){
@@ -48,7 +48,7 @@
 				<script type="text/javascript">
 					alert("Đã xóa thành công <?php echo count($arr);?> người dùng");
 					 $("#show").load('trang/danhsach_nguoidung.php');
-				</script>		
+				</script>
 			<?php
 		}
 		}
@@ -65,7 +65,7 @@
 				<script type="text/javascript">
 					alert("Đã xóa thành công <?php echo count($arr_nsp);?> nhóm sản phẩm");
 					 $("#show").load('trang/danhsach_nhomsanpham.php');
-				</script>		
+				</script>
 			<?php
 		}
 			} else
@@ -103,11 +103,11 @@
 				<script type="text/javascript">
 					alert("Đã khóa thành công <?php echo count($arr_nsp);?> người dùng!");
 					 $("#show").load('trang/danhsach_nguoidung.php');
-				</script>		
+				</script>
 			<?php
 		}
 			}
-			else 
+			else
 				if(isset($_POST['kichhoat_multi'])){
 				$arr_nsp = $_POST['kichhoat_multi'];
 				$check = 0;
@@ -120,7 +120,7 @@
 				<script type="text/javascript">
 					alert("Đã kích hoạt thành công <?php echo count($arr_nsp);?> người dùng!");
 					 $("#show").load('trang/danhsach_nguoidung.php');
-				</script>		
+				</script>
 			<?php
 		}
 			}else
@@ -138,7 +138,7 @@
 				<script type="text/javascript">
 					alert("Đã xóa thành công <?php echo count($arr_sp);?> sản phẩm!");
 					 $("#show").load('trang/danhsach_sanpham.php');
-				</script>		
+				</script>
 			<?php
 		}
 			}
@@ -155,7 +155,7 @@
 				<script type="text/javascript">
 					alert("Đã khóa thành công <?php echo count($arr_nsp);?> sản phẩm!");
 					 $("#show").load('trang/danhsach_sanpham.php');
-				</script>		
+				</script>
 			<?php
 		}
 			}
@@ -172,7 +172,7 @@
 				<script type="text/javascript">
 					alert("Đã duyệt thành công <?php echo count($arr_nsp);?> sản phẩm!");
 					 $("#show").load('trang/danhsach_sanpham.php');
-				</script>		
+				</script>
 			<?php
 		}
 			}else
@@ -186,7 +186,62 @@
 			</script>
 			<?php
 		}
-	}
-
+	} else
+	if(isset($_POST['xoa_multi_htx'])){
+	$arr_htx = $_POST['xoa_multi_htx'];
+	$check = 0;
+for($i=0;$i< count($arr_htx);$i++){
+	$htx = $arr_htx[$i];
+	if(mysqli_query($conn,"DELETE FROM HOPTACXA WHERE HTX_ID = $htx")) $check=0; else $check = 1;
+}
+if($check==0){
+?>
+	<script type="text/javascript">
+		alert("Đã xóa thành công <?php echo count($arr_htx);?> hợp tác xã!");
+		 $("#show").load('trang/danhsach_hoptacxa.php');
+	</script>
+<?php
+}
+}else
+			if(isset($_POST['xoa_htx'])){
+			$htx_id = $_POST['xoa_htx'];
+			if(mysqli_query($conn,"DELETE FROM HOPTACXA WHERE HTX_ID = $htx_id")){
+			?>
+			<script type="text/javascript">
+				alert("Xóa hợp tác xã thành công!")
+				 $("#show").load('trang/danhsach_hoptacxa.php');
+			</script>
+			<?php
+			}
+			}
+            else
+                if(isset($_POST['dvvc_xoa_multi'])){
+                    $arr_dvvc = $_POST['dvvc_xoa_multi'];
+                    $check = 0;
+                    for($i=0;$i< count($arr_dvvc);$i++){
+                        $dvvc = $arr_dvvc[$i];
+                        if(mysqli_query($conn,"DELETE FROM DONVIVANCHUYEN WHERE DVVC_ID = $dvvc")) $check=0; else $check = 1;
+                    }
+                    if($check==0){
+                        ?>
+                        <script type="text/javascript">
+                            alert("Đã xóa thành công <?php echo count($arr_dvvc);?> đơn vị vận chuyển!");
+                            $("#show").load('trang/danhsach_donvivanchuyen.php');
+                        </script>
+                        <?php
+                    }
+                } else
+                    if(isset($_POST['xoa_dvvc'])){
+                        $id_dvvc = $_POST['xoa_dvvc'];
+                        if(mysqli_query($conn,"DELETE FROM DONVIVANCHUYEN WHERE DVVC_ID = $id_dvvc")
+                            && mysqli_query($conn,"DELETE FROM LOAIHANGVANCHUYEN WHERE DVVC_ID = $id_dvvc")){
+                            ?>
+                            <script type="text/javascript">
+                                alert("Xóa đơn vị vận chuyển thành công!")
+                                $("#show").load('trang/danhsach_donvivanchuyen.php');
+                            </script>
+                            <?php
+                        }
+                    }
 
 ?>

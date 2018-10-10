@@ -1,6 +1,6 @@
 
 <?php
-include("config/connect.php");
+include("../config/connect.php");
 $hinh_daup = array();
 $check = 0;
 $checkt=0;
@@ -9,7 +9,7 @@ $checkt=0;
 			$hinh_ten = $_FILES['hinh']['name'][$key];
 			$kichco = $_FILES['hinh']['size'][$key];
 			$tam_ten = $_FILES['hinh']['tmp_name'][$key];
-			$folder = "upload/";
+			$folder = "../test/";
 			$duoi = explode(".",$hinh_ten);
 			$ext = end($duoi);
 			$chophep = array('jpeg','png','gif','jpg');
@@ -20,7 +20,7 @@ $checkt=0;
 				$checkt =1;
 			}
 			else
-				if($kichco > 9000000) 
+				if($kichco > 9000000)
 				{
 					echo "<script>alert('Kích cở ảnh quá lớn!');</script>";
 					$checkt=1;
@@ -32,7 +32,7 @@ $checkt=0;
 							{
 								$hinh_daup[] = $hinh_ten;
 								$check = 1;
-							}	
+							}
 		}
 		if($check==1 && $checkt == 0) echo "<script>alert('Upload thành công!');</script>";
 		if($check == 0 && $checkt == 0) echo "<script>alert('Upload thất bại!');</script>";
@@ -46,11 +46,11 @@ $checkt=0;
 	<p>
 <?php
 	for ($i=0; $i< count($hinh_daup); $i++){?>
-	
+
 	<div style="width: 100px; float: left; margin: 2px; text-align: center;">
-		<img src="<?php echo 'upload/'.$hinh_daup[$i]; ?>" style="width: 100px; height: 100px"/>
+		<img src="<?php echo '../test/'.$hinh_daup[$i]; ?>" style="width: 100px; height: 100px"/>
 	</div>
-		
+
 <?php
 	}
 ?>

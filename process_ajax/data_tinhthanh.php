@@ -49,7 +49,7 @@
 	$key2 = $_POST['id2'];
 	mysqli_set_charset($conn, 'UTF8');
 	if($key2 != ""){
-	$sql = "select * from user where usr_sdt = $key2";
+	$sql = "SELECT * FROM USER WHERE USR_SDT = $key2";
                $result = mysqli_query($conn,$sql);
                $rowcount=mysqli_num_rows($result);
                if($rowcount > 0){
@@ -72,8 +72,16 @@
 			document.getElementById('slhxa').style.visibility = 'hidden';
 			document.getElementById('dk').style.visibility = 'hidden';
 			document.getElementById('capchar').style.visibility = 'hidden';
+            document.getElementById('slngaysinh').style.visibility = 'hidden';
+            document.getElementById('slthangsinh').style.visibility = 'hidden';
+            document.getElementById('slnamsinh').style.visibility = 'hidden';
+            document.getElementById('alert_ho_ten').style.visibility = 'hidden';
 
-		})
+
+
+
+
+        })
 	</script>
 <?php
 		}
@@ -94,6 +102,9 @@
 			document.getElementById('slhxa').style.visibility = 'hidden';
 			document.getElementById('dk').style.visibility = 'hidden';
 			document.getElementById('capchar').style.visibility = 'hidden';
+            document.getElementById('slngaysinh').style.visibility = 'hidden';
+            document.getElementById('slthangsinh').style.visibility = 'hidden';
+            document.getElementById('slnamsinh').style.visibility = 'hidden';
 			document.getElementById("alert_sdt").innerHTML="Số điện thoại không đúng định dạng!"
 
 		})
@@ -117,6 +128,9 @@
 			document.getElementById('slhxa').style.visibility = 'hidden';
 			document.getElementById('dk').style.visibility = 'hidden';
 			document.getElementById('capchar').style.visibility = 'hidden';
+            document.getElementById('slngaysinh').style.visibility = 'hidden';
+            document.getElementById('slthangsinh').style.visibility = 'hidden';
+            document.getElementById('slnamsinh').style.visibility = 'hidden';
 			document.getElementById("alert_sdt").innerHTML="Số điện phải bắt đầu bằng số 0!"
 
 		})
@@ -138,6 +152,9 @@
 				document.getElementById('slhxa').style.visibility = 'visible';;
 				document.getElementById('dk').style.visibility = 'visible';
 				document.getElementById('capchar').style.visibility = 'visible';
+                document.getElementById('slngaysinh').style.visibility = 'visible';
+                document.getElementById('slthangsinh').style.visibility = 'visible';
+                document.getElementById('slnamsinh').style.visibility = 'visible';
 
 		})
 				</script>

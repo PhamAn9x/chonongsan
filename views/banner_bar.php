@@ -58,7 +58,7 @@
 							}
 							?>
 							<?php
-								if(isset($_SESSION['htx'])){
+								if(isset($_SESSION['sdt'])){
 							?>
 							<td class="w3-border-left">
 								<a href="?view=dangtin" class="w3-btn w3-round w3-border-left w3-green w3-hover-white" style="margin-top: 4px; margin-left: 90%; width: 125px;";><span style="font-weight: 700">Đăng tin</span></a>

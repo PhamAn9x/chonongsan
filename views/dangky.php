@@ -6,6 +6,7 @@
   <script type="text/javascript">
     var check = 0;
     function check_dk() {
+      var nnd = document.getElementById('sl_nnd').value;
       var ho = document.getElementById('ho').value;
       var ten = document.getElementById('ten').value;
       var sdt   = document.getElementById('sdt').value;
@@ -16,6 +17,12 @@
       var sltinh = document.getElementById('sltinh').value;
       var slhuyen = document.getElementById('slhuyen').value;
       var slxa = document.getElementById('slxa').value;
+      if(nnd == ""){
+        document.getElementById("sl_nnd").style.borderColor = "red"; 
+        document.getElementById("sl_nnd").style.borderWidth = "2px";
+        document.getElementById("alert_nnd").innerHTML="<i>Vui lòng chọn nhóm ngưòi dùng!</i>";
+        check = 1;
+      }else
       if(ho == "") 
       {
         document.getElementById("ho").style.borderColor = "red"; 
@@ -286,12 +293,20 @@
   <div class="loginheader">
     <h4 class="title">Nhập đầy đủ thông tin để tiến hành dăng ký!.</h4>
   </div>
-  <div class="loginbox radius w3-col s6" style="margin-left:200px; width: 66%;">
 
+  <div class="loginbox radius w3-col s6" style="margin-left:150px; padding-left: 3.5%; width: 75%;">
+   
     <div class="loginboxinner radius" style="float: left;">
-
       <!--loginheader-->
-      <div class="loginform">
+     <div class="loginform">
+<p><select id="sl_nnd" name = "sl_nnd">
+     <option value="">Chọn nhóm ngưòi dùng</option>
+     <option value="0">Ngưòi dùng cá nhân</option>
+     <option value="1">Tổ chức - Công ty</option>
+
+   </select>
+ </p>
+ <div style="color: red;" id="alert_nnd"></div>
 
         <p>
           <input type="text" id="sdt" name="sdt" placeholder="Nhập số điện thoại >= 10 và <=  11 ký tự!" class="radius" />
@@ -423,7 +438,8 @@
  </div>
  <div class="w3-col s12" style="padding-left: 25%;">
   <p id="dk">
-    <input type="button" class="w3-blue" name="dangky" id="dangky" onclick="check_dk();" value="Đăng ký">
+    <input style="width: 200px; float: left;" type="button" class="w3-blue" name="dangky" id="dangky" onclick="check_dk();" value="Đăng ký">
+     <input style="margin-left: 3px; width: 200px; float: left;" type="button" class="w3-red" name="dangky" id="trolai"  value="Trở lại">
   </p>
 </div>
 
@@ -437,6 +453,7 @@
 </form>
 <?php 
 if(isset($_POST['ten'])){
+  $nhom_nd = $_POST['sl_nnd'];
   $ngaydangky =date("Y-m-d");
   $gioitinh = $_POST['slgioitinh'];
   $htx = $_POST['slhxa'];
@@ -458,7 +475,7 @@ if(isset($_POST['ten'])){
     echo ("<script> alert('Vui lòng kiểm tra đầy đủ thông tin và xác thực không phải người máy!');</script>");
   }else
   {
-    $sql = "INSERT INTO USER (USR_SDT,USR_PASS,USR_EMAIL,HTX_ID,GH_ID,ID_TINH,ID_HUYEN,ID_XA,USR_HO,USR_TEN,USR_GIOITINH,USR_NGAYDANGKY,USR_NGAYSINH,USR_TRANGTHAI,Q_ID) VALUES ('$sdt','$pass','$email',$htx,1,'$tinh','$huyen','$xa','$ho','$ten','$gioitinh','$ngaydangky','$nsinh',0,3)";
+    $sql = "INSERT INTO USER (USR_SDT,USR_PASS,USR_EMAIL,HTX_ID,GH_ID,ID_TINH,ID_HUYEN,ID_XA,USR_HO,USR_TEN,USR_GIOITINH,USR_NGAYDANGKY,USR_NGAYSINH,USR_TRANGTHAI,Q_ID,USR_LOAI) VALUES ('$sdt','$pass','$email',$htx,1,'$tinh','$huyen','$xa','$ho','$ten','$gioitinh','$ngaydangky','$nsinh',0,3,$nhom_nd)";
            // echo $sql;
     $kq = mysqli_query($conn,$sql);
     if($kq) {
@@ -472,3 +489,10 @@ if(isset($_POST['ten'])){
 }
 ?>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#trolai").click(function(){
+  window.history.back();
+    });
+  })
+</script>

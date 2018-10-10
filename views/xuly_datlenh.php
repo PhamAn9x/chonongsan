@@ -41,7 +41,7 @@ if(isset($_POST['sldatlenh'])){
 					$sp_ghichu = $value['L_LOINHAN'];
 					if($sl_ban >= $mua_conlai && $mua_conlai > 0)
 					{
-						echo "Còn đủ bán"."<br />";
+						//echo "Còn đủ bán"."<br />";
 						$sl_ban = $sl_ban - $mua_conlai;
 						// mysqli_set_charset($conn,'UTF8');
 						// mysqli_query($conn,"
@@ -54,6 +54,15 @@ if(isset($_POST['sldatlenh'])){
 
 						echo "1. Da mua".$mua_conlai." của".$sdt_ban."<br />";
 						echo "1. So luong ban con lai ".$sl_ban."<br />";
+						?>
+								<script type="text/javascript">
+										var mua_con_lai = "<?php echo $mua_conlai;?>";
+										var sdt_ban = "<?php echo $sdt_ban; ?>";
+										var sl_ban ="<?php echo $sl_ban; ?>";
+										var string = "Đã mua  "+mua_conlai+"  của "+sdt_ban+" <br />"+ " Số lượng bán còn lại là "+sl_ban;
+									alert( string);
+								</script>
+						<?php
 						$mua_conlai = 0;
 						mysqli_set_charset($conn,'UTF8');
 						mysqli_query($conn,"UPDATE LENH SET L_SOLUONG = $sl_ban WHERE L_SDT = '$sdt_ban' AND SP_ID = $spid AND L_TEN = 'ban' AND L_GIA = $sp_gia");
@@ -62,9 +71,9 @@ if(isset($_POST['sldatlenh'])){
 					}
 					else
 					{
-						echo "2. Một Người khong dủ cung cấp <br />";
+						//echo "2. Một Người khong dủ cung cấp <br />";
 						$mua_conlai = ($sl_ban - $mua_conlai)*(-1);
-						echo "2. Da mua".$sl_ban." của".$sdt_ban."<br />";
+						//echo "2. Da mua".$sl_ban." của".$sdt_ban."<br />";
 						// mysqli_set_charset($conn,'UTF8');
 						// mysqli_query($conn,"
 						// 	INSERT INTO KHOPLENH(KL_TEN,KL_SDT_BAN,KL_SDT_MUA,KL_SP_ID,KL_SOLUONG,KL_SP_TEN,KL_GIA,KL_DIACHI,KL_GHICHU) VALUES ('mua','$sdt','$sdt_ban',$spid,$sl_ban,'$spten',$sp_gia,'$sp_diachi','$sp_ghichu')
@@ -74,11 +83,11 @@ if(isset($_POST['sldatlenh'])){
 							INSERT INTO KHOPLENH(KL_TEN,KL_SDT_BAN,KL_SDT_MUA,KL_SP_ID,KL_SOLUONG,KL_SP_TEN,KL_GIA,KL_DIACHI,KL_GHICHU) VALUES ('ban','$sdt','$sdt_ban',$spid,$sl_ban,'$spten',$sp_gia,'$sp_diachi','$sp_ghichu')
 							");
 						$sl_ban = 0;
-						echo "2. So luong ban con lai ".$sl_ban."<br />";
+						//echo "2. So luong ban con lai ".$sl_ban."<br />";
 						mysqli_set_charset($conn,'UTF8');
 						mysqli_query($conn,"UPDATE LENH SET L_SOLUONG = $sl_ban WHERE L_SDT = '$sdt_ban' AND SP_ID = $spid AND L_TEN = 'ban' AND L_GIA = $sp_gia");
 
-						echo "2. Số lượng cần mua còn lại ".$mua_conlai."<br />";
+						//echo "2. Số lượng cần mua còn lại ".$mua_conlai."<br />";
 
 					}
 					// mysqli_query($conn,"DELETE FROM LENH WHERE L_TEN = 'ban' AND L_SOLUONG <=0");
@@ -105,14 +114,14 @@ if(isset($_POST['sldatlenh'])){
 						$sl_update = $rs['L_SOLUONG'] + $sl;
 						$sql = "UPDATE LENH SET L_SOLUONG = $sl_update WHERE L_TEN = 'mua' AND L_SDT = '$sdt' AND SP_ID = $spid AND L_GIA = $gia";
 						mysqli_query($conn,$sql);
-							echo "co dang lenh roi";
+							//echo "co dang lenh roi";
 					}
 				else
 				{
 					echo "Chưa khớp lệnh được";
 					mysqli_set_charset($conn,'UTF8');
 					mysqli_query($conn,"INSERT INTO LENH(L_TEN,SP_ID,L_SDT,SP_TEN,L_SOLUONG,L_GIA,L_TONGTIEN,L_DIACHIGIAO,L_LOINHAN) VALUES ('mua',$spid,'$sdt','$spten',$sl,$gia,$thanhtien,'$diachi','$loinhan')");
-					echo $sql;
+					//echo $sql;
 				}
 			}
 			mysqli_query($conn,"DELETE FROM LENH WHERE L_TEN = 'ban' AND L_SOLUONG <=0");
@@ -140,7 +149,15 @@ if(isset($_POST['sldatlenh'])){
 						//echo $check."<br />";
 							if($check <= 0){
 								$mcl = $sl_mua - $ban_conlai;
-								echo "Da ban ".$ban_conlai." cho ".$sdt_mua."<br />";
+								?>
+									<script type="text/javascript">
+										var ban_conlai = "<?php echo $ban_conlai; ?>";
+										var sdt_mua = "<?php echo $sdt_mua; ?>";
+
+								alert("Da ban "+ban_conlai+" cho "+sdt_mua+" !<br />");
+										
+									</script>
+								<?php
 								// mysqli_set_charset($conn,'UTF8');
 								// mysqli_query($conn,"
 								// 	INSERT INTO KHOPLENH(KL_TEN,KL_SDT_BAN,KL_SDT_MUA,KL_SP_ID,KL_SOLUONG,KL_SP_TEN,KL_GIA,KL_DIACHI,KL_GHICHU) VALUES ('ban','$sdt','$sdt_mua',$spid,$ban_conlai,'$spten',$sp_gia,'$sp_diachi','$sp_ghichu')
@@ -150,7 +167,7 @@ if(isset($_POST['sldatlenh'])){
 									INSERT INTO KHOPLENH(KL_TEN,KL_SDT_BAN,KL_SDT_MUA,KL_SP_ID,KL_SOLUONG,KL_SP_TEN,KL_GIA,KL_DIACHI,KL_GHICHU) VALUES ('mua','$sdt','$sdt_mua',$spid,$ban_conlai,'$spten',$sp_gia,'$sp_diachi','$sp_ghichu')
 									");
 
-								echo "So luong ".$sdt_mua." mua con lai la ".$mcl."<br/>";
+								//echo "So luong ".$sdt_mua." mua con lai la ".$mcl."<br/>";
 								mysqli_set_charset($conn,'UTF8');
 								mysqli_query($conn,"UPDATE LENH SET L_SOLUONG = $mcl WHERE L_SDT = '$sdt_mua' AND SP_ID = $spid AND L_TEN = 'mua' AND L_GIA = $sp_gia");
 								$ban_conlai=0;
@@ -175,7 +192,16 @@ if(isset($_POST['sldatlenh'])){
 							if($ban_conlai > 0)
 							{
 								$ban_conlai = $ban_conlai - $sl_mua;
-								echo "Da ban ".$sl_mua." cho ".$sdt_mua."<br />";
+								?>
+										<script type="text/javascript">
+										var ban_conlai = "<?php echo $$sl_mua; ?>";
+										var sdt_mua = "<?php echo $sdt_mua; ?>";
+
+								alert("Da ban "+ban_conlai+" cho "+sdt_mua+" !<br />");
+							</script>
+
+								<?php
+								//echo "Da ban ".$sl_mua." cho ".$sdt_mua."<br />";
 								// mysqli_set_charset($conn,'UTF8');
 								// mysqli_query($conn,"
 								// 	INSERT INTO KHOPLENH(KL_TEN,KL_SDT_BAN,KL_SDT_MUA,KL_SP_ID,KL_SOLUONG,KL_SP_TEN,KL_GIA,KL_DIACHI,KL_GHICHU) VALUES ('ban','$sdt','$sdt_mua',$spid,$sl_mua,'$spten',$sp_gia,'$sp_diachi','$sp_ghichu')
@@ -193,7 +219,13 @@ if(isset($_POST['sldatlenh'])){
 						// mysqli_query($conn,"DELETE FROM LENH WHERE L_TEN = 'mua' AND L_SOLUONG < 1");
 					}
 					if($ban_conlai > 0){
-						echo "Còn lại chưa khớp lệnh ".$ban_conlai;
+					//	echo "Còn lại chưa khớp lệnh ".$ban_conlai;
+						?>
+							<script type="text/javascript">
+								var conlai =" <?php echo $ban_conlai; ?>";
+								alert("Còn lại chưa khớp lệnh "+conlai);
+							</script>
+						<?php
 						$sql="INSERT INTO LENH(L_TEN,SP_ID,L_SDT,SP_TEN,L_SOLUONG,L_GIA,L_TONGTIEN,L_DIACHIGIAO,L_LOINHAN) VALUES ('ban',$spid,'$sdt','$spten',$ban_conlai,$gia,$thanhtien,'$diachi','$loinhan')";
 						echo $sql;
 						mysqli_set_charset($conn,"UTF8");
@@ -224,14 +256,14 @@ if(isset($_POST['sldatlenh'])){
 						$sl_update = $rs['L_SOLUONG'] + $sl;
 						$sql = "UPDATE LENH SET L_SOLUONG = $sl_update WHERE L_TEN = 'ban' AND L_SDT = '$sdt' AND SP_ID = $spid AND L_GIA = $gia";
 						mysqli_query($conn,$sql);
-							echo "co dang lenh ban roi";
+							//echo "co dang lenh ban roi";
 					}
 				else
 				{
 					echo "Chưa khớp lệnh được";
 					mysqli_set_charset($conn,'UTF8');
 					mysqli_query($conn,"INSERT INTO LENH(L_TEN,SP_ID,L_SDT,SP_TEN,L_SOLUONG,L_GIA,L_TONGTIEN,L_DIACHIGIAO,L_LOINHAN) VALUES ('ban',$spid,'$sdt','$spten',$sl,$gia,$thanhtien,'$diachi','$loinhan')");
-					echo $sql;
+					//echo $sql;
 				}
 				}
 			}
@@ -239,3 +271,8 @@ if(isset($_POST['sldatlenh'])){
 	}
 }
 ?>
+<script type="text/javascript">
+	var sp_id = <?php  echo $spid; ?>;
+	alert("Lệnh được đặt thành công! Xin cảm ơn!");
+	window.location.href="../index.php?xem=chitietsanpham&id="+sp_id;
+</script>

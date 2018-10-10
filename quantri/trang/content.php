@@ -16,15 +16,20 @@
         <div class="col-md-3 col-sm-6 col-xs-12">
          <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>150</h3>
+                <?php
+                include('../config/connect.php');
+                    $sql = "SELECT COUNT(*) as KQ FROM DONHANG";
+                    $kq = mysqli_fetch_row(mysqli_query($conn,$sql));
+                ?>
+              <h3><?php echo $kq[0]; ?><sup style="font-size: 20px">Đơn hàng</sup></h3>
 
-              <p>New Orders</p>
+              <p>Số đơn hàng đã khớp</p>
             </div>
             <div class="icon">
               <i class="fa fa-shopping-cart"></i>
             </div>
             <a href="#" class="small-box-footer">
-              More info <i class="fa fa-arrow-circle-right"></i>
+              Xem chi tiết <i class="fa fa-arrow-circle-right"></i>
             </a>
             <!-- /.info-box-content -->
           </div>
@@ -34,15 +39,19 @@
         <div class="col-md-3 col-sm-6 col-xs-12">
          <div class="small-box bg-green">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <?php
+                $sql = "SELECT COUNT(*) as KQ FROM LENH";
+                $kq = mysqli_fetch_row(mysqli_query($conn,$sql));
+                ?>
+              <h3><?php echo $kq[0]; ?><sup style="font-size: 20px">Lệnh</sup></h3>
 
-              <p>Bounce Rate</p>
+              <p>Số lệnh đang chờ</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
             <a href="#" class="small-box-footer">
-              More info <i class="fa fa-arrow-circle-right"></i>
+              Xem chi tiết <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
         </div>
@@ -54,15 +63,19 @@
         <div class="col-md-3 col-sm-6 col-xs-12">
          <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+                <?php
+                $sql = "SELECT COUNT(*) as KQ FROM USER";
+                $kq = mysqli_fetch_row(mysqli_query($conn,$sql));
+                ?>
+              <h3><?php echo $kq[0] ?><sup style="font-size: 20px">Người dùng</sup></h3>
 
-              <p>User Registrations</p>
+              <p>Người dùng đã đăng ký</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">
-              More info <i class="fa fa-arrow-circle-right"></i>
+            <a id="nguoidung_xemchitiet" class="small-box-footer">
+              Xem chi tiết <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
         </div>
@@ -70,15 +83,19 @@
         <div class="col-md-3 col-sm-6 col-xs-12">
          <div class="small-box bg-red">
             <div class="inner">
-              <h3>65</h3>
+                <?php
+                $sql = "SELECT SUM(USR_SOLUOTDANGNHAP) as KQ FROM USER";
+                $kq = mysqli_fetch_row(mysqli_query($conn,$sql));
+                ?>
+              <h3><?php echo $kq[0]; ?><sup style="font-size: 20px">Lượt</sup></h3>
 
-              <p>Unique Visitors</p>
+              <p>Số lượt đăng nhập</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
             <a href="#" class="small-box-footer">
-              More info <i class="fa fa-arrow-circle-right"></i>
+              Xem chi tiết <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
         </div>
@@ -218,3 +235,4 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
+

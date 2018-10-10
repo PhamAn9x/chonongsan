@@ -1,32 +1,33 @@
-<?php
-if(isset($_POST['d'])){
-	$key = $_POST['d'];
-}
+<div>
+     <div><img id="logo" class="img-polaroid" alt="Logo" src="' . $row['logo'] . '" title="Click to change the logo" width="128">
+     <input style="visibility:hidden;" id="logoupload" type="file" accept="image/* ">
+</div>
 
-include('database_connection.php');
-$query = "SELECT * FROM HINHANH ORDER BY HA_ID DESC LIMIT $key";
-$statement = $connect->prepare($query);
-$statement->execute();
-$result = $statement->fetchAll();
-$number_of_rows = $statement->rowCount();
-$output = '';
-$output .= '';
-if($number_of_rows > 0)
-{
- $count = 0;
- foreach($result as $row)
- {
-  $count ++; 
-  $output .= '
-   <td id="im"><span class="delete" id="'.$row["HA_ID"].'" data-image_name="'.$row["HA_TEN"].'" ><img src="images/'.$row["HA_TEN"].'" class="img-thumbnail" width="100" height="100" /></span></td>
-  ';
- }
-}
-else
-{
- $output .= '
- ';
-}
-$output .= '</table>';
-echo $output;
-?>
+
+<script>
+  $('img#logo').click(function(){
+    $('#logoupload').trigger('click');
+    $('#logoupload').change(function(e){
+
+      var reader = new FileReader(),
+           files = e.dataTransfer ? e.dataTransfer.files : e.target.files,
+            i = 0;
+
+            reader.onload = onFileLoad;
+
+             while (files[i]) reader.readAsDataURL(files[i++]);
+
+              });
+
+                function onFileLoad(e) {
+                        var data = e.target.result;
+                          $('img#logo').attr("src",data);
+                          //Upload the image to the database
+                           //Save data on keydown
+                            $.post('test.php',{data:$('img#logo').attr("src")},function(){
+
+                            });
+                            }
+
+                        });
+                        </script>

@@ -24,15 +24,15 @@ function adddotstring($strNum) {
 		$_SESSION['click'] = 1;
     include("../config/connect.php");
     mysqli_set_charset($conn, 'UTF8');
-    $start = ($_SESSION['click']*8);
+    $start = ($_SESSION['click']*10);
     if($_SESSION['click'] <= $id){
-    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp limit $start,4";
+    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp limit $start,5";
     $result = mysqli_query($conn,$sql);
     while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC))
     {
 ?>
            
-                <div class="itemnew" style="width: 225px;height: 225px; margin-left: 1%;">
+                <div class="itemnew" style="width: 220px;height: 220px; margin-left: 1%;">
                     <!-- item image -->
                     <div class="item-img">
                         <img src="upload/<?php echo $rows['HA_TEN']; ?>" width="230px" height="230px" />

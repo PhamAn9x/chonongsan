@@ -30,13 +30,13 @@ function adddotstring($strNum) {
 		if($nsp == "" && $key != ""){
 			   $hienxemthem = 0;
 			?>
-				<div class="w3-teal" style=" width: 90%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 2px; margin-left: 5%; font-family: 'roboto'; font-weight: 700; ">Kết quả cho từ khóa <span style="text-transform: uppercase; color: yellow;"><?php echo " ".$key; ?></span></div>
+				<div class="w3-teal" style=" width: 100%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 2px; margin-left: 0%; font-family: 'roboto'; font-weight: 700; ">Kết quả cho từ khóa <span style="text-transform: uppercase; color: yellow;"><?php echo " ".$key; ?></span></div>
  <div class="container-item" style="padding-left: 4%;">
  	<div id="xemthem">
 			<?php 
  
     mysqli_set_charset($conn, 'UTF8');
-    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp WHERE SP_TEN LIKE '%$key%' LIMIT 0,8";
+    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp WHERE SP_TEN LIKE '%$key%' LIMIT 0,10";
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) <1){
     	$hienxemthem = 1;
@@ -104,7 +104,7 @@ function adddotstring($strNum) {
                                         <?php
                                             }else{
                                                 ?>
-                                                <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
+                                                <span style="font-weight:600; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
                                         
                                     </span>
                                                 <?php
@@ -154,7 +154,7 @@ function adddotstring($strNum) {
  <div class="w3-col s12" style="text-align: center;">
     <?php
         $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM SANPHAM as sp WHERE SP_TEN LIKE '%$key%'"));
-        $phan_trang = ceil(($sql_trang-8)/8);
+        $phan_trang = ceil(($sql_trang-10)/10);
      ?>
      <div id="nut">
     <?php 
@@ -226,13 +226,13 @@ function adddotstring($strNum) {
 				?>
 					
 
-				<div class="w3-teal" style=" width: 90%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 2px; margin-left: 5%; font-family: 'roboto'; font-weight: 700; "><?php echo $rs[0]; ?></div>
+				<div class="w3-teal" style=" width: 100%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 2px; margin-left: 0%; font-family: 'roboto'; font-weight: 700; "><?php echo $rs[0]; ?></div>
  <div class="container-item" style="padding-left: 4%;">
  	<div id="xemthem">
 			<?php 
  
     mysqli_set_charset($conn, 'UTF8');
-    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp WHERE NSP_ID = $nsp LIMIT 0,8";
+    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp WHERE NSP_ID = $nsp LIMIT 0,10";
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) <1){
     	$hienxemthem = 1;
@@ -300,7 +300,7 @@ function adddotstring($strNum) {
                                         <?php
                                             }else{
                                                 ?>
-                                                <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
+                                                <span style="font-weight:600; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
                                         
                                     </span>
                                                 <?php
@@ -350,7 +350,7 @@ function adddotstring($strNum) {
  <div class="w3-col s12" style="text-align: center;">
     <?php
         $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM SANPHAM as sp WHERE NSP_ID = $nsp"));
-        $phan_trang = ceil(($sql_trang-8)/8);
+        $phan_trang = ceil(($sql_trang-10)/10);
      ?>
      <div id="nut">
      <?php 
@@ -421,13 +421,13 @@ function adddotstring($strNum) {
 					   $hienxemthem = 0;
 				?>
 					
-						<div class="w3-teal" style=" width: 90%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 2px; margin-left: 5%; font-family: 'roboto'; font-weight: 700; ">Kết quả <span  style="text-transform: uppercase; color: yellow;" ><?php echo " ".$rs[0];?></span> và từ khóa <span style="text-transform: uppercase; color: yellow;"><?php echo " ".$key; ?></span></div>
+						<div class="w3-teal" style=" width: 100%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 2px; margin-left: 0%; font-family: 'roboto'; font-weight: 700; ">Kết quả <span  style="text-transform: uppercase; color: yellow;" ><?php echo " ".$rs[0];?></span> và từ khóa <span style="text-transform: uppercase; color: yellow;"><?php echo " ".$key; ?></span></div>
  <div class="container-item" style="padding-left: 4%;">
  	<div id="xemthem">
 			<?php 
  
     mysqli_set_charset($conn, 'UTF8');
-    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp WHERE NSP_ID = $nsp AND SP_TEN LIKE '%$key%' LIMIT 0,8";
+    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp WHERE NSP_ID = $nsp AND SP_TEN LIKE '%$key%' LIMIT 0,10";
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) <1){
     	$hienxemthem = 1;
@@ -495,7 +495,7 @@ function adddotstring($strNum) {
                                         <?php
                                             }else{
                                                 ?>
-                                                <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
+                                                <span style="font-weight:600; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
                                         
                                     </span>
                                                 <?php
@@ -546,7 +546,7 @@ function adddotstring($strNum) {
  <div class="w3-col s12" style="text-align: center;">
     <?php
         $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM SANPHAM as sp WHERE NSP_ID = $nsp AND SP_TEN LIKE '%$key%'"));
-        $phan_trang = ceil(($sql_trang-8)/8);
+        $phan_trang = ceil(($sql_trang-10)/10);
      ?>
      <div id="nut">
       <?php 
@@ -617,13 +617,13 @@ function adddotstring($strNum) {
 							
 
 						
-							<div class="w3-teal" style=" width: 90%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 2px; margin-left: 5%; font-family: 'roboto'; font-weight: 700; ">SÀN GIAO DỊCH NÔNG SẢN TRỰC TUYẾN</div>
+							<div class="w3-teal" style=" width: 100%; border-radius:5px 0 0 0; height: 45px;  margin-top: 0px; font-size: 25px;text-align: center; padding-top: 2px; margin-left: 0%; font-family: 'roboto'; font-weight: 700; ">SÀN GIAO DỊCH NÔNG SẢN TRỰC TUYẾN</div>
  <div class="container-item" style="padding-left: 4%;">
  	<div id="xemthem">
 			<?php 
  
     mysqli_set_charset($conn, 'UTF8');
-    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp LIMIT 0,8";
+    $sql = "SELECT *,(SELECT HA_TEN FROM HINHANH as ha WHERE ha.SP_ID = sp.SP_ID limit 1) as HA_TEN FROM SANPHAM as sp LIMIT 0,10";
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) <1){
     	$hienxemthem = 1;
@@ -691,7 +691,7 @@ function adddotstring($strNum) {
                                         <?php
                                             }else{
                                                 ?>
-                                                <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
+                                                <span style="font-weight:600; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
                                         
                                     </span>
                                                 <?php
@@ -742,7 +742,7 @@ function adddotstring($strNum) {
  <div class="w3-col s12" style="text-align: center;">
     <?php
         $sql_trang = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM SANPHAM as sp"));
-        $phan_trang = ceil(($sql_trang-8)/8);
+        $phan_trang = ceil(($sql_trang-10)/10);
      ?>
      <div id="nut">
      	<?php 
