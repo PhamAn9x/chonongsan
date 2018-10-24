@@ -14,7 +14,7 @@
 						  <div class="itemnew" style="width: 150px;height: 150px; margin-left: 1%; ">
                     <!-- item image -->
                     <div class="item-img">
-                        <img src="upload/<?php echo $rows['HA_TEN']; ?>" width="230px" height="230px" />
+                        <img src="upload/<?php echo $rows['HA_TEN']; ?>" width="150px" height="150px" />
                     </div>
 
                     <div class="item-content">
@@ -22,7 +22,7 @@
                             <div class="item-top-content-inner">
                                 <div class="item-product">
                                     <div class="item-top-title">
-                                        <h2 style="width: 200px; font-size: 17px; font-weight: 900;text-shadow: currentColor;"><?php echo $rows['SP_TEN']; ?></h2>
+                                        <h2 style="width: 200px; font-size: 12px; font-weight: 900;text-shadow: currentColor;"><?php echo $rows['SP_TEN']; ?></h2>
                                        
                                     </div>
                                 </div>
@@ -34,7 +34,7 @@
                             if( $dong[0] != null){
                                 
                             ?>
-                                     <span style="font-weight:600; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
+                                     <span style="font-weight:600; font-size: 13px; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
                                         
                                     </span>
                                      /
@@ -44,7 +44,7 @@
                                         <?php
                                             }else{
                                                 ?>
-                                                <span style="font-weight:600; color: blue;">Bán: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
+                                                <span style="font-weight:600; color: blue; font-size: 13px;">Bán: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
                                         
                                     </span>
                                                 <?php
@@ -58,7 +58,7 @@
                             if( $dong[0] != null){
                                 
                             ?>
-                                     <span style="font-weight:600; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
+                                     <span style="font-weight:600; color: blue;font-size: 13px;">Mua: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
                                         
                                     </span>
                                      /
@@ -68,7 +68,7 @@
                                         <?php
                                             }else{
                                                 ?>
-                                                <span style="font-weight:600; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
+                                                <span style="font-weight:600; color: blue;font-size: 13px;">Mua: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
                                         
                                     </span>
                                                 <?php
@@ -82,11 +82,11 @@
                                     $dathich = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM THICH WHERE USR_SDT = $sdt AND SP_ID = $sp_id"));
                                                             if($dathich < 1){
                                 ?>
-                              <a href="views/xuly_thich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" title="Thích" src="logo_image/ictim2.png" width="30px" height="30px"></a>
+                           <!--    <a href="views/xuly_thich.php?id=<?php// echo $sp_id.'&ủ='.$sdt; ?>" ><img style="position: absolute; top:40%; lèt: 80%;" title="Thích" src="logo_image/ictim2.png" width="30px" height="30px"></a> -->
                               <?php
                                 } else{
                             ?>
-                                 <a href="views/xuly_bothich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" src="logo_image/ictim.png" title="Bỏ thích" width="37px" height="37px"></a>
+                                 <!-- <a href="views/xuly_bothich.php?id=<?php// echo $sp_id.'&ủ='.$sdt; ?>" ><img style="position: absolute; top:40%; lèt: 80%;" src="logo_image/ictim.png" title="Bỏ thích" width="37px" height="37px"></a> -->
                            <?php 
                                 }
                                 }

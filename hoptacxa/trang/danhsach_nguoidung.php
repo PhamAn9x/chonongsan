@@ -60,6 +60,7 @@ session_start();
             <th>Họ và tên</th>
             <th>Hợp tác xã</th>
             <th>Địa chỉ</th>
+            <th>Nhóm người dùng</th>
             <th>Trạng thái Ac</th>
             <th> Quyền</th>
             <th style="width:20px;">Cập nhật</th>
@@ -94,6 +95,15 @@ session_start();
               $dc = mysqli_fetch_row(mysqli_query($conn,"SELECT XA_NAME,HUYEN_NAME,TINH_NAME FROM phuong_xa px,quan_huyen qh,tinh_thanh tt where px.id_xa = $id_xa AND qh.id_huyen = $id_huyen AND tt.id_tinh = $id_tinh"));
               ?>
               <td><?php echo $dc[0]."-".$dc[1]."-".$dc[2];?></td>
+               <td>
+                <?php 
+                    if($row['USR_LOAI'] == 0){
+                        echo "Cá nhân";
+                    }else{
+                        echo "Tổ chức";
+                    }
+                ?>
+              </td>
               <?php
               if($row['USR_TRANGTHAI'] == 0){
                 ?>

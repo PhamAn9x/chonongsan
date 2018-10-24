@@ -7,7 +7,7 @@
 		?>
 			<script type="text/javascript">
 				alert('Đã giao đơn hàng');
-				window.location.href="index.php?view=dh_danhan";
+				 $("#show").load('trang/dvvc_donhang_danhan.php');
 			</script>
 		<?php
 	}

@@ -97,9 +97,12 @@ function dangnhap(){
       $id =$row['HTX_ID'];
       $sqln = "SELECT HTX_TEN FROM HOPTACXA WHERE HTX_ID = $id";
       $rs = mysqli_fetch_row(mysqli_query($conn,$sqln));
+      if($row['Q_ID'] == 1 || $row['Q_ID'] == 5){
+        echo '<script type="text/javascript"> alert("Bạn không có quyền trên tài khoản này!");</script>';
+      } else{
       if($row['Q_ID'] == 1) $_SESSION['admin'] = $row['Q_ID'];
-      if($row['Q_ID'] == 2) $_SESSION['ndthuong'] = $row['Q_ID'];
-      if($row['Q_ID'] == 3) $_SESSION['htx'] = $row['Q_ID'];
+      if($row['Q_ID'] == 3) $_SESSION['ndthuong'] = $row['Q_ID'];
+      if($row['Q_ID'] == 5) $_SESSION['htx'] = $row['Q_ID'];
       if($row['Q_ID'] == 4) $_SESSION['giaohang'] = $row['Q_ID'];
       $_SESSION['user'] = $row['USR_TEN'];
 		  $_SESSION['sdt'] = $row['USR_SDT'];
@@ -109,7 +112,7 @@ function dangnhap(){
       $_SESSION['alert'] ='<span style="color: red;">CHÚC MỪNG BẠN</span><br />Đăng Nhập Thành Công!';
        $_SESSION['redirect']='index.php';
       include('views/alert.php');
-
+}
       ?>
       <?php
     }else

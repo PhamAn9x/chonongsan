@@ -96,8 +96,9 @@
                                 <?php
 								if(isset($_SESSION['sdt'])){
 									$sp_id = $rows['SP_ID'];
-									$sdt = $_SESSION['sdt'];
+									$sdt = $_SESSION['sdt']; 
 									$dathich = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM THICH WHERE USR_SDT = $sdt AND SP_ID = $sp_id"));
+
 															if($dathich < 1){
 								?>
                               <a href="views/xuly_thich.php?id=<?php echo $sp_id.'&usr='.$sdt; ?>" ><img style="position: absolute; top:40%; left: 80%;" title="Thích" src="logo_image/ictim2.png" width="30px" height="30px"></a>

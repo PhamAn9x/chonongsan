@@ -413,16 +413,55 @@
 
 											</div>
 										</div>
-										<div class="item-product">
-											<span class="price-num" style="color: red; font-size:19px; font-weight: 700"><?php echo adddotstring($rows['SP_GIA']); ?>
-
-										</span>
-										/
-										<span style="color: black">
-											<?php echo $rows['SP_DONVITINH']; ?>
-										</span>
-									</div>
-									<img style="position: absolute; top:50%; left: 75%;" src="logo_image/ictim2.png" width="30px" height="30px">
+										    <div class="item-product" style="width: 200px;">
+                                    <?php 
+                                    $sp_id = $rows['SP_ID'];
+                            $sql = "SELECT MIN(L_GIA) AS GIA_M FROM LENH WHERE SP_ID = $sp_id AND L_TEN = 'ban' ";
+                            $dong = mysqli_fetch_row(mysqli_query($conn,$sql));
+                            if( $dong[0] != null){
+                                
+                            ?>
+                                     <span style="font-weight:600; font-size: 13px; color: blue;">Mua: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
+                                        
+                                    </span>
+                                     /
+                                         <span style="color: black">
+                                            <?php echo $rows['SP_DONVITINH']; ?>
+                                        </span>
+                                        <?php
+                                            }else{
+                                                ?>
+                                                <span style="font-weight:600; color: blue; font-size: 13px;">Bán: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
+                                        
+                                    </span>
+                                                <?php
+                                            }
+                                        ?>
+                                         <br /> 
+                                   <?php 
+                                    $sp_id = $rows['SP_ID'];
+                            $sql = "SELECT MAX(L_GIA) AS GIA_M FROM LENH WHERE SP_ID = $sp_id AND L_TEN = 'mua' ";
+                            $dong = mysqli_fetch_row(mysqli_query($conn,$sql));
+                            if( $dong[0] != null){
+                                
+                            ?>
+                                     <span style="font-weight:600; color: blue;font-size: 13px;">Mua: </span><span class="price-num" style="color: red; font-size:12px; font-weight: 700"><?php echo adddotstring( $dong[0]); ?>
+                                        
+                                    </span>
+                                     /
+                                         <span style="color: black">
+                                            <?php echo $rows['SP_DONVITINH']; ?>
+                                        </span>
+                                        <?php
+                                            }else{
+                                                ?>
+                                                <span style="font-weight:600; color: blue;font-size: 13px;">Mua: </span><span class="price-num" style="color: red; font-size:11px; font-weight: 700"><?php echo "Đang cập nhật"; ?>
+                                        
+                                    </span>
+                                                <?php
+                                            }
+                                        ?>
+                                </div>
 								</div>
 							</div>
 							<div class="item-add-content">
