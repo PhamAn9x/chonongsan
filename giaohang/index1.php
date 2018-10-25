@@ -6,7 +6,7 @@ if(isset($_SESSION['giaohang'])){
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Quản trị hệ thống</title>
+  <title>Đối tác giao hàng</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -48,7 +48,7 @@ if(isset($_SESSION['giaohang'])){
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>HG</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">Quản trị hệ thống</span>
+      <span class="logo-lg">Đối tác giao hàng</span>
     </a>  
     <br />
                 <div class="pull-right">
@@ -79,7 +79,10 @@ if(isset($_SESSION['giaohang'])){
           <ul class="treeview-menu">
             <li style="cursor: pointer;" id="dhcn"><a><i class="fa fa-circle-o"></i> Đơn hàng chờ nhận</a></li>
             <li style="cursor: pointer;" id="dhdn"><a><i class="fa fa-circle-o"></i> Đơn hàng đã nhận</a></li>
+            <li style="cursor: pointer;" id="dhdgg"><a><i class="fa fa-circle-o"></i> Đơn hàng đang giao</a></li>
             <li style="cursor: pointer;" id="dhdg"><a><i class="fa fa-circle-o"></i> Đơn hàng đã giao</a></li>
+            <li style="cursor: pointer;" id="dhkg"><a><i class="fa fa-circle-o"></i> Đơn hàng không thể giao</a></li>
+             <li style="cursor: pointer;" id="dhls"><a><i class="fa fa-circle-o"></i>Lịch sử giao hàng</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -145,14 +148,14 @@ if(isset($_SESSION['giaohang'])){
       $("#dhdg").click(function(){
           $("#show").load('trang/dvvc_donhang_dagiao.php');
       });
-       $("#dssp").click(function(){
-          $("#show").load('trang/danhsach_sanpham.php');
+       $("#dhdgg").click(function(){
+          $("#show").load('trang/dvvc_donhang_danggiao.php');
       });
-        $("#dshtx").click(function(){
-          $("#show").load('trang/danhsach_hoptacxa.php');
+        $("#dhkg").click(function(){
+          $("#show").load('trang/dvvc_donhang_khonggiao.php');
       });
-         $("#dsdvvc").click(function(){
-          $("#show").load('trang/danhsach_donvivanchuyen.php');
+         $("#dhls").click(function(){
+          $("#show").load('trang/dvvc_lichsu.php');
       });
   });
 </script>

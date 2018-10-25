@@ -98,7 +98,8 @@
                 <td><?php echo $row['DH_NOINHAN']; ?></td>
                 <td><?php echo $row['DH_TONGKHOILUONG']." Kg"; ?></td>
               <!-- -->
-                 <td><button id="btnxoa<?php echo $row['USR_SDT']; ?>" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-eye-slash  "></i></button></td>
+              <input style="display: none;" type="text" id="idan<?php echo $row['DH_ID']; ?>" value="<?php echo $row['DH_ID']; ?>">
+                 <td><button id="btnan<?php echo $row['DH_ID']; ?>" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-eye-slash  "></i></button></td>
             </tr>
             <div id = "cho_id"></div>
             <?php
@@ -106,9 +107,9 @@
             ?>
             <script type="text/javascript">
                 $(document).ready(function(){
-                    $("#nhandh<?php echo $row['DH_ID']; ?>").click(function(){
-                        var id = $('#id<?php echo $row['DH_ID']; ?>').val();
-                        $.post("../process_ajax/ajax_xuly_donhangchonhan.php", {id: id}, function(data){
+                    $("#btnan<?php echo $row['DH_ID']; ?>").click(function(){
+                        var id = $('#idan<?php echo $row['DH_ID']; ?>').val();
+                        $.post("../process_ajax/ajax_xuly_donhangchonhan.php", {xlan:1,id: id}, function(data){
                             $("#cho_id").html(data);
                         });
 

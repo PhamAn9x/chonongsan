@@ -69,7 +69,7 @@
     include("../../config/connect.php");
     $dvvc = $_SESSION['giaohang'];
     mysqli_set_charset($conn,"UTF8");
-    $sql = "SELECT * FROM DONHANG WHERE DH_DVVC_ID = '$dvvc' AND DH_TRANGTHAI = 1";
+    $sql = "SELECT * FROM DONHANG WHERE DH_DVVC_ID = '$dvvc' AND DH_TRANGTHAI = 3";
     ?>
         <tbody>
           <?php
@@ -111,13 +111,14 @@
                                     }
 
                     </style>
+                    
                    <select  class="" id="sltrangthai<?php echo $row['DH_ID']; ?>">
-                       <option  value="1">Đã nhận</option>
-                       <option value="2">Đang xử lý</option>
-                       <option value="3">Đã xử lý</option>
+                       <!-- <option value="2">Đang xử lý</option> -->
+                       <option  value="3">Đã nhận</option>
+                       <!-- <option value="3">Đã xử lý</option> -->
                        <option value="4">Đang giao hàng</option>
                        <option value="5">Không thể giao hàng</option>
-                       <option value="6">Đã giao hàng</option>
+                       <!-- <option value="6">Đã giao hàng</option> -->
                    </select>
                 </td>
                  <!-- <td><button id="btnxoa<?php //echo $row['USR_SDT']; ?>" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-times "></i></button></td> -->
@@ -131,10 +132,10 @@
                     $("#sltrangthai<?php echo $row['DH_ID']; ?>").change(function(){
                         var id = $('#trangthai<?php echo $row['DH_ID']; ?>').val();
                         var tt = $('#sltrangthai<?php echo $row['DH_ID']; ?>').val();
-                        // $.post("../process_ajax/ajax_xuly_donhangchonhan.php", {id: id}, function(data){
-                        //     $("#cho_id").html(data);
-                        // });
-                        alert(id +" " + tt);
+                        $.post("../process_ajax/ajax_xuly_donhangchonhan.php", {xltt:1,id: id,tt:tt}, function(data){
+                            $("#cho_id").html(data);
+                        });
+                        //alert(id +" " + tt);
 
                     });
                 });

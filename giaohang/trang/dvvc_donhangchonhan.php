@@ -70,7 +70,7 @@
     include("../../config/connect.php");
     $dvvc = $_SESSION['giaohang'];
     mysqli_set_charset($conn,"UTF8");
-    $sql = "SELECT * FROM DONHANG WHERE DH_DVVC_ID = '$dvvc' AND DH_TRANGTHAI = 0";
+    $sql = "SELECT * FROM DONHANG WHERE DH_DVVC_ID = '$dvvc' AND DH_TRANGTHAI = 2";
     ?>
         <tbody>
           <?php
@@ -103,7 +103,8 @@
                     <input style="display: none;" type="text" name="id<?php echo $row['DH_ID']; ?>" id="id<?php echo $row['DH_ID']; ?>" value="<?php echo $row['DH_ID']; ?>"/>
                     <input class="btn btn-success" type="button" name="nhandh" id="nhandh<?php echo $row['DH_ID']; ?>" value="Nhận đơn hàng">
                 </td>
-                 <td><button id="btnxoa<?php echo $row['USR_SDT']; ?>" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-times "></i></button></td>
+                 <input style="display: none;" type="text" name="nhandh" id="knhandh<?php echo $row['DH_ID']; ?>" value="<?php echo $row['DH_ID']; ?>">
+                 <td><button id="btnknhan<?php echo $row['DH_ID']; ?>" type="button" class="btn btn-danger"><i style="font-size: 20px;" class="fa fa-times "></i></button></td>
             </tr>
             <div id = "cho_id"></div>
             <?php
@@ -113,10 +114,18 @@
                 $(document).ready(function(){
                     $("#nhandh<?php echo $row['DH_ID']; ?>").click(function(){
                         var id = $('#id<?php echo $row['DH_ID']; ?>').val();
-                        $.post("../process_ajax/ajax_xuly_donhangchonhan.php", {id: id}, function(data){
+                        $.post("../process_ajax/ajax_xuly_donhangchonhan.php", {xlnh:1,id: id}, function(data){
                             $("#cho_id").html(data);
                         });
 
+                    });
+                    $("#btnknhan<?php echo $row['DH_ID']; ?>").click(function(){
+                        var id = $('#knhandh<?php echo $row['DH_ID']; ?>').val();
+                        if(confirm("Bạn có chắc từ chối đơn hàng này?")){
+                        $.post("../process_ajax/ajax_xuly_donhangchonhan.php", {xlkn: 1, id: id}, function(data){
+                            $("#cho_id").html(data);
+                        });
+                      }
                     });
                 });
             </script>
